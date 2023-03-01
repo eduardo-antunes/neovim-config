@@ -1,0 +1,30 @@
+-- Utilitários para o resto da config
+
+local this = {}
+
+function this.leader_keys(keys, opts)
+  if not opts then opts = {} end
+  for rhs, lhs in pairs(keys) do
+    vim.keymap.set('n', '<leader>' .. rhs, lhs, opts)
+  end
+end
+
+function this.local_keys(keys, opts)
+  if not opts then opts = {} end
+  for rhs, lhs in pairs(keys) do
+    vim.keymap.set('n', '<localleader>' .. rhs, lhs, opts)
+  end
+end
+
+function this.ensure_packer()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
+    vim.cmd.packadd 'packer.nvim'
+    return true
+  end
+  return false
+end
+
+return this
