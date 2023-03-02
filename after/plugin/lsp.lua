@@ -1,6 +1,7 @@
 -- Configurações para nvim-cmp (autocomplete):
 
 local ac = require('cmp')
+
 ac.setup {
   mapping = {
     ['<tab>']  = ac.mapping(ac.mapping.select_next_item()),
@@ -36,48 +37,48 @@ end)
 
 -- Configurações para cliente nativo de lsp:
 
-local ed = require('eduardo.utils')
-local keys = vim.keymap.set
-
 -- atalhos gerais para diagnósticos
 
-local opts = { silent = true }
-keys('n', '[d', vim.diagnostic.goto_prev, opts)
-keys('n', ']d', vim.diagnostic.goto_next, opts)
+local function nmap(lhs, rhs)
+  vim.keymap.set('n', lhs, rhs, { silent = true })
+end
 
-ed.leader_keys({
-  ['ll'] = vim.diagnostic.open_float,
-  ['lq'] = vim.diagnostic.setloclist,
-}, opts)
+nmap('[d', vim.diagnostic.goto_prev)
+nmap(']d', vim.diagnostic.goto_next)
+
+nmap('<leader>ll', vim.diagnostic.open_float)
+nmap('<leader>lq', vim.diagnostic.setloclist)
 
 -- atalhos específicos de lsp, ativos somente quando há um servidor lsp
 
 local function on_attach(client, bufnr)
 
-  local opts = { silent = true, buffer = bufnr }
-  keys('n', 'gD', vim.lsp.buf.declaration, opts)
-  keys('n', 'gd', vim.lsp.buf.definition, opts)
-  keys('n', 'gi', vim.lsp.buf.implementation, opts)
-  keys('n', '<c-k>', vim.lsp.buf.signature_help, opts)
+  local function nmap(lhs, rhs)
+    vim.keymap.set('n', lhs, rhs, { silent = true, buffer = bufnr })
+  end
 
-  ed.leader_keys({
-    ['lh']  = vim.lsp.buf.hover,
-    ['la']  = vim.lsp.buf.code_action,
-    ['lr']  = vim.lsp.buf.rename,
-    ['lwa'] = vim.lsp.buf.add_workspace_folder,
-    ['lwr'] = vim.lsp.buf.remove_workspace_folder,
-    ['lws'] = function ()
-      print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end,
-  }, opts)
+  nmap('gD', vim.lsp.buf.declaration)
+  nmap('gd', vim.lsp.buf.definition)
+  nmap('gi', vim.lsp.buf.implementation)
+  nmap('<c-k>', vim.lsp.buf.signature_help)
+
+  nmap('<leader>lh', vim.lsp.buf.hover)
+  nmap('<leader>la', vim.lsp.buf.code_action)
+  nmap('<leader>lr', vim.lsp.buf.rename)
+  nmap('<leader>lwa', vim.lsp.buf.add_workspace_folder)
+  nmap('<leader>lwr', vim.lsp.buf.remove_workspace_folder)
+
+  nmap('<leader>lws', function ()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end)
 
 end
 
 -- configuração do lsp em si, com autocomplete:
 
-local lsp_conf = require('lspconfig')
-
 local cap = require('cmp_nvim_lsp').default_capabilities()
+
+local lsp_conf = require('lspconfig')
 
 local servidores = { 'clangd', 'pyright' }
 

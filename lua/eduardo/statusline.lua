@@ -6,7 +6,7 @@ local this = {}
 
 -- Tabelas que definem o visual da statusline:
 
-local modo_simbolos = {
+local mode_symbols = {
   ['n']  = 'N',
   ['no'] = 'N',
   ['nt'] = 'N',
@@ -30,7 +30,7 @@ local modo_simbolos = {
   ['t']  = 'T',
 }
 
-local lsp_simbolos = {
+local lsp_symbols = {
   errors   = 'E',
   warnings = 'W',
   hints    = 'H',
@@ -53,7 +53,7 @@ end
 -- Exibe o símbolo do modo atual, no estilo evil-mode
 local function mode()
   local current_mode = vim.api.nvim_get_mode().mode
-  return fmt(' <%s> |', modo_simbolos[current_mode])
+  return fmt(' <%s> |', mode_symbols[current_mode])
 end
 
 -- Exibe o branch atual do git, se estiver em um repositório
@@ -116,16 +116,16 @@ local function lsp()
 
   local output = ' '
   if count.errors ~= 0 then
-    output = output .. lsp_simbolos.errors .. count.errors
+    output = fmt('%s%s:%s ', output, lsp_symbols.errors, count.errors)
   end
   if count.warnings ~= 0 then
-    output = output .. lsp_simbolos.warnings .. count.warnings
+    output = fmt('%s%s:%s ', output, lsp_symbols.warnings, count.warnings)
   end
   if count.hints ~= 0 then
-    output = output .. lsp_simbolos.hints .. count.hints
+    output = fmt('%s%s:%s ', output, lsp_symbols.hints, count.hints)
   end
   if count.info ~= 0 then
-    output = output .. lsp_simbolos.info .. count.info
+    output = fmt('%s%s:%s ', output, lsp_symbols.info, count.info)
   end
 
   return output
