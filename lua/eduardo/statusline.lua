@@ -56,11 +56,24 @@ local function mode()
   return fmt(' <%s> |', mode_symbols[current_mode])
 end
 
--- Exibe o branch atual do git, se estiver em um repositório
+-- Exibe o índice da marca harpoon do buffer (dep: harpoon)
+local function harpoon()
+  local id = require('harpoon.mark').get_index_of(vim.fn.expand '%')
+  if id == nil then
+    -- não há uma marca no buffer atual
+    return ''
+  end
+  return fmt(' (%s)', id)
+end
+
+-- Exibe o branch atual do git, se estiver em um repositório (dep: gitsigns)
 local function git()
-  local branch = vim.fn.system { 'git', 'symbolic-ref', '--short', 'HEAD' }
-  if branch:find('^fatal:.*$') then return '' end
-  return fmt(' git: %s |', branch:gsub('%s+', ''))
+  local branch = vim.b.gitsigns_head
+  if branch == nil then 
+    -- não é um repositório
+    return '' 
+  end
+  return fmt(' git: %s |', branch)
 end
 
 -- Exibe a posição do cursor no arquivo
@@ -141,6 +154,7 @@ function this.active()
   return table.concat {
     mode(),
     git(),
+    harpoon(),
     filepath(),
     file_status(),
     lsp(),
