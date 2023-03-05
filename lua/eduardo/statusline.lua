@@ -60,7 +60,7 @@ end
 local function git()
   local branch = vim.fn.system { 'git', 'symbolic-ref', '--short', 'HEAD' }
   if branch:find('^fatal:.*$') then return '' end
-  return fmt(' %s |', branch:gsub('%s+', ''))
+  return fmt(' git: %s |', branch:gsub('%s+', ''))
 end
 
 -- Exibe a posição do cursor no arquivo

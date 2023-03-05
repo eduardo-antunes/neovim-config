@@ -4,13 +4,13 @@ local ac = require('cmp')
 
 ac.setup {
   mapping = {
-    ['<tab>']  = ac.mapping(ac.mapping.select_next_item()),
-    ['<s-tab'] = ac.mapping(ac.mapping.select_prev_item()),
-    ['<c-b>']  = ac.mapping(ac.mapping.scroll_docs(-4), { 'i', 'c' }),
-    ['<c-f>']  = ac.mapping(ac.mapping.scroll_docs(4),  { 'i', 'c' }),
-    ['<c-space'] = ac.mapping(ac.mapping.complete()),
-    ['<c-y>']  = ac.config.disable,
-    ['<c-e>']  = ac.mapping {
+    ['<tab>']   = ac.mapping(ac.mapping.select_next_item()),
+    ['<s-tab>'] = ac.mapping(ac.mapping.select_prev_item()),
+    ['<c-b>']   = ac.mapping(ac.mapping.scroll_docs(-4), { 'i', 'c' }),
+    ['<c-f>']   = ac.mapping(ac.mapping.scroll_docs(4),  { 'i', 'c' }),
+    ['<c-space>'] = ac.mapping(ac.mapping.complete()),
+    ['<c-y>']   = ac.config.disable,
+    ['<c-e>']   = ac.mapping {
       ['i'] = ac.mapping.abort(),
       ['c'] = ac.mapping.close(),
     },
@@ -62,6 +62,7 @@ local function on_attach(client, bufnr)
   nmap('gi', vim.lsp.buf.implementation)
   nmap('<c-k>', vim.lsp.buf.signature_help)
 
+  nmap('<leader>lf', vim.lsp.buf.format)
   nmap('<leader>lh', vim.lsp.buf.hover)
   nmap('<leader>la', vim.lsp.buf.code_action)
   nmap('<leader>lr', vim.lsp.buf.rename)

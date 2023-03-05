@@ -2,9 +2,11 @@
 
 local o = vim.opt
 
+local undodir = vim.fn.stdpath('cache') .. '/undodir'
+
 o.mouse          = 'a'
 o.signcolumn     = 'yes'
-o.undodir        = vim.fn.stdpath('cache') .. '/undodir'
+o.undodir        = undodir
 o.scrolloff      = 8
 o.tabstop        = 4
 o.softtabstop    = 4

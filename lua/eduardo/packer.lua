@@ -8,22 +8,26 @@ return require('packer').startup(function ()
 
   use 'sheerun/vim-polyglot' -- suporte mais completo a várias linguagens
 
+  use 'vonr/align.nvim' -- alinhamento vertical rápido
+
   use 'tpope/vim-surround' -- operações rápidas sobre delimitadores
 
   use 'tpope/vim-commentary' -- atalhos para comentar e descomentar
 
-  use 'tpope/vim-fugitive' -- integração com o git, melhor que pão de queijo
-
   use 'neovim/nvim-lspconfig' -- configurações prontas para o lsp nativo
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- épico
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- muito bom
 
-  -- cores bonitas, pelo bem dos meus olhos
-  use {
-    'Mofiqul/vscode.nvim',
+  use 'theprimeagen/harpoon' -- marcas de navegação mais eficientes
+
+  use 'tpope/vim-fugitive' -- integração com o git, melhor que pão de queijo
+
+  -- integração com o git em buffers
+  use { 
+    'lewis6991/gitsigns.nvim',
+    tag = 'release',
     config = function ()
-      vim.opt.termguicolors = true
-      require('vscode').setup {}
+      require('gitsigns').setup()
     end
   }
 
@@ -35,14 +39,12 @@ return require('packer').startup(function ()
     end
   }
 
-  -- indica níveis de indentação, bem bacana
-  use { 
-    'lukas-reineke/indent-blankline.nvim',
+  -- cores bonitas, pelo bem dos meus olhos
+  use {
+    'mofiqul/vscode.nvim',
     config = function ()
-      require('indent_blankline').setup {
-        show_trailing_blankline_indent = false,
-        char = '┊',
-      }
+      vim.opt.termguicolors = true
+      require('vscode').setup {}
     end
   }
 
@@ -62,27 +64,12 @@ return require('packer').startup(function ()
     end
   }
 
-  -- terminal mais elegante e rápido de acessar
-  use {
-    'akinsho/toggleterm.nvim',
-    tag = '2.4.0',
-    config = function ()
-      require('toggleterm').setup {
-        open_mapping = '<c-\\>',
-        direction = 'float',
-        float_opts = {
-          border = 'curved'
-        }
-      }
-    end
-  }
-
   -- elfos que digitam por você ou algo do tipo
   use {
     'hrsh7th/nvim-cmp',
     after = 'nvim-lspconfig',
     requires = { 
-      'L3MON4D3/LuaSnip',
+      'l3mon4d3/LuaSnip',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
       'saadparwaiz1/cmp_luasnip',
