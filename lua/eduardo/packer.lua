@@ -22,10 +22,26 @@ return require('packer').startup(function ()
 
   use 'tpope/vim-fugitive' -- integração com o git, melhor que pão de queijo
 
+  -- cores bonitas, pelo bem dos meus olhos
+  use {
+    'mofiqul/vscode.nvim',
+    config = function ()
+      vim.opt.termguicolors = true
+      require('vscode').setup {}
+    end
+  }
+
+  -- statusline mais bonita e informativa
+  use {
+    '~/Projetos/plainline',
+    config = function ()
+      require('plainline').setup() 
+    end
+  }
+
   -- integração com o git em buffers
   use { 
     'lewis6991/gitsigns.nvim',
-    tag = 'release',
     config = function ()
       require('gitsigns').setup()
     end
@@ -36,15 +52,6 @@ return require('packer').startup(function ()
     'windwp/nvim-autopairs',
     config = function ()
       require('nvim-autopairs').setup()
-    end
-  }
-
-  -- cores bonitas, pelo bem dos meus olhos
-  use {
-    'mofiqul/vscode.nvim',
-    config = function ()
-      vim.opt.termguicolors = true
-      require('vscode').setup {}
     end
   }
 

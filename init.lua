@@ -7,5 +7,3 @@ require('eduardo.packer') -- instalação e gerenciamento de plugins
 require('eduardo.options') -- opções do editor
 
 require('eduardo.keys') -- atalhos de teclado
-
-require('eduardo.statusline').setup() -- statusline caseira

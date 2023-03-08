@@ -21,10 +21,6 @@ vim.keymap.set('n', '<leader><right>', vim.cmd.bnext)
 vim.keymap.set('n', '<leader><left>', vim.cmd.bprev)
 vim.keymap.set('n', '<leader>bd', vim.cmd.bdelete)
 
--- Substituição rápida em buffers
-
-vim.keymap.set('n', '<leader>s', [[:%s/\<<c-r><c-w>\>/<c-r><c-w>/gI<left><left><left>]])
-
 -- Copiar e colar do clipboard do sistema
 
 vim.keymap.set('n', '<leader>p', '"+p')
