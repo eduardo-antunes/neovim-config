@@ -1,8 +1,8 @@
 -- Configurações para harpoon.nvim
 
-local term = require('harpoon.term')
-local mark = require('harpoon.mark')
 local ui = require('harpoon.ui')
+local mark = require('harpoon.mark')
+local term = require('harpoon.term')
 
 vim.keymap.set('n', '<leader>ha', mark.add_file)
 vim.keymap.set('n', '<leader>hr', mark.rm_file)
@@ -12,5 +12,7 @@ vim.keymap.set('n', '<leader>1', function() ui.nav_file(1) end)
 vim.keymap.set('n', '<leader>2', function() ui.nav_file(2) end)
 vim.keymap.set('n', '<leader>3', function() ui.nav_file(3) end)
 vim.keymap.set('n', '<leader>4', function() ui.nav_file(4) end)
+vim.keymap.set('n', '<leader>5', function() ui.nav_file(5) end)
 
-vim.keymap.set('n', '<c-\\>', function() term.gotoTerminal(1) end)
+-- Para retornar de um terminal recém-aberto dessa forma, use <leader>r
+vim.keymap.set('n', '<leader><cr>', function() term.gotoTerminal(1) end)

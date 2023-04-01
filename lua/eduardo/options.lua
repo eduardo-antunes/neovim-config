@@ -1,4 +1,4 @@
--- Configuração de opções do editor
+-- Customização através de opções
 
 local o = vim.opt
 

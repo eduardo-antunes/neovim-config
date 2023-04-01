@@ -1,6 +1,5 @@
 -- Configurações para telescope.nvim
 
-local ed = require('eduardo.utils')
 local tel = require('telescope.builtin')
 
 local function tel_grep()

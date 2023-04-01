@@ -3,8 +3,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
--- Uma recomendação que me deram
-
 vim.keymap.set('n', 'Q', '<nop>')
 
 -- Pequenas conveniências
@@ -24,7 +22,7 @@ vim.keymap.set('n', '<leader>bd', vim.cmd.bdelete)
 -- Copiar e colar do clipboard do sistema
 
 vim.keymap.set('n', '<leader>p', '"+p')
-vim.keymap.set('n', '<leader>Y', '"+Y')
+vim.keymap.set('n', '<leader>Y', '"+y$')
 vim.keymap.set('n', '<leader>yy', '"+yy')
 vim.keymap.set({'n', 'v'}, '<leader>y', '"+y')
 

@@ -6,4 +6,6 @@ require('eduardo.packer') -- instalação e gerenciamento de plugins
 
 require('eduardo.options') -- opções do editor
 
-require('eduardo.keys') -- atalhos de teclado
+require('eduardo.remap') -- atalhos de teclado
+
+-- Há ainda configurações específicas de certos plugins em after/plugin.

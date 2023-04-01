@@ -8,5 +8,6 @@ local function precise_align()
   require('align').align_to_string(false, true, true)
 end
 
-vim.keymap.set('x', 'aa', quick_align,   { silent = true })
-vim.keymap.set('x', 'aw', precise_align, { silent = true })
+local opts = { silent = true, remap = false }
+vim.keymap.set('x', 'aa', quick_align, opts)
+vim.keymap.set('x', 'aw', precise_align, opts)

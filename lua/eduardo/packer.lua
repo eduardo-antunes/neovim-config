@@ -1,22 +1,20 @@
 -- Instalação e gerenciamento de plugins com o packer
 
-local bootstrap = require('eduardo.utils').ensure_packer()
-
 return require('packer').startup(function ()
 
   use 'wbthomason/packer.nvim' -- o próprio packer
 
-  use 'sheerun/vim-polyglot' -- suporte mais completo a várias linguagens
-
-  use 'vonr/align.nvim' -- alinhamento vertical rápido
-
   use 'tpope/vim-surround' -- operações rápidas sobre delimitadores
+
+  use 'vonr/align.nvim' -- alinhamento vertical rápido de texto
+
+  use 'sheerun/vim-polyglot' -- suporte mais completo a várias linguagens
 
   use 'tpope/vim-commentary' -- atalhos para comentar e descomentar
 
   use 'neovim/nvim-lspconfig' -- configurações prontas para o lsp nativo
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- muito bom
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- excelente
 
   use 'theprimeagen/harpoon' -- marcas de navegação mais eficientes
 
@@ -27,23 +25,24 @@ return require('packer').startup(function ()
     'mofiqul/vscode.nvim',
     config = function ()
       vim.opt.termguicolors = true
-      require('vscode').setup {}
+      local c = require('vscode.colors')
+      require('vscode').setup {
+        italic_comments = true,
+        group_overrides = {
+          -- quem é o ser humano amargurado que fez os delimitadores serem
+          -- exibidos em AMARELO por padrão? Isso devia ser crime, sério
+          ['@punctuation.bracket'] = { fg = c.vscNone },
+        },
+      }
+      require('vscode').load('dark')
     end
   }
 
-  -- statusline mais bonita e informativa
+  -- statusline mais agradável e prática
   use {
     '~/Projetos/plainline',
     config = function ()
       require('plainline').setup() 
-    end
-  }
-
-  -- integração com o git em buffers
-  use { 
-    'lewis6991/gitsigns.nvim',
-    config = function ()
-      require('gitsigns').setup()
     end
   }
 
@@ -82,10 +81,5 @@ return require('packer').startup(function ()
       'saadparwaiz1/cmp_luasnip',
     },
   }
-
-  -- caso o packer tenha sido recém-baixado
-  if bootstrap then
-    require('packer').sync()
-  end
 
 end)
