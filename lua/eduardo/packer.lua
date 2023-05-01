@@ -16,8 +16,6 @@ return require('packer').startup(function ()
 
   use 'theprimeagen/harpoon' -- marcas de navegação mais eficientes
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- excelente
-
   use { 'tpope/vim-fugitive', cmd = { 'G', 'Git', 'Gclog' } } -- integração com o git
 
   -- cores bonitas, pelo bem dos meus olhos
@@ -74,6 +72,19 @@ return require('packer').startup(function ()
     config = function ()
       require('telescope').load_extension('fzf')
     end
+  }
+
+  -- colorização sintática mais precisa e agradável
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    ft = { 'c', 'cpp', 'lua', 'python' },
+    config = function ()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = { 'c', 'cpp', 'lua', 'python' },
+        highlight = { enable = true },
+      }
+    end,
+    run = ':TSUpdate',
   }
 
   -- elfos que digitam por você ou algo do tipo
