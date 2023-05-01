@@ -13,8 +13,8 @@ vim.api.nvim_create_autocmd('FileType', {
       local opts = { buffer = bufnr, remap = false }
 
       -- Atalhos específicos para quando a interface do fugitive estiver aberta
-      vim.keymap.set('n', '<leader>p', function() vim.cmd.Git('push') end, opts)
-      vim.keymap.set('n', '<leader>P', function() vim.cmd.Git('pull') end, opts)
-      vim.keymap.set('n', '<leader>u', ':Git push -u origin ', opts)
+      vim.keymap.set('n', '<leader>gp', function() vim.cmd.Git('push') end, opts)
+      vim.keymap.set('n', '<leader>gP', function() vim.cmd.Git('pull') end, opts)
+      vim.keymap.set('n', '<leader>gu', ':Git push -u origin ', opts)
     end,
   })

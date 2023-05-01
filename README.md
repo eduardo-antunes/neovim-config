@@ -10,4 +10,4 @@ $ git clone https://github.com/eduardo-antunes/neovim-config ~/.config/nvim
 $ gh repo clone eduardo-antunes/neovim-config ~/.config/nvim
 ```
 
-Então, instale o [packer](https://github.com/wbthomason/packer.nvim) e siga as instruções dos desenvolvedores para instalar versões atualizadas dos plugins que eu utilizo.
+Então, instale o [packer](https://github.com/wbthomason/packer.nvim) e siga as instruções dos desenvolvedores para instalar versões atualizadas dos plugins que eu utilizo. É recomendado também instalar os programas ripgrep e fd, assim como servidores LSP.

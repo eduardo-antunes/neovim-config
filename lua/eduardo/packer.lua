@@ -14,35 +14,41 @@ return require('packer').startup(function ()
 
   use 'neovim/nvim-lspconfig' -- configurações prontas para o lsp nativo
 
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- excelente
-
   use 'theprimeagen/harpoon' -- marcas de navegação mais eficientes
 
-  use 'tpope/vim-fugitive' -- integração com o git, melhor que pão de queijo
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- excelente
+
+  use { 'tpope/vim-fugitive', cmd = { 'G', 'Git', 'Gclog' } } -- integração com o git
 
   -- cores bonitas, pelo bem dos meus olhos
   use {
-    'mofiqul/vscode.nvim',
+    'rebelot/kanagawa.nvim',
     config = function ()
       vim.opt.termguicolors = true
-      local c = require('vscode.colors')
-      require('vscode').setup {
-        italic_comments = true,
-        group_overrides = {
-          -- quem é o ser humano amargurado que fez os delimitadores serem
-          -- exibidos em AMARELO por padrão? Isso devia ser crime, sério
-          ['@punctuation.bracket'] = { fg = c.vscNone },
-        },
+      require('kanagawa').setup {
+        compile = true, -- carregamento mais rápido
+        statementStyle = { bold = false },
       }
-      require('vscode').load('dark')
+      vim.cmd.colorscheme 'kanagawa'
     end
   }
 
   -- statusline mais agradável e prática
   use {
-    '~/Projetos/plainline',
+    '~/Projetos/pessoais/plainline',
     config = function ()
       require('plainline').setup() 
+    end
+  }
+
+  -- indica níveis de indentação, bem bacana
+  use { 
+    'lukas-reineke/indent-blankline.nvim',
+    config = function ()
+      require('indent_blankline').setup {
+        show_trailing_blankline_indent = false,
+        char = '┊',
+      }
     end
   }
 
