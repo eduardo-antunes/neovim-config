@@ -6,11 +6,11 @@ return require('packer').startup(function ()
 
   use 'tpope/vim-surround' -- operações rápidas sobre delimitadores
 
+  use 'tpope/vim-commentary' -- atalhos para comentar e descomentar
+
   use 'vonr/align.nvim' -- alinhamento vertical rápido de texto
 
   use 'sheerun/vim-polyglot' -- suporte mais completo a várias linguagens
-
-  use 'tpope/vim-commentary' -- atalhos para comentar e descomentar
 
   use 'neovim/nvim-lspconfig' -- configurações prontas para o lsp nativo
 
@@ -50,6 +50,15 @@ return require('packer').startup(function ()
     end
   }
 
+  -- navegação rápida dentro de cada buffer
+  use { 
+    'ggandor/leap.nvim',
+    requires = 'tpope/vim-repeat',
+    config = function ()
+      require('leap').add_default_mappings()
+    end
+  }
+
   -- completa pares de delimitadores automaticamente
   use {
     'windwp/nvim-autopairs',
@@ -77,6 +86,7 @@ return require('packer').startup(function ()
   -- colorização sintática mais precisa e agradável
   use {
     'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
     ft = { 'c', 'cpp', 'lua', 'python' },
     config = function ()
       require('nvim-treesitter.configs').setup {
@@ -84,7 +94,6 @@ return require('packer').startup(function ()
         highlight = { enable = true },
       }
     end,
-    run = ':TSUpdate',
   }
 
   -- elfos que digitam por você ou algo do tipo
