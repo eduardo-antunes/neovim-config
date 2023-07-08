@@ -53,3 +53,11 @@ vim.keymap.set('n', '<leader>k', vim.cmd.lprev)
 vim.keymap.set('n', '<c-q>', vim.cmd.copen)
 vim.keymap.set('n', '<c-j>', vim.cmd.cnext)
 vim.keymap.set('n', '<c-k>', vim.cmd.cprev)
+
+-- Autocomandos básicos de sobrevivência
+
+local ws = vim.api.nvim_create_augroup('RemoveWhitespace', { clear = true })
+vim.api.nvim_create_autocmd('BufWritePre', {
+    group = ws, pattern = '*',
+    command = [[%s/\s\+$//e]],
+  })

@@ -4,7 +4,7 @@ vim.keymap.set('n', '<leader>gc', ':Git ')
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git)
 vim.keymap.set('n', '<leader>gl', vim.cmd.Gclog)
 
-local fugitive_gr = vim.api.nvim_create_augroup('eduardo_fugitive', {})
+local fugitive_gr = vim.api.nvim_create_augroup('eduardo_fugitive', { clear = true })
 vim.api.nvim_create_autocmd('FileType', {
     group = fugitive_gr,
     pattern = 'fugitive',

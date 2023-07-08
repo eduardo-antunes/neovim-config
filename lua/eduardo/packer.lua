@@ -20,14 +20,10 @@ return require('packer').startup(function ()
 
   -- cores bonitas, pelo bem dos meus olhos
   use {
-    'rebelot/kanagawa.nvim',
+    'bluz71/vim-nightfly-colors',
     config = function ()
       vim.opt.termguicolors = true
-      require('kanagawa').setup {
-        compile = true, -- carregamento mais rápido
-        statementStyle = { bold = false },
-      }
-      vim.cmd.colorscheme 'kanagawa'
+      vim.cmd.colorscheme 'nightfly'
     end
   }
 
@@ -35,27 +31,18 @@ return require('packer').startup(function ()
   use {
     '~/Projetos/pessoais/plainline',
     config = function ()
-      require('plainline').setup() 
+      require('plainline').setup()
     end
   }
 
   -- indica níveis de indentação, bem bacana
-  use { 
+  use {
     'lukas-reineke/indent-blankline.nvim',
     config = function ()
       require('indent_blankline').setup {
         show_trailing_blankline_indent = false,
         char = '┊',
       }
-    end
-  }
-
-  -- navegação rápida dentro de cada buffer
-  use { 
-    'ggandor/leap.nvim',
-    requires = 'tpope/vim-repeat',
-    config = function ()
-      require('leap').add_default_mappings()
     end
   }
 
@@ -87,10 +74,10 @@ return require('packer').startup(function ()
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    ft = { 'c', 'cpp', 'lua', 'python' },
+    ft = { 'c', 'cpp', 'lua', 'python', 'sh' },
     config = function ()
       require('nvim-treesitter.configs').setup {
-        ensure_installed = { 'c', 'cpp', 'lua', 'python' },
+        ensure_installed = { 'c', 'cpp', 'lua', 'python', 'bash' },
         highlight = { enable = true },
       }
     end,
@@ -100,7 +87,7 @@ return require('packer').startup(function ()
   use {
     'hrsh7th/nvim-cmp',
     after = 'nvim-lspconfig',
-    requires = { 
+    requires = {
       'l3mon4d3/LuaSnip',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
