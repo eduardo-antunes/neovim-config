@@ -42,7 +42,7 @@ vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, opts)
 
 -- Operações do cliente de lsp
 local function on_attach(client, bufnr)
-  local opts = { silent = true, buffer = bufnr, remap = false }
+  local opts = { silent = true, buffer = bufnr }
 
   vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
   vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -51,13 +51,13 @@ local function on_attach(client, bufnr)
 
   vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts)
   vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, opts)
-  vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_cmption, opts)
+  vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
   vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-  vim.keymap.set("n", "<leader>lwa", vim.lsp.buf.add_workspcmpe_folder, opts)
-  vim.keymap.set("n", "<leader>lwr", vim.lsp.buf.remove_workspcmpe_folder, opts)
+  vim.keymap.set("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, opts)
+  vim.keymap.set("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, opts)
 
   vim.keymap.set("n", "<leader>lws", function ()
-    print(vim.inspect(vim.lsp.buf.list_workspcmpe_folders()))
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, opts)
 end
 
