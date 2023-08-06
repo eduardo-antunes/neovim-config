@@ -18,11 +18,10 @@ return require("packer").startup(function ()
 
   -- cores bonitas, pelo bem dos meus olhos
   use {
-    "bluz71/vim-nightfly-colors",
+    "mofiqul/vscode.nvim",
     config = function ()
       vim.opt.termguicolors = true
-      vim.g.nightflyItalics = false
-      vim.cmd.colorscheme "nightfly"
+      vim.cmd.colorscheme "vscode"
     end
   }
 

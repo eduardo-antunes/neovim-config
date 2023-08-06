@@ -13,7 +13,7 @@ cmp.setup {
       ["i"] = cmp.mapping.abort(),
       ["c"] = cmp.mapping.close(),
     },
-    ["<cr>"]   = cmp.mapping.confirm { select = false },
+    ["<c-j>"]   = cmp.mapping.confirm { select = true },
   },
   snippet = {
     expand = function (args)
