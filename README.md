@@ -14,5 +14,4 @@ $ gh repo clone eduardo-antunes/neovim-config ~/.config/nvim
 $ ln -s ~/.config/nvim/tmux.conf ~/.tmux.conf
 ```
 
-Então, instale o [packer](https://github.com/wbthomason/packer.nvim) e siga as instruções dos desenvolvedores para instalar versões atualizadas dos plugins do
-neovim que eu utilizo. É recomendado também instalar os programas `ripgrep` e `fd`, assim como servidores LSP.
+É recomendado também instalar os programas `ripgrep` e `fd`.
