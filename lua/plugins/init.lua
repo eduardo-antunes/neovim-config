@@ -18,7 +18,8 @@ return {
     priority = 1000,
     config = function ()
       vim.opt.termguicolors = true
-      vim.cmd.colorscheme "vscode"
+      require("vscode").setup { transparent = true }
+      require("vscode").load()
     end
   },
 

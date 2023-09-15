@@ -1,17 +1,17 @@
 -- Configuração do lsp nativo, com autocomplete
 
-  return {
-    "neovim/nvim-lspconfig",
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-      "l3mon4d3/LuaSnip",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-nvim-lsp",
-      "saadparwaiz1/cmp_luasnip",
-    },
-    config = function ()
+return {
+  "neovim/nvim-lspconfig",
+  dependencies = {
+    "hrsh7th/nvim-cmp",
+    "l3mon4d3/LuaSnip",
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-nvim-lsp",
+    "saadparwaiz1/cmp_luasnip",
+  },
+  config = function ()
 
-      -- Configuração do autocomplete apenas
+    -- Configuração do autocomplete apenas
       local cmp = require("cmp")
       cmp.setup {
         mapping = {
@@ -51,38 +51,49 @@
       vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, opts)
 
       -- Operações do cliente de lsp
-      local function on_attach(client, bufnr)
-        local opts = { silent = true, buffer = bufnr }
+        local function on_attach(client, bufnr)
+          local opts = { silent = true, buffer = bufnr }
 
-        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-        vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-        vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-        vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, opts)
+          vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+          vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+          vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+          vim.keymap.set("n", "<c-k>", vim.lsp.buf.signature_help, opts)
 
-        vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts)
-        vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, opts)
-        vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
-        vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
-        vim.keymap.set("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, opts)
-        vim.keymap.set("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, opts)
+          vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts)
+          vim.keymap.set("n", "<leader>lh", vim.lsp.buf.hover, opts)
+          vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, opts)
+          vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, opts)
+          vim.keymap.set("n", "<leader>lwa", vim.lsp.buf.add_workspace_folder, opts)
+          vim.keymap.set("n", "<leader>lwr", vim.lsp.buf.remove_workspace_folder, opts)
 
-        vim.keymap.set("n", "<leader>lws", function ()
-          print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-        end, opts)
+          vim.keymap.set("n", "<leader>lws", function ()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end, opts)
       end
 
-    -- Configurações de servidores lsp externos
+      -- Configurações de servidores lsp externos
 
-    local servidores = { "clangd", "pyright", "gopls" }
+      local lsp_enable = true
+      local servidores = { "clangd", "pyright", "gopls" }
+      local blacklist = { "suckless", "dwm", "dwmblocks", "dmenu" }
 
-    local lsp_conf = require("lspconfig")
-    local cap = require("cmp_nvim_lsp").default_capabilities()
-    for _, servidor in ipairs(servidores) do
-      lsp_conf[servidor].setup {
-        capabilities = cap,
-        on_attach = on_attach,
-      }
+      -- Exceções especiais ao lsp
+      local this_proj = vim.fn.fnamemodify(vim.loop.cwd(), ":t")
+      for _, proj in ipairs(blacklist) do
+        if this_proj == proj then
+          lsp_enable = false
+        end
+      end
+
+      local lsp_conf = require("lspconfig")
+      local cap = require("cmp_nvim_lsp").default_capabilities()
+      for _, servidor in ipairs(servidores) do
+        if lsp_enable then
+          lsp_conf[servidor].setup {
+            capabilities = cap,
+            on_attach = on_attach,
+          }
+        end
+      end
     end
-
-  end
-}
+  }
