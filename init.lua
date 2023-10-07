@@ -1,7 +1,14 @@
--- Esse arquivo é o ponto de partida da config, mas eu não uso ele para
--- configurações propriamente ditas. Essa tarefa está distribuída entre
--- vários outros arquivos com propósitos específicos.
+-- Esse arquivo é o ponto de partida da config. Ele se destina a
+-- configurações gerais e a carregar os demais módulos da config.
 
-require("eduardo.setup")  -- setup básico, com plugins e teclas líderes
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
+vim.opt.termguicolors = true
+vim.cmd.colors "habamax"
+vim.cmd.hi "Normal guibg=NONE"
+vim.cmd.hi "Visual guifg=NONE guibg=#3A3A3A"
+
 require("eduardo.config") -- configuração de opções
 require("eduardo.remap")  -- atalhos de teclado
+require("eduardo.pack")   -- carrega plugins

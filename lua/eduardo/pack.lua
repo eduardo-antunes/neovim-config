@@ -1,12 +1,6 @@
--- Setup básico do sistema de plugins e teclas líderes
+-- Setup básico do sistema de plugins
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
-
--- Depois que o packer.nvim foi deprecado, passei a utilizar o lazy.nvim para
--- a instalação e gerenciamento de plugins. Ele é bem melhor, pra ser sincero.
-
-local lazy_icons = true -- requer nerd font
+local icons = true -- requer nerd font
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -22,7 +16,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 local config = {}
-if not lazy_icons then
+if not icons then
   -- substitui ícones com caracteres Unicode
   config.ui = {
     icons = {

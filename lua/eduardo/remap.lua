@@ -49,14 +49,14 @@ local atalhos = {
   { "n", "<leader>k", vim.cmd.lprev },
 
   -- Lista de quickfix global
-  { "n", "<c-q>", vim.cmd.copen },
-  { "n", "<c-j>", vim.cmd.cnext },
-  { "n", "<c-k>", vim.cmd.cprev },
+  { "n", "<leader>c",  vim.cmd.copen },
+  { "n", "<leader>cj", vim.cmd.cnext },
+  { "n", "<leader>ck", vim.cmd.cprev },
 }
 
 -- Aplica os atalhos na tabela
 for _, atalho in ipairs(atalhos) do
-  vim.keymap.set(atalho[1], atalho[2], atalho[3], { desc = atalho.desc })
+  vim.keymap.set(atalho[1], atalho[2], atalho[3])
 end
 
 -- Remova espaços em branco sobressalentes ao salvar arquivos
