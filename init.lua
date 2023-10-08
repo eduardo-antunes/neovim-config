@@ -8,6 +8,7 @@ vim.opt.termguicolors = true
 vim.cmd.colors "habamax"
 vim.cmd.hi "Normal guibg=NONE"
 vim.cmd.hi "Visual guifg=NONE guibg=#3A3A3A"
+vim.cmd.hi "PmenuSel guibg=#87AFAF"
 
 require("eduardo.config") -- configuração de opções
 require("eduardo.remap")  -- atalhos de teclado

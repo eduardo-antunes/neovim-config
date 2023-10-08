@@ -3,6 +3,7 @@
 local undodir = vim.fn.stdpath("cache") .. "/undodir"
 
 vim.o.mouse          = "a"
+vim.o.complete       = "."
 vim.o.signcolumn     = "yes"
 vim.o.completeopt    = "menu,menuone,noselect"
 vim.o.wildmode       = "longest,list,full"
@@ -36,9 +37,9 @@ vim.o.lazyredraw     = true
 vim.o.ignorecase     = false
 
 -- Configurações de tabulação para a linguagem lua
-local lua_tab = vim.api.nvim_create_augroup("LuaTab", { clear = true })
 vim.api.nvim_create_autocmd("FileType", {
-    group = lua_tab, pattern = "lua",
+    pattern = "lua",
+    group = vim.api.nvim_create_augroup("LuaTab"),
     callback = function ()
       vim.bo.tabstop     = 2
       vim.bo.softtabstop = 2

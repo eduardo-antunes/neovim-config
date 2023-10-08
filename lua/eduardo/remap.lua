@@ -43,6 +43,12 @@ local atalhos = {
   { "v", "J", ":m\">+1<cr>gv=gv" },
   { "v", "K", ":m\">-2<cr>gv=gv" },
 
+  -- Diagnósticos
+  { "n", "[d", vim.diagnostic.goto_prev, silent = true          },
+  { "n", "]d", vim.diagnostic.goto_next, silent = true          },
+  { "n", "<leader>ll", vim.diagnostic.open_float, silent = true },
+  { "n", "<leader>lq", vim.diagnostic.setloclist, silent = true },
+
   -- Lista de quickfix local
   { "n", "<leader>q", vim.cmd.lopen },
   { "n", "<leader>j", vim.cmd.lnext },
@@ -56,12 +62,22 @@ local atalhos = {
 
 -- Aplica os atalhos na tabela
 for _, atalho in ipairs(atalhos) do
-  vim.keymap.set(atalho[1], atalho[2], atalho[3])
+  vim.keymap.set(atalho[1], atalho[2], atalho[3], { silent = atalho.silent })
 end
 
+-- Atalhos para o sistema de complete nativo
+
+vim.keymap.set("i", "<tab>", function ()
+  return vim.fn.pumvisible() == 1 and "<c-n>" or "<tab>"
+end, { expr = true })
+
+vim.keymap.set("i", "<s-tab>", function ()
+  return vim.fn.pumvisible() == 1 and "<c-p>" or "<s-tab>"
+end, { expr = true })
+
 -- Remova espaços em branco sobressalentes ao salvar arquivos
-local ws = vim.api.nvim_create_augroup("RemoveWhitespace", { clear = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = ws, pattern = "*",
+    pattern = "*",
     command = [[if &ft!="text"|%s/\s\+$//e|endif]],
+    group = vim.api.nvim_create_augroup("RemoveWhitespace"),
   })

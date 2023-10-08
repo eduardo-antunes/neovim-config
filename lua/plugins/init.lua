@@ -18,6 +18,14 @@ return {
     version = false, config = true
   },
 
+  -- autocompletion mais simples e leve
+  {
+    "echasnovski/mini.completion",
+    version = false, opts = {
+      lsp_completion = { source_func = "omnifunc", auto_setup = false }
+    }
+  },
+
   -- indica níveis de indentação, bem bacana
   {
     "lukas-reineke/indent-blankline.nvim",
