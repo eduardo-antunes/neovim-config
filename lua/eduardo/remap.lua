@@ -1,21 +1,16 @@
 -- Configuração de atalhos de teclado
 
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
+
 local atalhos = {
   -- Pequenas conveniências
+  { "n", "H",         "^"           },
+  { "n", "L",         "$"           },
   { "n", "Q",         "<nop>"       },
-  { "i", "kj",        "<esc>"       },
+  { "n", "<bs>",      "<c-^>zz"     },
   { "n", "<leader>s", ":%s/"        },
-  { "n", "<leader>r", "<c-^>"       },
   { "n", "<leader>e", ":e %:h/"     },
-  { "t", "<esc>",     "<c-\\><c-n>" },
-
-  -- Movimentação entre janelas
-  { "n", "<leader>w", "<c-w>"  },
-  { "n", "<c-j>",     "<c-w>j" },
-  { "n", "<c-k>",     "<c-w>k" },
-  { "n", "<c-h>",     "<c-w>h" },
-  { "n", "<c-l>",     "<c-w>l" },
-  { "n", "<c-\\>",    "<c-w>p" },
 
   -- Gerenciamento de buffers
   { "n", "<leader><right>", vim.cmd.bnext   },
@@ -50,14 +45,14 @@ local atalhos = {
   { "n", "<leader>lq", vim.diagnostic.setloclist, silent = true },
 
   -- Lista de quickfix local
-  { "n", "<leader>q", vim.cmd.lopen },
-  { "n", "<leader>j", vim.cmd.lnext },
-  { "n", "<leader>k", vim.cmd.lprev },
+  { "n", "<leader>q",  vim.cmd.lopen },
+  { "n", "<leader>qj", vim.cmd.lnext },
+  { "n", "<leader>qk", vim.cmd.lprev },
 
   -- Lista de quickfix global
-  { "n", "<leader>c",  vim.cmd.copen },
-  { "n", "<leader>cj", vim.cmd.cnext },
-  { "n", "<leader>ck", vim.cmd.cprev },
+  { "n", "<c-q>",  vim.cmd.copen },
+  { "n", "<c-q>j", vim.cmd.cnext },
+  { "n", "<c-q>k", vim.cmd.cprev },
 }
 
 -- Aplica os atalhos na tabela
@@ -79,5 +74,5 @@ end, { expr = true })
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     command = [[if &ft!="text"|%s/\s\+$//e|endif]],
-    group = vim.api.nvim_create_augroup("RemoveWhitespace"),
+    group = vim.api.nvim_create_augroup("RemoveWhitespace", {}),
   })

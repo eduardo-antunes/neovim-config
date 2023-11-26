@@ -4,16 +4,13 @@ return {
   "neovim/nvim-lspconfig",
   dependencies = "mfussenegger/nvim-jdtls", -- para JAVA
   config = function ()
-
       local on_attach = function(client, bufnr)
         client.server_capabilities.semanticTokensProvider = nil
-        vim.bo[bufnr].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
 
         local atalhos = {
           ["gD"] = vim.lsp.buf.declaration,
           ["gd"] = vim.lsp.buf.definition,
           ["gi"] = vim.lsp.buf.definition,
-          ["<c-k>"] = vim.lsp.buf.signature_help,
           ["<leader>lf"] = vim.lsp.buf.format,
           ["<leader>lh"] = vim.lsp.buf.hover,
           ["<leader>la"] = vim.lsp.buf.code_action,
@@ -57,9 +54,9 @@ return {
         on_attach = on_attach,
         root_dir = vim.fs.dirname(vim.fs.find({"gradlew", ".git", "mvnw"}, { upward = true })[1])
       }
-      local java_lsp = vim.api.nvim_create_augroup("JavaLSP", { clear = true })
       vim.api.nvim_create_autocmd("FileType", {
-          group = java_lsp, pattern = "java",
+          pattern = "java",
+          group = vim.api.nvim_create_augroup("JavaLSP", {}),
           callback = function ()
             require("jdtls").start_or_attach(java_config)
           end

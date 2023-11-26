@@ -1,6 +1,6 @@
 -- Setup básico do sistema de plugins
 
-local icons = true -- requer nerd font
+local icons = false -- requer nerd font
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
 if not vim.loop.fs_stat(lazypath) then
@@ -20,21 +20,24 @@ if not icons then
   -- substitui ícones com caracteres Unicode
   config.ui = {
     icons = {
-      cmd = "⌘",
-      config = "🛠",
-      event = "📅",
-      ft = "📂",
-      init = "⚙",
-      keys = "🗝",
-      plugin = "🔌",
+      cmd     = "⌘",
+      config  = "🛠",
+      event   = "📅",
+      ft      = "📂",
+      init    = "⚙",
+      keys    = "🗝",
+      plugin  = "🔌",
       runtime = "💻",
-      source = "📄",
-      start = "🚀",
-      task = "📌",
-      lazy = "💤 ",
+      require = "🌙",
+      source  = "📄",
+      start   = "🚀",
+      task    = "📌",
+      lazy    = "💤 ",
     }
   }
 end
+config.dev = { path = "~/Projetos/pessoais" }
+vim.keymap.set("n", "<leader>L", vim.cmd.Lazy)
 
 -- Essa linha configura a interface do lazy e carrega os plugins, utilizando
 -- as especificações na pasta lua/plugins

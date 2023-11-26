@@ -4,10 +4,8 @@ return {
   "theprimeagen/harpoon",
   dependencies = "nvim-lua/plenary.nvim",
   init = function ()
-
     local ui = require("harpoon.ui")
     local mark = require("harpoon.mark")
-    local term = require("harpoon.term")
 
     -- Operações sobre a lista de marcas
     vim.keymap.set("n", "<leader>hr", mark.rm_file)
@@ -20,9 +18,5 @@ return {
     vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end)
     vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
     vim.keymap.set("n", "<leader>5", function() ui.nav_file(5) end)
-
-    -- Operações sobre terminais (uso pouco, mas é bom ter)
-    vim.keymap.set("n", "<leader><cr>", function() term.gotoTerminal(1) end)
-
   end
 }

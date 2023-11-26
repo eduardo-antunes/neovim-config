@@ -8,9 +8,11 @@ return {
 
   "tpope/vim-surround", -- operações rápidas sobre delimitadores
 
+  "christoomey/vim-tmux-navigator", -- integração melhor com o tmux
+
   { "windwp/nvim-autopairs", config = true }, -- delimitadores balanceados
 
-  { "eduardo-antunes/plainline", config = true }, -- statusline mais prática
+  { "eduardo-antunes/plainline", config = true, dev = true }, -- statusline mais prática
 
   -- alinhamento vertical rápido de texto
   {
@@ -21,9 +23,7 @@ return {
   -- autocompletion mais simples e leve
   {
     "echasnovski/mini.completion",
-    version = false, opts = {
-      lsp_completion = { source_func = "omnifunc", auto_setup = false }
-    }
+    version = false, config = true,
   },
 
   -- indica níveis de indentação, bem bacana

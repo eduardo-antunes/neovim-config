@@ -1,0 +1,52 @@
+# Configuração da janela
+window:
+  padding:
+    x: 2
+  title: "Terminal"
+
+# Configuração do shell inicial
+shell:
+  program: /usr/bin/tmux # tmux é ativado automaticamente
+  args:
+    - new-session
+    - -A
+    - -s
+    - "0"
+
+# Configuração das cores (habamax)
+colors:
+  primary:
+    background: '0x1C1C1C'
+    foreground: '0xBCBCBC'
+  normal:
+    black: '0x1C1C1C'
+    red: '0xD75F5F'
+    green: '0x87AF87'
+    yellow: '0xAFAF87'
+    blue: '0x5F87AF'
+    magenta: '0xAF87AF'
+    cyan: '0x5F8787'
+    white: '0x9E9E9E'
+  bright:
+    black: '0x767676'
+    red: '0xD78F5F'
+    green: '0xAFD7AF'
+    yellow: '0xD7D787'
+    blue: '0x87AFD7'
+    magenta: '0xD7AFD7'
+    cyan: '0x87AFAF'
+    white: '0xBCBCBC'
+
+# Configuração da fonte
+font:
+  offset:
+    x: 0
+    y: 1
+  normal:
+    family: IntelOne Mono
+    style: Regular
+  size: 9.5
+
+# Atalhos de teclado
+key_bindings:
+- { key: F11, action: ToggleFullscreen }

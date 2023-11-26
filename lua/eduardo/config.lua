@@ -2,6 +2,8 @@
 
 local undodir = vim.fn.stdpath("cache") .. "/undodir"
 
+vim.g.python_highlight_space_errors = false
+
 vim.o.mouse          = "a"
 vim.o.complete       = "."
 vim.o.signcolumn     = "yes"
@@ -36,10 +38,10 @@ vim.o.smartcase      = true
 vim.o.lazyredraw     = true
 vim.o.ignorecase     = false
 
--- Configurações de tabulação para a linguagem lua
+-- Configurações de indentação para a linguagem lua
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "lua",
-    group = vim.api.nvim_create_augroup("LuaTab"),
+    group = vim.api.nvim_create_augroup("LuaTab", {}),
     callback = function ()
       vim.bo.tabstop     = 2
       vim.bo.softtabstop = 2
