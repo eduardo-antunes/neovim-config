@@ -9,6 +9,7 @@ $ git clone https://github.com/eduardo-antunes/neovim-config ~/.config/nvim
 $ gh repo clone eduardo-antunes/neovim-config ~/.config/nvim
 ```
 
-Além da configuração do neovim em si, esse repositório também inclui as configurações do alacritty, um emulador de terminal, e do tmux, um
-multiplexador de terminal, duas ferramentas que funcionam muito bem com o editor e melhoram a experiência de usá-lo. Para ativar essas
-configurações adicionais, basta executar o script `externo/install.sh`.
+É recomendável também instalar os programas `ripgrep` e `fd`. Alguns plugins do neovim os utilizam automaticamente para obter um melhor
+desempenho e/ou usabilidade. O presente repositório também inclui pequenas configurações para o `alacritty` e o `tmux`, que complementam
+a experiência de utilizar o editor com funcionalidades mais sofisticadas e excelente desempenho. Para instalar essas configurações, basta
+executar o script `etc/install.sh`.
