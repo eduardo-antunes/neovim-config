@@ -6,7 +6,7 @@ vim.g.python_highlight_space_errors = false
 
 vim.o.mouse          = "a"
 vim.o.complete       = "."
-vim.o.signcolumn     = "yes"
+vim.o.signcolumn     = "number"
 vim.o.completeopt    = "menu,menuone,noselect"
 vim.o.wildmode       = "longest,list,full"
 vim.o.undodir        = undodir

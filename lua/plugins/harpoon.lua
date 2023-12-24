@@ -6,6 +6,7 @@ return {
   init = function ()
     local ui = require("harpoon.ui")
     local mark = require("harpoon.mark")
+    local exec = require("harpoon.tmux")
 
     -- Operações sobre a lista de marcas
     vim.keymap.set("n", "<leader>hr", mark.rm_file)
@@ -18,5 +19,11 @@ return {
     vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end)
     vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
     vim.keymap.set("n", "<leader>5", function() ui.nav_file(5) end)
-  end
+
+    -- Execução assíncrona de comandos com o tmux
+    local exec_prompt = function ()
+      exec.sendCommand(1, vim.fn.input("$ "))
+    end
+    vim.keymap.set("n", "<leader>!", exec_prompt)
+  end,
 }

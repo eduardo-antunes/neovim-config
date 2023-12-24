@@ -12,6 +12,8 @@ return {
 
   { "windwp/nvim-autopairs", config = true }, -- delimitadores balanceados
 
+  { "stevearc/dressing.nvim", config = true }, -- melhorias estéticas na interface
+
   { "eduardo-antunes/plainline", config = true, dev = true }, -- statusline mais prática
 
   -- alinhamento vertical rápido de texto
@@ -31,7 +33,7 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     config = function ()
       require("ibl").setup {
-        indent = { char = "┊" },
+        indent = { char = "│" },
         scope = { enabled = false },
       }
     end

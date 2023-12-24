@@ -27,28 +27,16 @@ return {
       end
 
       -- Configurações de servidores lsp externos
-      local lsp_ativo = true
       local servidores = { "clangd", "pyright", "gopls" }
-      local projetos_inativos = { "dwm", "dwmblocks", "dmenu" }
-
-      -- Exceções especiais ao lsp
-      local esse_proj = vim.fn.fnamemodify(vim.loop.cwd(), ":t")
-      for _, proj in ipairs(projetos_inativos) do
-        if esse_proj == proj then
-          lsp_ativo = false
-        end
-      end
 
       local lsp_conf = require("lspconfig")
       for _, servidor in ipairs(servidores) do
-        if lsp_ativo then
-          lsp_conf[servidor].setup {
-            on_attach = on_attach,
-          }
-        end
+        lsp_conf[servidor].setup {
+          on_attach = on_attach,
+        }
       end
 
-      -- Configuração específica para Java
+      -- Configuração específica para linguagem java
       local java_config = {
         cmd = { "jdtls" },
         on_attach = on_attach,

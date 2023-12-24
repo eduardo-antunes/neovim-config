@@ -7,9 +7,6 @@ return {
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   },
   opts = {
-    pickers = {
-      find_files = { follow = true }
-    },
     defaults = {
       mappings = {
         i = {
