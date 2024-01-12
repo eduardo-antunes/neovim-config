@@ -3,5 +3,5 @@
 # no repositório, que incluem o alacritty e o tmux.
 
 mkdir -p ~/.config/alacritty
-ln -s ~/.config/nvim/etc/alacritty.yml ~/.config/alacritty/alacritty.yml
+ln -s ~/.config/nvim/etc/alacritty.toml ~/.config/alacritty/alacritty.toml
 ln -s ~/.config/nvim/etc/tmux.conf ~/.tmux.conf

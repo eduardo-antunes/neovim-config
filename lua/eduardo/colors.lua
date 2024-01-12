@@ -15,8 +15,7 @@ function load_habamax()
   tweak_hl {
     { "Visual",      bg = "#3A3A3A", fg = "NONE"  },
     { "PmenuSel",    bg = "#87AFAF", fg = "black" },
-    { "FloatBorder", bg = "NONE"     },
-    { "Title",       fg = "darkcyan" },
+    { "FloatBorder", bg = "NONE"  },
   }
 end
 

@@ -1,0 +1,54 @@
+# Configuração da janela e da inicialização; eu ainda não descobri nenhuma
+# situação onde eu queira usar o terminal sem a conveniência do tmux à mão.
+
+[window]
+title = "Terminal"
+dynamic_title = false
+padding = { x = 2 }
+
+[shell]
+program = "/usr/bin/tmux"
+args = [ "new-session", "-A", "-s", "0" ]
+
+# Configuração das cores; tema do gnome-terminal pra dar aquele visual de
+# integração ao resto do sistema.
+
+[colors.bright]
+black   = "#535c64"
+blue    = "#2a7bde"
+cyan    = "#33c7de"
+green   = "#33d17a"
+magenta = "#c061cb"
+red     = "#f66151"
+white   = "#ffffff"
+yellow  = "#e9ad0c"
+
+[colors.normal]
+black   = "#171421"
+blue    = "#12488b"
+cyan    = "#2aa1b3"
+green   = "#26a269"
+magenta = "#a347ba"
+red     = "#c01c28"
+white   = "#d0cfcc"
+yellow  = "#a2734c"
+
+[colors.primary]
+background = "#1e1e1e"
+foreground = "#ffffff"
+
+# Configuração da fonte; sou muito fã da IntelOne Mono.
+# NOTA: se a fonte estiver parecendo um pouco borrada, é possível que a
+# renderização subpixel RGB esteja desligada. Demorei muito para perceber
+# isso, mas a diferença é genuinamente absurda. Para ligá-la, execute:
+# $ cd /etc/fonts/conf.d
+# $ sudo ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf
+
+[font]
+size = 9.5
+offset = { x = 0, y = 1 }
+normal = { family = "IntelOne Mono", style = "Regular" }
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"

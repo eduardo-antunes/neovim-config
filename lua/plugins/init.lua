@@ -16,17 +16,9 @@ return {
 
   { "eduardo-antunes/plainline", config = true, dev = true }, -- statusline mais prática
 
-  -- alinhamento vertical rápido de texto
-  {
-    "echasnovski/mini.align",
-    version = false, config = true
-  },
+  { "echasnovski/mini.completion", config = true }, -- autocompletion leve e simples
 
-  -- autocompletion mais simples e leve
-  {
-    "echasnovski/mini.completion",
-    version = false, config = true,
-  },
+  { "echasnovski/mini.align", config = true }, -- alinhamento vertical de texto
 
   -- indica níveis de indentação, bem bacana
   {
@@ -39,10 +31,19 @@ return {
     end
   },
 
+  -- explorador de arquivos similar ao dired do emacs
+  {
+    "stevearc/oil.nvim",
+    opts = { delete_to_trash = true },
+    init = function ()
+      vim.keymap.set("n", "-", vim.cmd.Oil)
+    end
+  },
+
   -- integração com o git, quase tão bom quanto pão de queijo
   {
     "tpope/vim-fugitive",
-    cmd = { "G", "Git", "Gclog" },
+    cmd = { "G", "Git", "Gclog", "Gdiffsplit" },
     init = function ()
       vim.keymap.set("n", "<leader>g", ":Git ")
     end

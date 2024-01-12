@@ -9,6 +9,7 @@ vim.o.complete       = "."
 vim.o.signcolumn     = "number"
 vim.o.completeopt    = "menu,menuone,noselect"
 vim.o.wildmode       = "longest,list,full"
+vim.o.mousemodel     = "extend"
 vim.o.undodir        = undodir
 vim.o.scrolloff      = 8
 vim.o.tabstop        = 4
