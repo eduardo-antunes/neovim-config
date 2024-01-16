@@ -13,10 +13,12 @@ function load_habamax()
   vim.opt.termguicolors = true
   vim.cmd.colors "habamax"
   tweak_hl {
-    { "Visual",      bg = "#3A3A3A", fg = "NONE"  },
-    { "PmenuSel",    bg = "#87AFAF", fg = "black" },
-    { "FloatBorder", bg = "NONE"  },
+    { "Visual",   bg = "#3A3A3A", fg = "NONE"  },
+    { "PmenuSel", bg = "#87AFAF", fg = "black" },
+    { "FloatBorder", bg = "NONE" },
   }
+  vim.cmd.highlight("Comment gui=italic")
 end
 
-load_habamax() -- habamax por padrão
+-- Teste drive do novo tema padrão
+vim.opt.termguicolors = true

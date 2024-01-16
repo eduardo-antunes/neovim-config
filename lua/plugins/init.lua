@@ -48,4 +48,16 @@ return {
       vim.keymap.set("n", "<leader>g", ":Git ")
     end
   },
+
+  -- o novo tema padrão fica bem melhor com o treesitter
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    ft = { "c", "lua", "vimdoc" },
+    config = function ()
+      require("nvim-treesitter.configs").setup {
+        highlight = { enable = true }
+      }
+    end
+  },
 }
