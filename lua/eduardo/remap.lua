@@ -11,6 +11,7 @@ local atalhos = {
   { "n", "<bs>",      "<c-^>zz"     },
   { "n", "<leader>s", ":%s/"        },
   { "n", "<leader>e", ":e %:h/"     },
+  { "n", "<leader>w", "<cmd>w<cr>"  },
 
   -- Gerenciamento de buffers
   { "n", "<leader><right>", vim.cmd.bnext   },
@@ -50,7 +51,7 @@ local atalhos = {
   { "n", "<leader>qk", vim.cmd.lprev },
 
   -- Lista de quickfix global
-  { "n", "<c-q>",  vim.cmd.copen },
+  { "n", "<c-q>q", vim.cmd.copen },
   { "n", "<c-q>j", vim.cmd.cnext },
   { "n", "<c-q>k", vim.cmd.cprev },
 }

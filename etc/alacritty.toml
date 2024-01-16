@@ -2,9 +2,9 @@
 # situação onde eu queira usar o terminal sem a conveniência do tmux à mão.
 
 [window]
-title = "Terminal"
+title = "Terminal  λ"
 dynamic_title = false
-padding = { x = 2 }
+dynamic_padding = true
 
 [shell]
 program = "/usr/bin/tmux"

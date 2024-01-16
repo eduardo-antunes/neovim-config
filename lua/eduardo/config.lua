@@ -49,3 +49,15 @@ vim.api.nvim_create_autocmd("FileType", {
       vim.bo.shiftwidth  = 2
     end
   })
+
+-- Configurações de "concealing" e atalhos para arquivos markdown
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    group = vim.api.nvim_create_augroup("MarkCon", {}),
+    callback = function ()
+      vim.o.conceallevel = 3
+      vim.o.concealcursor = "nc"
+      vim.keymap.set("v", "<c-b>", "<esc>`>a**<esc>`<i**<esc>")
+      vim.keymap.set("v", "<c-i>", "<esc>`>a*<esc>`<i*<esc>")
+    end
+  })
