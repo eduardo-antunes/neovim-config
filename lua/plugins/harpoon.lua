@@ -20,10 +20,5 @@ return {
     vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
     vim.keymap.set("n", "<leader>5", function() ui.nav_file(5) end)
 
-    -- Execução assíncrona de comandos com o tmux
-    local exec_prompt = function ()
-      exec.sendCommand(1, vim.fn.input("$ "))
-    end
-    vim.keymap.set("n", "<leader>!", exec_prompt)
   end,
 }

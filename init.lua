@@ -2,7 +2,6 @@
 -- exclusivamente a carregar o restante da configuração, composta
 -- por arquivos de propósito específico
 
-require("eduardo.colors") -- cores bonitas
-require("eduardo.config") -- configuração de opções
 require("eduardo.remap")  -- atalhos de teclado
 require("eduardo.pack")   -- carrega plugins
+require("eduardo.config") -- configuração de opções

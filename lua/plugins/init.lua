@@ -1,5 +1,7 @@
 -- Plugins de configuração mínima
 
+local parsers = { "c", "cpp", "lua", "python", "go", "vimdoc" }
+
 return {
 
   "sheerun/vim-polyglot", -- suporte mais completo a várias linguagens
@@ -12,13 +14,26 @@ return {
 
   { "windwp/nvim-autopairs", config = true }, -- delimitadores balanceados
 
+  { "echasnovski/mini.completion", config = true }, -- autocompletion leve e simples
+
+  { "echasnovski/mini.align", config = true }, -- alinhamento vertical de texto
+
   { "stevearc/dressing.nvim", config = true }, -- melhorias estéticas na interface
 
   { "eduardo-antunes/plainline", config = true, dev = true }, -- statusline mais prática
 
-  { "echasnovski/mini.completion", config = true }, -- autocompletion leve e simples
-
-  { "echasnovski/mini.align", config = true }, -- alinhamento vertical de texto
+  -- cores um pouco mais agradáveis para o dia-a-dia
+  {
+    "navarasu/onedark.nvim",
+    config = function ()
+      vim.opt.termguicolors = true
+      require("onedark").setup {
+        style = "darker",
+        highlights = { ["@constructor"] = { fmt = "NONE" } }
+      }
+      require("onedark").load()
+    end
+  },
 
   -- indica níveis de indentação, bem bacana
   {
@@ -31,7 +46,20 @@ return {
     end
   },
 
-  -- explorador de arquivos similar ao dired do emacs
+  -- suporte extra a linguagens, com colorização sintática mais precisa
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    ft = parsers,
+    config = function ()
+      require("nvim-treesitter.configs").setup {
+        highlight = { enable = true },
+        ensure_installed = parsers,
+      }
+    end
+  },
+
+  -- explorador/editor de arquivos similar ao dired do emacs
   {
     "stevearc/oil.nvim",
     opts = { delete_to_trash = true },
@@ -46,18 +74,6 @@ return {
     cmd = { "G", "Git", "Gclog", "Gdiffsplit" },
     init = function ()
       vim.keymap.set("n", "<leader>g", ":Git ")
-    end
-  },
-
-  -- o novo tema padrão fica bem melhor com o treesitter
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    ft = { "c", "lua", "vimdoc" },
-    config = function ()
-      require("nvim-treesitter.configs").setup {
-        highlight = { enable = true }
-      }
     end
   },
 }

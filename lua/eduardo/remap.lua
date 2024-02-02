@@ -51,9 +51,9 @@ local atalhos = {
   { "n", "<leader>qk", vim.cmd.lprev },
 
   -- Lista de quickfix global
-  { "n", "<c-q>q", vim.cmd.copen },
-  { "n", "<c-q>j", vim.cmd.cnext },
-  { "n", "<c-q>k", vim.cmd.cprev },
+  { "n", "<c-q>", vim.cmd.copen },
+  { "n", "<c-n>", vim.cmd.cnext },
+  { "n", "<c-p>", vim.cmd.cprev },
 }
 
 -- Aplica os atalhos na tabela
@@ -70,10 +70,3 @@ end, { expr = true })
 vim.keymap.set("i", "<s-tab>", function ()
   return vim.fn.pumvisible() == 1 and "<c-p>" or "<s-tab>"
 end, { expr = true })
-
--- Remova espaços em branco sobressalentes ao salvar arquivos
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    command = [[if &ft!="text"|%s/\s\+$//e|endif]],
-    group = vim.api.nvim_create_augroup("RemoveWhitespace", {}),
-  })

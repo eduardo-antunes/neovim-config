@@ -15,6 +15,7 @@ vim.o.scrolloff      = 8
 vim.o.tabstop        = 4
 vim.o.softtabstop    = 4
 vim.o.shiftwidth     = 4
+vim.o.lazyredraw     = true
 vim.o.smartindent    = true
 vim.o.modeline       = true
 vim.o.hidden         = true
@@ -36,7 +37,6 @@ vim.o.backup         = false
 vim.o.undofile       = true
 vim.o.incsearch      = true
 vim.o.smartcase      = true
-vim.o.lazyredraw     = true
 vim.o.ignorecase     = false
 
 -- Configurações de indentação para a linguagem lua
@@ -60,4 +60,11 @@ vim.api.nvim_create_autocmd("FileType", {
       vim.keymap.set("v", "<c-b>", "<esc>`>a**<esc>`<i**<esc>")
       vim.keymap.set("v", "<c-i>", "<esc>`>a*<esc>`<i*<esc>")
     end
+  })
+
+-- Remove espaços em branco sobressalentes ao salvar arquivos
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    command = [[if &ft!="text"|%s/\s\+$//e|endif]],
+    group = vim.api.nvim_create_augroup("RemoveWhitespace", {}),
   })
