@@ -45,6 +45,7 @@ foreground = "#ffffff"
 
 [font]
 size = 10
+offset = { y = 1 }
 normal = { family = "Source Code Pro" }
 
 [[keyboard.bindings]]

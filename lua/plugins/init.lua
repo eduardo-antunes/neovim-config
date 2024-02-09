@@ -59,21 +59,17 @@ return {
     end
   },
 
-  -- explorador/editor de arquivos similar ao dired do emacs
-  {
-    "stevearc/oil.nvim",
-    opts = { delete_to_trash = true },
-    init = function ()
-      vim.keymap.set("n", "-", vim.cmd.Oil)
-    end
-  },
-
   -- integração com o git, quase tão bom quanto pão de queijo
   {
     "tpope/vim-fugitive",
-    cmd = { "G", "Git", "Gclog", "Gdiffsplit" },
-    init = function ()
-      vim.keymap.set("n", "<leader>g", ":Git ")
-    end
+    keys = {
+      { "<leader>gg", vim.cmd.Git },
+      { "<leader>gc", vim.cmd.Gclog },
+      { "<leader>gd", vim.cmd.Gdiffsplit },
+      { "<leader>gs", "<cmd>Git status<cr>" },
+      { "<leader>gu", ":Git! push -u origin " },
+      { "<leader>gp", "<cmd>Git! push<cr>" },
+    },
+    cmd = { "G", "Git" }
   },
 }
