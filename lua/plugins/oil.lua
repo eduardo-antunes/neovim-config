@@ -2,19 +2,13 @@
 -- fora da utilização normal do neovim, como uma ferramenta de renomeação
 -- coletiva de arquivos no terminal (nunca entendi como o rename funciona)
 
-local function toggle_permissions()
-  -- Função muito simples que basicamente só me atende
-  if #require("oil.config").columns > 1 then
-    require("oil").set_columns { "size" }
-    return
-  end
-  require("oil").set_columns { "size", "permissions" }
-end
-
 return {
   "stevearc/oil.nvim",
   opts = {
-    columns = { "size" },
+    columns = {
+      { "size",        highlight = "Number" },
+      { "permissions", highlight = "String" },
+    },
     delete_to_trash = true,
     win_options = {
       conceallevel = 3,
@@ -26,11 +20,16 @@ return {
       ["H"] = "actions.select_vsplit",
       ["K"] = "actions.select_split",
       ["gr"] = "actions.refresh",
-      ["gp"] = toggle_permissions,
+      ["gt"] = "actions.open_terminal",
       ["<BS>"] = "actions.parent",
       ["<C-h>"] = false,
       ["<C-l>"] = false,
       ["<C-t>"] = false,
+    },
+    view_options = {
+      is_always_hidden = function(name, bufnr)
+        return name == ".."
+      end
     },
   },
   init = function ()
