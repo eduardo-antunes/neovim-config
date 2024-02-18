@@ -42,7 +42,7 @@ vim.o.ignorecase     = false
 -- Configurações de indentação para a linguagem lua
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "lua",
-    group = vim.api.nvim_create_augroup("LuaTab", {}),
+    group = vim.api.nvim_create_augroup("lua-conf", {}),
     callback = function ()
       vim.bo.tabstop     = 2
       vim.bo.softtabstop = 2
@@ -53,18 +53,18 @@ vim.api.nvim_create_autocmd("FileType", {
 -- Configurações de "concealing" e atalhos para arquivos markdown
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "markdown",
-    group = vim.api.nvim_create_augroup("MarkCon", {}),
     callback = function ()
       vim.o.conceallevel = 3
       vim.o.concealcursor = "nc"
       vim.keymap.set("v", "<c-b>", "<esc>`>a**<esc>`<i**<esc>")
       vim.keymap.set("v", "<c-i>", "<esc>`>a*<esc>`<i*<esc>")
-    end
+    end,
+    group = vim.api.nvim_create_augroup("markdown-conf", {})
   })
 
 -- Remove espaços em branco sobressalentes ao salvar arquivos
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     command = [[if &ft!="text"|%s/\s\+$//e|endif]],
-    group = vim.api.nvim_create_augroup("RemoveWhitespace", {}),
+    group = vim.api.nvim_create_augroup("sem-espacos", {}),
   })

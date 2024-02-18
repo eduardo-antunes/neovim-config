@@ -1,14 +1,13 @@
--- Plugins de configuração mínima
-
-local parsers = { "c", "cpp", "lua", "python", "go", "vimdoc" }
+-- Esse arquivo reúne todos os plugins que precisam de pouca configuração da
+-- minha parte; simplesmente não compensa fazer um arquivo para cada um.
 
 return {
 
-  "sheerun/vim-polyglot", -- suporte mais completo a várias linguagens
+  "tpope/vim-surround", -- operações rápidas sobre delimitadores
 
   "tpope/vim-commentary", -- atalhos para comentar e descomentar rapidamente
 
-  "tpope/vim-surround", -- operações rápidas sobre delimitadores
+  "sheerun/vim-polyglot", -- suporte mais completo a várias linguagens
 
   "christoomey/vim-tmux-navigator", -- integração melhor com o tmux
 
@@ -22,21 +21,18 @@ return {
 
   { "eduardo-antunes/plainline", config = true, dev = true }, -- statusline mais prática
 
-  -- cores um pouco mais agradáveis para o dia-a-dia
-  {
+  { -- cores mais agradáveis para o dia-a-dia
     "navarasu/onedark.nvim",
     config = function ()
       vim.opt.termguicolors = true
       require("onedark").setup {
-        style = "darker",
         highlights = { ["@constructor"] = { fmt = "NONE" } }
       }
       require("onedark").load()
     end
   },
 
-  -- indica níveis de indentação, bem bacana
-  {
+  { -- indica níveis de indentação visualmente, muito útil em python
     "lukas-reineke/indent-blankline.nvim",
     config = function ()
       require("ibl").setup {
@@ -46,30 +42,17 @@ return {
     end
   },
 
-  -- suporte extra a linguagens, com colorização sintática mais precisa
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    ft = parsers,
-    config = function ()
-      require("nvim-treesitter.configs").setup {
-        highlight = { enable = true },
-        ensure_installed = parsers,
-      }
-    end
-  },
-
-  -- integração com o git, quase tão bom quanto pão de queijo
-  {
+  { -- integração excelente com o Git, melhor que pão de queijo
     "tpope/vim-fugitive",
-    keys = {
-      { "<leader>gg", vim.cmd.Git },
+    cmd = { "G", "Git", "Gread", "Gedit" },
+    keys = { -- atalhos de teclado para o Git
+      { "<leader>gg", vim.cmd.Git  },
       { "<leader>gc", vim.cmd.Gclog },
-      { "<leader>gd", vim.cmd.Gdiffsplit },
+      { "<leader>gD", vim.cmd.Gdiffsplit },
+      { "<leader>gd", "<cmd>Git diff<cr>" },
       { "<leader>gs", "<cmd>Git status<cr>" },
       { "<leader>gu", ":Git! push -u origin " },
       { "<leader>gp", "<cmd>Git! push<cr>" },
     },
-    cmd = { "G", "Git" }
   },
 }
