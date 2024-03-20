@@ -13,7 +13,6 @@ return {
     -- refazer essa parte no futuro.
     local ui = require("harpoon.ui")
     local mark = require("harpoon.mark")
-    local exec = require("harpoon.tmux")
 
     -- Operações básicas do harpoon: ver a lista de arquivos marcados (que
     -- permite edição), e marcar ou desmarcar o arquivo atual.
@@ -30,5 +29,8 @@ return {
     vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
     vim.keymap.set("n", "<leader>5", function() ui.nav_file(5) end)
 
+    -- Acesso melhor ao terminal
+    local term = require("harpoon.term")
+    vim.keymap.set("n", "<leader><cr>", function() term.gotoTerminal(0) end)
   end,
 }

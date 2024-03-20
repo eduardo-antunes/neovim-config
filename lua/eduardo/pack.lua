@@ -1,4 +1,4 @@
--- Setup básico do sistema de plugins
+--# Setup básico do sistema de plugins
 
 local icons = false -- requer nerd font
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -20,19 +20,9 @@ if not icons then
   -- substitui ícones com caracteres Unicode
   config.ui = {
     icons = {
-      cmd     = "⌘",
-      config  = "🛠",
-      event   = "📅",
-      ft      = "📂",
-      init    = "⚙",
-      keys    = "🗝",
-      plugin  = "🔌",
-      runtime = "💻",
-      require = "🌙",
-      source  = "📄",
-      start   = "🚀",
-      task    = "📌",
-      lazy    = "💤 ",
+      cmd = "⌘", config = "🛠", event = "📅", ft = "📂", init = "⚙",
+      keys = "🗝", plugin = "🔌", runtime = "💻", require = "🌙",
+      source = "📄", start = "🚀", task = "📌", lazy = "💤 ",
     }
   }
 end

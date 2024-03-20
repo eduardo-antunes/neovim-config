@@ -7,12 +7,12 @@
 local linguagens = { "c", "cpp", "lua", "python", "go", "vimdoc" }
 
 return {
-    "nvim-treesitter/nvim-treesitter",
-    ft = linguagens, build = ":TSUpdate",
-    config = function ()
-      require("nvim-treesitter.configs").setup {
-        highlight = { enable = true },
-        ensure_installed = linguagens,
-      }
-    end
+  "nvim-treesitter/nvim-treesitter",
+  ft = linguagens, build = ":TSUpdate",
+  config = function ()
+    require("nvim-treesitter.configs").setup {
+      highlight = { enable = true },
+      ensure_installed = linguagens,
+    }
+  end
 }

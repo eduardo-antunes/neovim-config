@@ -3,36 +3,19 @@
 
 return {
 
-  "tpope/vim-surround", -- operações rápidas sobre delimitadores
+  "tpope/vim-sleuth", -- configurações de tabulação sempre corretas
 
-  "tpope/vim-commentary", -- atalhos para comentar e descomentar rapidamente
+  { "stevearc/dressing.nvim", opts = {} }, -- pequenas melhorias na interface
 
-  "sheerun/vim-polyglot", -- suporte mais completo a várias linguagens
-
-  "christoomey/vim-tmux-navigator", -- integração melhor com o tmux
-
-  { "windwp/nvim-autopairs", config = true }, -- delimitadores balanceados
-
-  { "echasnovski/mini.completion", config = true }, -- autocompletion leve e simples
-
-  { "echasnovski/mini.align", config = true }, -- alinhamento vertical de texto
-
-  { "stevearc/dressing.nvim", config = true }, -- melhorias estéticas na interface
-
-  { "eduardo-antunes/plainline", config = true, dev = true }, -- statusline mais prática
-
-  { -- cores mais agradáveis para o dia-a-dia
-    "navarasu/onedark.nvim",
+  { -- cores bonitas, pelo bem dos meus olhos
+    "folke/tokyonight.nvim",
+    lazy = false, priority = 1000,
     config = function ()
-      vim.opt.termguicolors = true
-      require("onedark").setup {
-        highlights = { ["@constructor"] = { fmt = "NONE" } }
-      }
-      require("onedark").load()
+      vim.cmd.colors "tokyonight"
     end
   },
 
-  { -- indica níveis de indentação visualmente, muito útil em python
+  { -- indica níveis de indentação visualmente
     "lukas-reineke/indent-blankline.nvim",
     config = function ()
       require("ibl").setup {
@@ -42,17 +25,42 @@ return {
     end
   },
 
-  { -- integração excelente com o Git, melhor que pão de queijo
-    "tpope/vim-fugitive",
-    cmd = { "G", "Git", "Gread", "Gedit" },
-    keys = { -- atalhos de teclado para o Git
-      { "<leader>gg", vim.cmd.Git  },
-      { "<leader>gc", vim.cmd.Gclog },
-      { "<leader>gD", vim.cmd.Gdiffsplit },
-      { "<leader>gd", "<cmd>Git diff<cr>" },
-      { "<leader>gs", "<cmd>Git status<cr>" },
-      { "<leader>gu", ":Git! push -u origin " },
-      { "<leader>gp", "<cmd>Git! push<cr>" },
-    },
+  { -- integração com git em buffers
+    "lewis6991/gitsigns.nvim",
+    opts = { numhl = true, signcolumn = false },
+  },
+
+  { -- integração excelente com o git (estou testando esse)
+    "neogitorg/neogit",
+    dependencies = "nvim-lua/plenary.nvim",
+    config = function ()
+      require("neogit").setup { kind = "replace" }
+      vim.keymap.set("n", "<leader>g", function() require("neogit").open() end)
+    end
+  },
+
+  { -- coleção de pequenos plugins para o neovim
+    "echasnovski/mini.nvim",
+    config = function ()
+      -- Delimitadores sempre balanceados
+      require("mini.pairs").setup {}
+
+      -- Operações sobre delimitadores
+      require("mini.surround").setup {}
+
+      -- Alinhamento vertical de texto
+      require("mini.align").setup {}
+
+      -- Atalhos para comentários
+      require("mini.comment").setup {}
+
+      -- Preenchimento automático ("completion") leve e simples
+      require("mini.completion").setup {}
+
+      -- Statusline prática e agradável
+      require("mini.statusline").setup {
+        use_icons = false
+      }
+    end
   },
 }
