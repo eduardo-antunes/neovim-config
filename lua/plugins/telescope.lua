@@ -36,7 +36,7 @@ return {
     vim.keymap.set("n", "<leader>.", t.find_files)
     vim.keymap.set("n", "<leader>:", t.commands)
     vim.keymap.set("n", "<leader>K", t.man_pages)
-    vim.keymap.set("n", "<leader>G", t.git_commits)
+    vim.keymap.set("n", "<leader>gc", t.git_commits)
     vim.keymap.set("n", "<leader>H", t.help_tags)
     vim.keymap.set("n", "<leader>/", pesquisa)
     vim.keymap.set("n", "<C-f>", todos_arquivos)

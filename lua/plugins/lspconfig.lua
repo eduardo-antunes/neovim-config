@@ -19,7 +19,8 @@ local function on_attach(client, buf)
     ["<leader>cr"] = vim.lsp.buf.rename,
   }
   -- Essa função é executada sempre que um servidor conecta-se a um buffer. Eu
-  -- simplesmente a utilizo para configurar os atalhos definidos acima.
+  -- simplesmente a utilizo para configurar os atalhos definidos acima e
+  -- ativar/desativar capacidades dos servidores
   client.server_capabilities.semanticTokensProvider = nil
   for lhs, rhs in pairs(atalhos) do
     vim.keymap.set("n", lhs, rhs, { buffer = buf })

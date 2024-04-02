@@ -28,9 +28,5 @@ return {
     vim.keymap.set("n", "<leader>3", function() ui.nav_file(3) end)
     vim.keymap.set("n", "<leader>4", function() ui.nav_file(4) end)
     vim.keymap.set("n", "<leader>5", function() ui.nav_file(5) end)
-
-    -- Acesso melhor ao terminal
-    local term = require("harpoon.term")
-    vim.keymap.set("n", "<leader><cr>", function() term.gotoTerminal(0) end)
   end,
 }

@@ -1,21 +1,44 @@
--- Esse arquivo reúne todos os plugins que precisam de pouca configuração da
--- minha parte; simplesmente não compensa fazer um arquivo para cada um.
+-- plugins/init.lua: reúne todos os plugins que precisam de pouca configuração
+-- da minha parte. Acho que não compensa fazer um arquivo para cada
 
 return {
 
-  "tpope/vim-sleuth", -- configurações de tabulação sempre corretas
+  -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
+  -- mais elegante do que gravar em pedra o estilo de cada linguagem
+  { "NMAC427/guess-indent.nvim", opts = {} },
 
-  { "stevearc/dressing.nvim", opts = {} }, -- pequenas melhorias na interface
+  -- Substitui alguns elementos tradicionais da interface com o uso do
+  -- telescope.nvim e de janelas 'floating'
+  { "stevearc/dressing.nvim", event = "VeryLazy", opts = {} },
 
-  { -- cores bonitas, pelo bem dos meus olhos
-    "folke/tokyonight.nvim",
+  { -- Minha humilde statusline. Sem ícones, sem cores, cheia de personalidade
+    "eduardo-antunes/plainline",
+    config = function ()
+      require("plainline").setup { separator = " │ " }
+      require("plainline.tabs").setup() -- tabline também humilde
+    end,
+    dev = true
+  },
+
+  { -- Cores bonitas, pelo bem dos meus olhos. Eu mudo essa parte às vezes,
+    -- mas o onedark.nvim para mim chega bem perto da perfeição
+    "navarasu/onedark.nvim",
     lazy = false, priority = 1000,
     config = function ()
-      vim.cmd.colors "tokyonight"
+      require("onedark").setup {
+        ending_tildes = true, -- gosto do visual clássico
+        toggle_style_key = "<leader>t",
+        highlights = {
+          ["@constructor"] = { fmt = "NONE" },
+          ["@string.documentation"] = { fmt = "italic" },
+        }
+      }
+      vim.cmd.colors "onedark"
     end
   },
 
-  { -- indica níveis de indentação visualmente
+  { -- Adiciona guias de indentação. Bastante útil, principalmente para
+    -- linguagens muito sensíveis a espaço em branco, como python
     "lukas-reineke/indent-blankline.nvim",
     config = function ()
       require("ibl").setup {
@@ -25,42 +48,45 @@ return {
     end
   },
 
-  { -- integração com git em buffers
-    "lewis6991/gitsigns.nvim",
-    opts = { numhl = true, signcolumn = false },
+  { -- Git direto no neovim. Uma interface que rivaliza com a do magit do
+    -- emacs, feita por um autor clássico de plugins. Sem dúvida uma das
+    -- ferramentas que me são mais caras
+    "tpope/vim-fugitive",
+    keys = {
+      { "<leader>gg", ":G " },
+      { "<leader>gp", ":G push" },
+      { "<leader>gF", ":G pull" },
+      { "<leader>G", vim.cmd.Git },
+    },
+    cmd = { "Git","G","Gread","Gwrite","Gclog" },
   },
 
-  { -- integração excelente com o git (estou testando esse)
-    "neogitorg/neogit",
-    dependencies = "nvim-lua/plenary.nvim",
-    config = function ()
-      require("neogit").setup { kind = "replace" }
-      vim.keymap.set("n", "<leader>g", function() require("neogit").open() end)
-    end
-  },
-
-  { -- coleção de pequenos plugins para o neovim
+  { -- Essa é na verdade uma coleção de pequenos plugins, todos de uso bem
+    -- específico, mas muito úteis
     "echasnovski/mini.nvim",
     config = function ()
-      -- Delimitadores sempre balanceados
-      require("mini.pairs").setup {}
+      -- Equilibra delimitadores automaticamente, o que para mim é realmente
+      -- uma necessidade básica. Similar ao electric-pair do emacs
+      require("mini.pairs").setup()
 
-      -- Operações sobre delimitadores
-      require("mini.surround").setup {}
+      -- Oferece operações extras sobre delimitadores. É portanto similar ao
+      -- vim-surround do tpope, embora não seja "retrocompatível" com ele (os
+      -- atalhos são diferentes, mas são também lógicos)
+      require("mini.surround").setup()
 
-      -- Alinhamento vertical de texto
-      require("mini.align").setup {}
+      -- Atalhos e funções para alinhar texto verticalmente. Eu adoro fazer
+      -- isso, e me deixa bem satisfeito que não dê mais trabalho
+      require("mini.align").setup()
 
-      -- Atalhos para comentários
-      require("mini.comment").setup {}
+      -- Outra "imitação" de um clássico do tpope, dessa vez similar ao
+      -- vim-commentary. Introduz atalhos para comentar e descomentar código.
+      -- Nem preciso explicar porque isso é útil
+      require("mini.comment").setup()
 
-      -- Preenchimento automático ("completion") leve e simples
-      require("mini.completion").setup {}
-
-      -- Statusline prática e agradável
-      require("mini.statusline").setup {
-        use_icons = false
-      }
+      -- Expande o sistema de preenchimento ("completion") nativo do vim,
+      -- tornando-o automático e integrando com LSP. Muito leve e simples
+      -- quando comparado com alternativas como o nvim-cmp, e já me atende bem
+      require("mini.completion").setup()
     end
   },
 }

@@ -1,5 +1,5 @@
 -- O oil.nvim é um editor/explorador de arquivos bastante similar ao dired do
--- emacs, ao menos em espíritos. Ele permite editar o conteúdo de diretórios
+-- emacs, ao menos em espírito. Ele permite editar o conteúdo de diretórios
 -- como um buffer normal, o que é muito intuitivo e permite usar todos os
 -- recursos de edição do neovim para manipular arquivos.
 

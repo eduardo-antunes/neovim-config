@@ -1,8 +1,10 @@
---# Setup básico do sistema de plugins
+-- pack.lua: configura o sistema de plugins com o lazy.nvim. O nome é uma
+-- homenagem ao falecido packer.nvim, que muito bem me serviu
 
-local icons = false -- requer nerd font
+local icons = false -- requer nerd font, eu não gosto
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
+-- Caso o lazy não esteja instalado, instala-o
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
     "git",
@@ -15,9 +17,13 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-local config = {}
+local config = {
+  change_detection = { enabled = false }
+}
 if not icons then
-  -- substitui ícones com caracteres Unicode
+  -- Substitui ícones com caracteres Unicode na falta de uma fonte apropriada.
+  -- Eu gosto bastante desses emojis, acho sinceramente que usar ícones deixa
+  -- o trem bem mais feio
   config.ui = {
     icons = {
       cmd = "⌘", config = "🛠", event = "📅", ft = "📂", init = "⚙",
@@ -26,7 +32,9 @@ if not icons then
     }
   }
 end
+-- Caminhos dos meus próprios plugins pessoais
 config.dev = { path = "~/Projetos/pessoais" }
+-- Atalho básico para abrir a interface do lazy
 vim.keymap.set("n", "<leader>L", vim.cmd.Lazy)
 
 -- Essa linha configura a interface do lazy e carrega os plugins, utilizando
