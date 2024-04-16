@@ -5,3 +5,4 @@
 require("eduardo.keys")    -- atalhos de teclado
 require("eduardo.pack")    -- carrega plugins
 require("eduardo.options") -- configuração de opções
+require("eduardo.term")    -- configurações de terminalini

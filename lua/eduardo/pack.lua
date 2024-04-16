@@ -35,7 +35,7 @@ end
 -- Caminhos dos meus próprios plugins pessoais
 config.dev = { path = "~/Projetos/pessoais" }
 -- Atalho básico para abrir a interface do lazy
-vim.keymap.set("n", "<leader>L", vim.cmd.Lazy)
+vim.keymap.set("n", "<leader>l", vim.cmd.Lazy)
 
 -- Essa linha configura a interface do lazy e carrega os plugins, utilizando
 -- as especificações na pasta lua/plugins

@@ -11,14 +11,8 @@ return {
   -- telescope.nvim e de janelas 'floating'
   { "stevearc/dressing.nvim", event = "VeryLazy", opts = {} },
 
-  { -- Minha humilde statusline. Sem ícones, sem cores, cheia de personalidade
-    "eduardo-antunes/plainline",
-    config = function ()
-      require("plainline").setup { separator = " │ " }
-      require("plainline.tabs").setup() -- tabline também humilde
-    end,
-    dev = true
-  },
+  -- Minha humilde statusline. Sem ícones, sem cores, cheia de personalidade
+  { "eduardo-antunes/plainline", opts = { separator = " │ " }, dev = true },
 
   { -- Cores bonitas, pelo bem dos meus olhos. Eu mudo essa parte às vezes,
     -- mas o onedark.nvim para mim chega bem perto da perfeição
@@ -26,12 +20,13 @@ return {
     lazy = false, priority = 1000,
     config = function ()
       require("onedark").setup {
+        style = "darker", -- fundo mais escuro
         ending_tildes = true, -- gosto do visual clássico
+        highlights = { ["@constructor"] = { fmt = "NONE" } },
+        code_style = { strings = "italic" },
+        -- Atalho para alternar entre fundo mais claro e mais escuro
         toggle_style_key = "<leader>t",
-        highlights = {
-          ["@constructor"] = { fmt = "NONE" },
-          ["@string.documentation"] = { fmt = "italic" },
-        }
+        toggle_style_list = { "dark", "darker" },
       }
       vim.cmd.colors "onedark"
     end
@@ -56,7 +51,7 @@ return {
       { "<leader>gg", ":G " },
       { "<leader>gp", ":G push" },
       { "<leader>gF", ":G pull" },
-      { "<leader>G", vim.cmd.Git },
+      { "<leader>gs", vim.cmd.Git },
     },
     cmd = { "Git","G","Gread","Gwrite","Gclog" },
   },

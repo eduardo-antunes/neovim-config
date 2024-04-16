@@ -19,6 +19,7 @@ end
 
 return {
   "nvim-telescope/telescope.nvim",
+  event = "VimEnter",
   dependencies = {
     "nvim-lua/plenary.nvim",
     -- A extensão do telescope fzf-native incrementa o plugin com um alto
@@ -28,18 +29,16 @@ return {
   init = function ()
     local t = require("telescope.builtin")
 
-    -- Atalhos para as funções definidas acima e para operações pré-definidas
-    -- do plugin, que incluem a listagem de: buffers do neovim, arquivos na
-    -- árvore do diretório atual, comandos do vim, páginas de manual, commits
-    -- do repositório git atual (se houver) e tópicos de ajuda do vim.
-    vim.keymap.set("n", "<leader> ", t.buffers)
-    vim.keymap.set("n", "<leader>.", t.find_files)
+    -- Atalhos para as operações pré-definidas do plugin, bem como para as
+    -- minhas funções próprias. Permitem pesquisar coisas variadas rapidamente
+    vim.keymap.set("n", "<c-b>", t.buffers)
+    vim.keymap.set("n", "<c-f>", t.find_files)
+    vim.keymap.set("n", "<leader>f", todos_arquivos)
+    vim.keymap.set("n", "<leader>h", t.help_tags)
+    vim.keymap.set("n", "<leader>k", t.man_pages)
     vim.keymap.set("n", "<leader>:", t.commands)
-    vim.keymap.set("n", "<leader>K", t.man_pages)
-    vim.keymap.set("n", "<leader>gc", t.git_commits)
-    vim.keymap.set("n", "<leader>H", t.help_tags)
+    vim.keymap.set("n", "<leader>.", t.oldfiles)
     vim.keymap.set("n", "<leader>/", pesquisa)
-    vim.keymap.set("n", "<C-f>", todos_arquivos)
 
     require("telescope").load_extension("fzf") -- extensão fzf-native
   end,

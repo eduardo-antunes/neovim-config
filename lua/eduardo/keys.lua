@@ -10,9 +10,8 @@ vim.keymap.set("n", "L", "$")
 
 -- Atalhos mais diretos para operações comuns
 vim.keymap.set("n", "<leader>s", ":%s/")
+vim.keymap.set("n", "<leader>w", vim.cmd.write)
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>")
-vim.keymap.set("n", "<leader>e", ":e %:h/")
-vim.keymap.set("n", "<leader>w", "<cmd>w<cr>")
 
 -- Navegação entre janelas (normal)
 vim.keymap.set("n", "<c-k>", "<c-w>k")
@@ -31,16 +30,6 @@ vim.keymap.set("t", "<c-k>", "<c-\\><c-n><c-w>k")
 vim.keymap.set("t", "<c-j>", "<c-\\><c-n><c-w>j")
 vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>h")
 vim.keymap.set("t", "<c-l>", "<c-\\><c-n><c-w>l")
-
--- Gerência de terminais; eu gosto de abrir o terminal sempre em uma aba
--- separada, para não interferir com as janelas correntes
-vim.keymap.set("n", "<leader><cr>", "<cmd>tabnew|term<cr>")
-
--- Navegação entre abas com alt
-vim.keymap.set("n", "<a-1>", "<cmd>1tabn<cr>")
-vim.keymap.set("n", "<a-2>", "<cmd>2tabn<cr>")
-vim.keymap.set("n", "<a-3>", "<cmd>3tabn<cr>")
-vim.keymap.set("n", "<a-4>", "<cmd>4tabn<cr>")
 
 -- Copiar e colar do clipboard do sistema
 vim.keymap.set("n", "<leader>p",  "\"+p")
@@ -65,26 +54,23 @@ vim.keymap.set("v", "J", ":m'>+1<cr>gv=gv")
 vim.keymap.set("v", "K", ":m'>-2<cr>gv=gv")
 
 -- Navegação rápida de diagnósticos
-local z = { silent = true }
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, z)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next, z)
-vim.keymap.set("n", "<leader>ll", vim.diagnostic.open_float, z)
-vim.keymap.set("n", "<leader>lq", vim.diagnostic.setloclist, z)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
 
 -- Navegação rápida do "quickfix"
-vim.keymap.set("n", "<c-q>", vim.cmd.copen)
 vim.keymap.set("n", "<c-n>", vim.cmd.cnext)
 vim.keymap.set("n", "<c-p>", vim.cmd.cprev)
 
 vim.keymap.set("n", "Q", "<nop>") -- comando muito ruim simplesmente
 vim.keymap.set("n", "<bs>", "<c-^>zz") -- arquivo alternativo no <bs>
 
--- Atalhos para o sistema de complete nativo
-
-vim.keymap.set("i", "<tab>", function ()
-  return vim.fn.pumvisible() == 1 and "<c-n>" or "<tab>"
-end, { expr = true })
-
-vim.keymap.set("i", "<s-tab>", function ()
-  return vim.fn.pumvisible() == 1 and "<c-p>" or "<s-tab>"
-end, { expr = true })
+-- Destaca o texto copiado após operações de cópia; extraído diretamente do
+-- excelente kickstart.nvim
+vim.api.nvim_create_autocmd('TextYankPost', {
+  group = vim.api.nvim_create_augroup('hl-yank', {}),
+  callback = function()
+    vim.highlight.on_yank()
+  end,
+})

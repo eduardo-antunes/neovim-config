@@ -4,15 +4,19 @@
 -- que eu utilizo que não precisam de nenhuma configuração extra além de
 -- atalhos de teclado.
 
-local s = { "clangd", "pylsp", "gopls" }
+local s = { "clangd", "pylsp", "gopls", "rust_analyzer" }
 
 local function on_attach(client, buf)
+  local t = require("telescope.builtin") -- atalhos usam o telescope.nvim
   local atalhos = {
     -- Atalhos de teclado específicos para buffers com LSP ativo, dão acesso às
     -- operações mais comuns realizadas junto aos servidores.
-    ["gd"] = require("telescope.builtin").lsp_definitions,
-    ["gr"] = require("telescope.builtin").lsp_references,
-    ["gI"] = require("telescope.builtin").lsp_implementations,
+    ["gd"] = t.lsp_definitions,
+    ["gr"] = t.lsp_references,
+    ["gI"] = t.lsp_implementations,
+    ["gD"] = vim.lsp.buf.declaration,
+    ["<leader>ct"] = t.lsp_type_definitions,
+    ["<leader>cs"] = t.lsp_document_symbols,
     ["<leader>cf"] = vim.lsp.buf.format,
     ["<leader>ch"] = vim.lsp.buf.hover,
     ["<leader>ca"] = vim.lsp.buf.code_action,
@@ -30,7 +34,7 @@ end
 return {
   "neovim/nvim-lspconfig", -- plugin geral de LSP
   dependencies = "mfussenegger/nvim-jdtls", -- plugin específico para java
-  ft = { "c", "cpp", "python", "go", "java" },
+  ft = { "c", "cpp", "python", "go", "rust", "java" },
   config = function ()
     -- Sob o plugin de LSP nvim-lspconfig, toda a configuração necessária para
     -- os servidores na lista s é feita por esse pequeno bloco de código.

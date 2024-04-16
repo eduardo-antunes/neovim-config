@@ -23,10 +23,11 @@ vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.cursorline = true
 vim.o.cursorlineopt = "number"
+vim.opt.shortmess:append "I"
 
 -- Tempos de atualização na interface
 vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+vim.o.timeoutlen = 500
 vim.o.lazyredraw = true
 
 -- Pesquisa ignorando capitalização, incremental e não persistente
@@ -35,10 +36,15 @@ vim.o.smartcase  = true
 vim.o.incsearch  = true
 vim.o.hlsearch   = false
 
+-- Indentação padrão
+vim.o.tabstop    = 2
+vim.o.expandtab  = 4
+vim.o.shiftwidth = 4
+
 -- Números de linha e símbolos
-vim.o.number         = true
+vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn     = 'number' -- usa a coluna de números para símbolos
+vim.o.signcolumn = "number" -- usa a coluna de números para símbolos
 
 -- Backups e histórico de operações de arquivos
 vim.o.undodir  = vim.fn.stdpath("cache") .. "/undodir"
@@ -51,16 +57,6 @@ vim.o.complete    = "." -- usa apenas o arquivo atual
 vim.o.completeopt = "menu,menuone,noselect"
 vim.o.wildmode    = "longest,list,full"
 vim.o.wildmenu    = true
-
--- Opções no terminal
-vim.api.nvim_create_autocmd("TermOpen", {
-  group = vim.api.nvim_create_augroup("term", {}),
-  callback = function ()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.cmd.startinsert() -- começa no modo de inserção
-  end
-})
 
 -- Remove espaços em branco sobressalentes ao salvar arquivos
 vim.api.nvim_create_autocmd("BufWritePre", {
