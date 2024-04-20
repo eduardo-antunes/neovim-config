@@ -13,20 +13,26 @@ return {
       { "size", highlight = "Number" },
       { "permissions", highlight = "String" },
     },
+    constrain_cursor = "name", -- se tiver de editar permissões, uso o terminal
     -- Mova arquivos para o lixo quando eles são removidos no oil (depende do
     -- programa trash-cli no Linux)
     delete_to_trash = true,
     -- Atalhos de teclado mais intuitivos
+    use_default_keymaps = false,
     keymaps = {
-      ["e"] = "actions.select",
-      ["H"] = "actions.select_vsplit",
-      ["K"] = "actions.select_split",
-      ["gr"] = "actions.refresh",
+      ["~"] = "actions.cd",
+      ["-"] = "actions.parent",
+      ["_"] = "actions.open_cwd",
+      ["g."] = "actions.toggle_hidden",
+      ["gs"] = "actions.change_sort",
+      ["g?"] = "actions.show_help",
       ["gt"] = "actions.open_terminal",
-      ["<BS>"] = "actions.parent",
-      ["<C-h>"] = false,
-      ["<C-l>"] = false,
-      ["<C-t>"] = false,
+      ["g\\"] = "actions.toggle_trash",
+      ["<c-e>"] = "actions.select",
+      ["<c-s>"] = "actions.select_split",
+      ["<a-s>"] = "actions.select_vsplit",
+      ["<c-t>"] = "actions.select_tab",
+      ["<c-q>"] = "actions.close",
     },
     view_options = {
       -- Mesmo ao exibir arquivos ocultos, não faz sentido exibir o
@@ -35,6 +41,8 @@ return {
     },
   },
   init = function ()
-    vim.keymap.set("n", "-", vim.cmd.Oil) -- acesso rápido ao oil
+    vim.keymap.set("n", "-", vim.cmd.Oil)
+    vim.keymap.set("n", "<c-s>", "<cmd>sp|Oil<cr>")
+    vim.keymap.set("n", "<a-s>", "<cmd>vs|Oil<cr>")
   end
 }

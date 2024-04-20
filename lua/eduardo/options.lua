@@ -10,9 +10,12 @@ vim.o.hidden     = true
 vim.o.exrc       = true
 
 -- Interface mais limpa e mínima
+vim.o.cmdheight  = 0
+vim.o.laststatus = 3
 vim.o.tabstop    = 2
 vim.o.shiftwidth = 2
 vim.o.scrolloff  = 10
+vim.o.report     = 100
 vim.o.title      = false
 vim.o.ruler      = false
 vim.o.errorbells = false
@@ -22,13 +25,13 @@ vim.o.showmode   = false
 vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.cursorline = true
+vim.o.equalalways = true
 vim.o.cursorlineopt = "number"
-vim.opt.shortmess:append "I"
+vim.opt.shortmess:append "ISWs"
 
 -- Tempos de atualização na interface
 vim.o.updatetime = 250
 vim.o.timeoutlen = 500
-vim.o.lazyredraw = true
 
 -- Pesquisa ignorando capitalização, incremental e não persistente
 vim.o.ignorecase = true
@@ -38,8 +41,8 @@ vim.o.hlsearch   = false
 
 -- Indentação padrão
 vim.o.tabstop    = 2
-vim.o.expandtab  = 4
 vim.o.shiftwidth = 4
+vim.o.expandtab  = true
 
 -- Números de linha e símbolos
 vim.o.number = true
@@ -57,9 +60,3 @@ vim.o.complete    = "." -- usa apenas o arquivo atual
 vim.o.completeopt = "menu,menuone,noselect"
 vim.o.wildmode    = "longest,list,full"
 vim.o.wildmenu    = true
-
--- Remove espaços em branco sobressalentes ao salvar arquivos
-vim.api.nvim_create_autocmd("BufWritePre", {
-  command = [[if &ft!="text"|%s/\s\+$//e|endif]],
-  group = vim.api.nvim_create_augroup("no-whitespace", {}),
-})

@@ -6,9 +6,9 @@ local function pesquisa()
   -- Pergunta ao usuário por um termo de pesquisa e então utiliza o grep (ou o
   -- ripgrep) para efetuar a pesquisa no diretório atual, mostrando todos os
   -- resultados na interface do telescope.
-  require("telescope.builtin").grep_string {
-    search = vim.fn.input("Pesquisar no diretório: ")
-  }
+  local term = vim.fn.input("Pesquisar no diretório: ")
+  if term == "" then return end
+  require("telescope.builtin").grep_string { search = term }
 end
 
 local function todos_arquivos()

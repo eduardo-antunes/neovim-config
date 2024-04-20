@@ -3,6 +3,9 @@
 
 return {
 
+  -- Integração simples, mas efetiva com o git
+  "tpope/vim-fugitive",
+
   -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
   -- mais elegante do que gravar em pedra o estilo de cada linguagem
   { "NMAC427/guess-indent.nvim", opts = {} },
@@ -12,7 +15,7 @@ return {
   { "stevearc/dressing.nvim", event = "VeryLazy", opts = {} },
 
   -- Minha humilde statusline. Sem ícones, sem cores, cheia de personalidade
-  { "eduardo-antunes/plainline", opts = { separator = " │ " }, dev = true },
+  { "eduardo-antunes/plainline", opts = {}, dev = true },
 
   { -- Cores bonitas, pelo bem dos meus olhos. Eu mudo essa parte às vezes,
     -- mas o onedark.nvim para mim chega bem perto da perfeição
@@ -43,17 +46,15 @@ return {
     end
   },
 
-  { -- Git direto no neovim. Uma interface que rivaliza com a do magit do
-    -- emacs, feita por um autor clássico de plugins. Sem dúvida uma das
-    -- ferramentas que me são mais caras
-    "tpope/vim-fugitive",
+  { -- "Um Terminal para a Todos Governar". Terminal nativo persistente e de
+    -- acesso rápido, com um port da funcionalidade de compile do emacs
+    "eduardo-antunes/one-terminal",
+    dev = true, opts = { kind = "split" },
     keys = {
-      { "<leader>gg", ":G " },
-      { "<leader>gp", ":G push" },
-      { "<leader>gF", ":G pull" },
-      { "<leader>gs", vim.cmd.Git },
-    },
-    cmd = { "Git","G","Gread","Gwrite","Gclog" },
+      { "<leader><cr>", function() require("one-terminal").open() end },
+      { "<leader>m", function() require("one-terminal").compile() end },
+      { "<leader>r", function() require("one-terminal").recompile() end },
+    }
   },
 
   { -- Essa é na verdade uma coleção de pequenos plugins, todos de uso bem
