@@ -4,7 +4,7 @@
 -- colorização sintática. A lista de linguagens abaixo define quais parsers
 -- (analisadores sintáticos) serão baixados e utilizados.
 
-local linguagens = { "c", "cpp", "lua", "python", "go", "vimdoc" }
+local linguagens = { "c", "cpp", "rust", "lua", "python", "go", "vimdoc" }
 
 return {
   "nvim-treesitter/nvim-treesitter",

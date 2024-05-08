@@ -12,8 +12,6 @@ vim.keymap.set("n", "L", "$")
 vim.keymap.set("n", "<bs>", "<c-^>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
 vim.keymap.set("n", "<c-d>", "<c-d>zz")
-vim.keymap.set("v", "J", ":m'>+1<cr>gv=gv")
-vim.keymap.set("v", "K", ":m'>-2<cr>gv=gv")
 vim.keymap.set("t", "<esc>", "<c-\\><c-n>")
 vim.keymap.set("n", "<c-q>", vim.cmd.copen)
 vim.keymap.set("n", "<c-n>", vim.cmd.cnext)
@@ -37,6 +35,11 @@ vim.keymap.set("t", "<c-k>", "<c-\\><c-n><c-w>k")
 vim.keymap.set("t", "<c-j>", "<c-\\><c-n><c-w>j")
 vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>h")
 vim.keymap.set("t", "<c-l>", "<c-\\><c-n><c-w>l")
+vim.keymap.set("t", "<c-q>", "<c-\\><c-n><c-w>q")
+
+-- Restaura alguns atalhos de teclado do terminal
+vim.keymap.set("t", "<a-l>", "<c-l>")
+vim.keymap.set("t", "<a-k>", "<c-k>")
 
 -- Copiar e colar do clipboard do sistema
 vim.keymap.set("n", "<leader>p",  "\"+p")
@@ -53,7 +56,7 @@ vim.keymap.set("v", "<leader>d",  "\"_d")
 vim.keymap.set("v", "<leader>p", "\"_dP")
 
 -- Navegação rápida de diagnósticos
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)

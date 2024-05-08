@@ -1,19 +1,10 @@
--- O oil.nvim é um editor/explorador de arquivos bastante similar ao dired do
--- emacs, ao menos em espírito. Ele permite editar o conteúdo de diretórios
--- como um buffer normal, o que é muito intuitivo e permite usar todos os
--- recursos de edição do neovim para manipular arquivos.
+-- O oil.nvim é um editor/explorador de arquivos que permite editar os
+-- conteúdos de diretórios como se eles fossem buffers de texto normais. Eu o
+-- prefiro ao editor nativo netrw por ser mais rápido e intuitivo
 
 return {
   "stevearc/oil.nvim",
   opts = {
-    -- As colunas exibidas na edição de diretórios fornecem mais
-    -- informação sobre cada arquivo. Coloquei tamanho e permissões para que
-    -- o visual fosse mais parecido com o de dired, e por ser útil.
-    columns = {
-      { "size", highlight = "Number" },
-      { "permissions", highlight = "String" },
-    },
-    constrain_cursor = "name", -- se tiver de editar permissões, uso o terminal
     -- Mova arquivos para o lixo quando eles são removidos no oil (depende do
     -- programa trash-cli no Linux)
     delete_to_trash = true,

@@ -5,11 +5,6 @@
 local a = vim.api
 local eduardo = a.nvim_create_augroup("eduardo", {})
 
--- Remove espaços em branco sobressalentes ao salvar
-a.nvim_create_autocmd("BufWritePre", {
-  group = eduardo, command = ":%s/\\s\\+$//e"
-})
-
 -- Destaca o texto copiado após operações de cópia
 a.nvim_create_autocmd("TextYankPost", {
   group = eduardo, callback = function() vim.highlight.on_yank() end

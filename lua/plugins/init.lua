@@ -3,9 +3,6 @@
 
 return {
 
-  -- Integração simples, mas efetiva com o git
-  "tpope/vim-fugitive",
-
   -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
   -- mais elegante do que gravar em pedra o estilo de cada linguagem
   { "NMAC427/guess-indent.nvim", opts = {} },
@@ -23,13 +20,13 @@ return {
     lazy = false, priority = 1000,
     config = function ()
       require("onedark").setup {
-        style = "darker", -- fundo mais escuro
+        style = "dark", -- fundo mais escuro
         ending_tildes = true, -- gosto do visual clássico
         highlights = { ["@constructor"] = { fmt = "NONE" } },
         code_style = { strings = "italic" },
         -- Atalho para alternar entre fundo mais claro e mais escuro
         toggle_style_key = "<leader>t",
-        toggle_style_list = { "dark", "darker" },
+        toggle_style_list = { "darker", "dark" },
       }
       vim.cmd.colors "onedark"
     end
@@ -46,17 +43,6 @@ return {
     end
   },
 
-  { -- "Um Terminal para a Todos Governar". Terminal nativo persistente e de
-    -- acesso rápido, com um port da funcionalidade de compile do emacs
-    "eduardo-antunes/one-terminal",
-    dev = true, opts = { kind = "split" },
-    keys = {
-      { "<leader><cr>", function() require("one-terminal").open() end },
-      { "<leader>m", function() require("one-terminal").compile() end },
-      { "<leader>r", function() require("one-terminal").recompile() end },
-    }
-  },
-
   { -- Essa é na verdade uma coleção de pequenos plugins, todos de uso bem
     -- específico, mas muito úteis
     "echasnovski/mini.nvim",
@@ -70,9 +56,18 @@ return {
       -- atalhos são diferentes, mas são também lógicos)
       require("mini.surround").setup()
 
+      -- Atalhos para movimentar seleções arbitrárias de texto por um arquivo;
+      -- substitui alguns dos meus atalhos mais úteis e confusos
+      require("mini.move").setup()
+
       -- Atalhos e funções para alinhar texto verticalmente. Eu adoro fazer
       -- isso, e me deixa bem satisfeito que não dê mais trabalho
       require("mini.align").setup()
+
+      -- Destaca espaços em branco sobressalentes e oferece funções para
+      -- removê-lo de maneira simples e direta, o que é bastante útil
+      local trail = require("mini.trailspace") trail.setup()
+      vim.keymap.set("n", "<leader><bs>", trail.trim)
 
       -- Outra "imitação" de um clássico do tpope, dessa vez similar ao
       -- vim-commentary. Introduz atalhos para comentar e descomentar código.

@@ -33,8 +33,7 @@ end
 
 return {
   "neovim/nvim-lspconfig", -- plugin geral de LSP
-  dependencies = "mfussenegger/nvim-jdtls", -- plugin específico para java
-  ft = { "c", "cpp", "python", "go", "rust", "java" },
+  ft = { "c", "cpp", "python", "go", "rust" },
   config = function ()
     -- Sob o plugin de LSP nvim-lspconfig, toda a configuração necessária para
     -- os servidores na lista s é feita por esse pequeno bloco de código.
@@ -42,24 +41,5 @@ return {
     for _, servidor in ipairs(s) do
       lsp_conf[servidor].setup { on_attach = on_attach }
     end
-
-    -- A linguagem java, desnecessariamente complicada do jeito que só ela
-    -- mesmo sabe ser, precisa de um plugin específico para configurar o seu
-    -- servidor LSP. Isso porque esse plugin introduz extensões em relação ao
-    -- setup básico que aliviam um pouco o sofrimento de escrever java,
-    -- incluindo geração automática de getters e setters.
-    local j = { "gradlew", ".git", "mvnw" }
-    local raiz_java = vim.fs.dirname(vim.fs.find(j, {upward = true})[1])
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = "java",
-        group = vim.api.nvim_create_augroup("odeio-java", {}),
-        callback = function ()
-          require("jdtls").start_or_attach {
-            cmd = { "jdtls" },
-            on_attach = on_attach,
-            root_dir = raiz_java,
-          }
-        end
-      })
   end
 }
