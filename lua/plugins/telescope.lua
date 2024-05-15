@@ -19,14 +19,7 @@ end
 
 return {
   "nvim-telescope/telescope.nvim",
-  event = "VimEnter",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    -- A extensão do telescope fzf-native incrementa o plugin com um alto
-    -- desempenho proporcionado por uma implementação nativa do algoritmo do fzf.
-    { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  },
-  init = function ()
+  config = function ()
     local t = require("telescope.builtin")
 
     -- Atalhos para as operações pré-definidas do plugin, bem como para as

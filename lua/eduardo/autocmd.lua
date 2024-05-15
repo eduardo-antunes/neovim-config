@@ -10,12 +10,20 @@ a.nvim_create_autocmd("TextYankPost", {
   group = eduardo, callback = function() vim.highlight.on_yank() end
 })
 
--- Sem números de linha em buffers de terminal (não tem sentido)
+-- Configurações de buffers de terminal
 a.nvim_create_autocmd("TermOpen", {
-  group = eduardo, command = "setl nonu nornu"
+  group = eduardo, command = "setl nonu nornu scrolloff=0"
 })
 
 -- Desativa hightlighting de delimitadores correspondentes no modo terminal,
 -- pelo simples motivo de que isso tira a minha concentração
 a.nvim_create_autocmd("TermEnter", { group = eduardo, command = "NoMatchParen" })
 a.nvim_create_autocmd("TermLeave", { group = eduardo, command = "DoMatchParen" })
+
+-- Deixa a opção 'list' ligada apenas no modo normal
+a.nvim_create_autocmd("ModeChanged", {
+  pattern = "*:n", group = eduardo, command = "set list"
+})
+a.nvim_create_autocmd("ModeChanged", {
+  pattern = "n:*", group = eduardo, command = "set nolist"
+})

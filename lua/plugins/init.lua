@@ -1,7 +1,7 @@
--- plugins/init.lua: reúne todos os plugins que precisam de pouca configuração
--- da minha parte. Acho que não compensa fazer um arquivo para cada
+-- plugins.lua: declara os plugins que eu utilizo, usando o pacman (meu
+-- gerenciador de plugins simples) para instalá-los e configurá-los
 
-return {
+require("lib.pacman").setup {
 
   -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
   -- mais elegante do que gravar em pedra o estilo de cada linguagem
@@ -9,37 +9,25 @@ return {
 
   -- Substitui alguns elementos tradicionais da interface com o uso do
   -- telescope.nvim e de janelas 'floating'
-  { "stevearc/dressing.nvim", event = "VeryLazy", opts = {} },
+  { "stevearc/dressing.nvim", opts = {} },
 
   -- Minha humilde statusline. Sem ícones, sem cores, cheia de personalidade
-  { "eduardo-antunes/plainline", opts = {}, dev = true },
+  { "eduardo-antunes/plainline", opts = {} },
 
   { -- Cores bonitas, pelo bem dos meus olhos. Eu mudo essa parte às vezes,
     -- mas o onedark.nvim para mim chega bem perto da perfeição
     "navarasu/onedark.nvim",
-    lazy = false, priority = 1000,
-    config = function ()
-      require("onedark").setup {
-        style = "dark", -- fundo mais escuro
-        ending_tildes = true, -- gosto do visual clássico
-        highlights = { ["@constructor"] = { fmt = "NONE" } },
-        code_style = { strings = "italic" },
-        -- Atalho para alternar entre fundo mais claro e mais escuro
-        toggle_style_key = "<leader>t",
-        toggle_style_list = { "darker", "dark" },
-      }
+    opts = {
+      ending_tildes = true, -- gosto do visual clássico
+      highlights = { ["@constructor"] = { fmt = "NONE" } },
+      code_style = { strings = "italic" },
+      -- Atalho para alternar entre fundo mais claro e mais escuro
+      toggle_style_key = "<leader><tab>",
+      toggle_style_list = { "darker", "dark" },
+    },
+    config = function()
+      vim.o.termguicolors = true
       vim.cmd.colors "onedark"
-    end
-  },
-
-  { -- Adiciona guias de indentação. Bastante útil, principalmente para
-    -- linguagens muito sensíveis a espaço em branco, como python
-    "lukas-reineke/indent-blankline.nvim",
-    config = function ()
-      require("ibl").setup {
-        indent = { char = "│" },
-        scope = { enabled = false },
-      }
     end
   },
 
@@ -64,11 +52,6 @@ return {
       -- isso, e me deixa bem satisfeito que não dê mais trabalho
       require("mini.align").setup()
 
-      -- Destaca espaços em branco sobressalentes e oferece funções para
-      -- removê-lo de maneira simples e direta, o que é bastante útil
-      local trail = require("mini.trailspace") trail.setup()
-      vim.keymap.set("n", "<leader><bs>", trail.trim)
-
       -- Outra "imitação" de um clássico do tpope, dessa vez similar ao
       -- vim-commentary. Introduz atalhos para comentar e descomentar código.
       -- Nem preciso explicar porque isso é útil
@@ -80,4 +63,15 @@ return {
       require("mini.completion").setup()
     end
   },
+
+  -- Plugins de configuração mais extensa são declarados em arquivos
+  -- separados, para manter uma organização mais modular
+  { source = "plugins.oil" },
+  { source = "plugins.treesitter" },
+  { source = "plugins.lspconfig" },
+
+  -- Telescope e suas dependências
+  { "nvim-lua/plenary.nvim" },
+  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  { source = "plugins.telescope" },
 }

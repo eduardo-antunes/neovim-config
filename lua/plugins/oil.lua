@@ -1,29 +1,20 @@
--- O oil.nvim é um editor/explorador de arquivos que permite editar os
--- conteúdos de diretórios como se eles fossem buffers de texto normais. Eu o
--- prefiro ao editor nativo netrw por ser mais rápido e intuitivo
+-- O oil.nvim é um editor de diretórios que permite a manipulação dos seus
+-- conteúdos como se eles fossem buffers de texto; melhor que o netrw
 
 return {
   "stevearc/oil.nvim",
   opts = {
-    -- Mova arquivos para o lixo quando eles são removidos no oil (depende do
-    -- programa trash-cli no Linux)
+    columns = {},
     delete_to_trash = true,
-    -- Atalhos de teclado mais intuitivos
-    use_default_keymaps = false,
+    skip_confirm_for_simple_edits = true,
     keymaps = {
-      ["~"] = "actions.cd",
-      ["-"] = "actions.parent",
-      ["_"] = "actions.open_cwd",
-      ["g."] = "actions.toggle_hidden",
-      ["gs"] = "actions.change_sort",
-      ["g?"] = "actions.show_help",
-      ["gt"] = "actions.open_terminal",
-      ["g\\"] = "actions.toggle_trash",
-      ["<c-e>"] = "actions.select",
-      ["<c-s>"] = "actions.select_split",
-      ["<a-s>"] = "actions.select_vsplit",
-      ["<c-t>"] = "actions.select_tab",
-      ["<c-q>"] = "actions.close",
+      ["<CR>"] = false,
+      ["<C-s>"] = false,
+      ["<C-h>"] = false,
+      ["<C-e>"] = "actions.select",
+      ["<C-s>"] = "actions.select_split",
+      ["<A-s>"] = "actions.select_vsplit",
+      ["<C-q>"] = "actions.close",
     },
     view_options = {
       -- Mesmo ao exibir arquivos ocultos, não faz sentido exibir o
@@ -31,7 +22,7 @@ return {
       is_always_hidden = function(nome, id) return nome == ".." end
     },
   },
-  init = function ()
+  config = function ()
     vim.keymap.set("n", "-", vim.cmd.Oil)
     vim.keymap.set("n", "<c-s>", "<cmd>sp|Oil<cr>")
     vim.keymap.set("n", "<a-s>", "<cmd>vs|Oil<cr>")

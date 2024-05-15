@@ -4,7 +4,7 @@
 -- que eu utilizo que não precisam de nenhuma configuração extra além de
 -- atalhos de teclado.
 
-local s = { "clangd", "jedi_language_server", "gopls", "rust_analyzer" }
+local s = { "clangd", "pyright", "gopls", "rust_analyzer" }
 
 local function on_attach(client, buf)
   local t = require("telescope.builtin") -- atalhos usam o telescope.nvim

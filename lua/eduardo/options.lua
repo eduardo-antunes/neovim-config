@@ -24,6 +24,7 @@ vim.o.showmode    = false
 vim.o.hidden      = true
 vim.o.rnu         = true
 vim.o.number      = true
+vim.o.list        = true
 vim.o.splitright  = true
 vim.o.splitbelow  = true
 vim.o.cursorline  = true
