@@ -19,6 +19,7 @@ end
 
 return {
   "nvim-telescope/telescope.nvim",
+  opts = {},
   config = function ()
     local t = require("telescope.builtin")
 

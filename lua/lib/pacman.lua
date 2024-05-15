@@ -24,14 +24,14 @@ end
 
 -- Atualiza um repositório de forma assíncrona, executando o código desejado
 -- caso a operação finalize corretamente. Atualização simples e rasa
-local function update(name, on_success)
+local function update(name, path, on_success)
   local args = { "pull", "--update-shallow", "--ff-only" }
   local callback = vim.schedule_wrap(function(code)
     if code == 0 then on_success()
     else err(s.format("[!] Erro ao tentar atualizar %s", name))
     end
   end)
-  l.spawn("git", { args=args, cwd=plugin.path }, callback)
+  l.spawn("git", { args=args, cwd=path }, callback)
 end
 
 -- Compila o plugin dado, caso seja necessário
@@ -104,13 +104,12 @@ end
 
 -- Atualiza todos os plugins
 function this.update_all()
-  for _, plugin in ipairs(this.plugins) do
-    pull(plugin.name, function()
+  for i, plugin in ipairs(this.plugins) do
+    update(plugin.name, plugin.path, function()
       build(plugin)
-      vim.print(s.format("%s atualizado!", plugin.name))
+      vim.print(s.format("%d. %s atualizado!", i, plugin.name))
     end)
   end
-  vim.print("Atualização concluída")
 end
 
 -- Comunica algumas informações sobre os plugins instalados
