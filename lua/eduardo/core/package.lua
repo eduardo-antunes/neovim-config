@@ -1,4 +1,4 @@
--- pacman.lua: gerenciador de pacotes muito simples para o neovim. Ele busca
+-- package.lua: gerenciador de pacotes muito simples para o neovim. Ele busca
 -- combinar o estilo declarativo do lazy.nvim com uma abordagem muito mais
 -- simplista, que para mim já é suficiente. Feito para estudo
 
@@ -67,9 +67,8 @@ local function load(plugin)
   end
 end
 
--- Converte uma declaração simples de plugin em uma declaração completa,
--- para uso interno no pacman
-local function norm(plugin)
+-- Converte uma declaração simples de plugin em uma declaração completa
+local function complete(plugin)
   _, _, plugin.name = plugin[1]:find("^[^ /]+/([^ /]+)$")
   plugin.path = s.format("%s/%s", pack_path, plugin.name)
   return plugin
@@ -80,14 +79,13 @@ local this = {}
 -- A partir de uma declaração de plugin,essa função o instala (caso já não
 -- esteja instalado) e o carrega. Usada implicitamente pela função setup
 function this.use(plugin)
-  -- Se a chave source estiver presente, ela contém um arquivo cuja execução
+  -- Se a chave require estiver presente, ela contém um arquivo cuja execução
   -- produzirá a declaração de plugin
-  if plugin.source then
-    plugin = require(plugin.source)
+  if plugin.require then
+    plugin = require(plugin.require)
   end
-
-  -- Normaliza a declaração e insere-a na lista global de plugins
-  plugin = norm(plugin)
+  -- "Completa" a declaração e insere-a na lista global de plugins
+  plugin = complete(plugin)
   table.insert(this.plugins, plugin)
   -- Carrega o plugin caso ele já esteja instalado
   if vim.loop.fs_stat(plugin.path) then
@@ -120,8 +118,8 @@ function this.status()
   end
 end
 
--- Inicializa o pacman com uma lista de declarações de plugins; esses plugins
--- serão instalados (se necessário) e carregados
+-- Inicializa o package.lua com uma lista de declarações de plugins; esses
+-- plugins serão instalados (se necessário) e carregados
 function this.setup(plugins)
   this.plugins = {}
   vim.fn.mkdir(pack_path, "p")

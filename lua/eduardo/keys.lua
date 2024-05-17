@@ -70,7 +70,7 @@ end
 vim.keymap.set("n", "<leader><bs>", trim)
 
 -- Atalhos para abrir e manipular um terminal único
-local term = require("lib.terminal")
+local term = require("eduardo.core.terminal")
 vim.keymap.set("n", "<leader><cr>", term.open)
 vim.keymap.set("n", "<leader>t", term.edit)
 vim.keymap.set("n", "<leader>r", term.rec)

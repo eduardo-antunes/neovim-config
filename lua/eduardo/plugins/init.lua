@@ -1,7 +1,7 @@
--- plugins.lua: declara os plugins que eu utilizo, usando o pacman (meu
+-- plugins.lua: declara os plugins que eu utilizo, usando o package.lua (meu
 -- gerenciador de plugins simples) para instalá-los e configurá-los
 
-require("lib.pacman").setup {
+require("eduardo.core.package").setup {
 
   -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
   -- mais elegante do que gravar em pedra o estilo de cada linguagem
@@ -11,7 +11,7 @@ require("lib.pacman").setup {
   -- telescope.nvim e de janelas 'floating'
   { "stevearc/dressing.nvim", opts = {} },
 
-  -- Minha humilde statusline. Sem ícones, sem cores, cheia de personalidade
+  -- Minha humilde statusline. Sem ícones e sem cores
   { "eduardo-antunes/plainline", opts = {} },
 
   { -- Cores bonitas, pelo bem dos meus olhos. Eu mudo essa parte às vezes,
@@ -66,12 +66,11 @@ require("lib.pacman").setup {
 
   -- Plugins de configuração mais extensa são declarados em arquivos
   -- separados, para manter uma organização mais modular
-  { source = "plugins.oil" },
-  { source = "plugins.treesitter" },
-  { source = "plugins.lspconfig" },
+  { require = "eduardo.plugins.oil" },
+  { require = "eduardo.plugins.treesitter" },
 
   -- Telescope e suas dependências
   { "nvim-lua/plenary.nvim" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  { source = "plugins.telescope" },
+  { require = "eduardo.plugins.telescope" },
 }

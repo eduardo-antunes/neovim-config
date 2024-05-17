@@ -1,5 +1,6 @@
--- O oil.nvim é um editor de diretórios que permite a manipulação dos seus
--- conteúdos como se eles fossem buffers de texto; melhor que o netrw
+-- oil.lua: instala e configura o oil, um editor de diretórios que permite
+-- visualizá-los como buffers de texto, manipulando arquivos com comandos
+-- normais de edição de texto. Muit chique
 
 return {
   "stevearc/oil.nvim",
@@ -18,7 +19,7 @@ return {
     },
     view_options = {
       -- Mesmo ao exibir arquivos ocultos, não faz sentido exibir o
-      -- pseudo-diretório '..', pois ele não agrega nada no oil
+      -- pseudo-diretório '..', pois ele não agrega nada, realmente
       is_always_hidden = function(nome, id) return nome == ".." end
     },
   },

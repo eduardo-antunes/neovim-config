@@ -2,28 +2,58 @@
 -- permitem associar listas de comandos de vim (ou funções de lua) a ocorrência
 -- de certos eventos no editor, para que executem sem interação com o usuário
 
-local a = vim.api
-local eduardo = a.nvim_create_augroup("eduardo", {})
+local e = vim.api.nvim_create_augroup("eduardo", {})
+local autocmd = vim.api.nvim_create_autocmd
 
 -- Destaca o texto copiado após operações de cópia
-a.nvim_create_autocmd("TextYankPost", {
-  group = eduardo, callback = function() vim.highlight.on_yank() end
-})
+autocmd("TextYankPost", { group = e, callback = vim.highlight.on_yank })
 
 -- Configurações de buffers de terminal
-a.nvim_create_autocmd("TermOpen", {
-  group = eduardo, command = "setl nonu nornu scrolloff=0"
-})
+autocmd("TermOpen", { group = e, command = "setl nonu nornu scrolloff=0" })
 
 -- Desativa hightlighting de delimitadores correspondentes no modo terminal,
 -- pelo simples motivo de que isso tira a minha concentração
-a.nvim_create_autocmd("TermEnter", { group = eduardo, command = "NoMatchParen" })
-a.nvim_create_autocmd("TermLeave", { group = eduardo, command = "DoMatchParen" })
+autocmd("TermEnter", { group = e, command = "NoMatchParen" })
+autocmd("TermLeave", { group = e, command = "DoMatchParen" })
 
 -- Deixa a opção 'list' ligada apenas no modo normal
-a.nvim_create_autocmd("ModeChanged", {
-  pattern = "*:n", group = eduardo, command = "set list"
+autocmd("ModeChanged", { pattern = "*:n", group = e, command = "setl list" })
+autocmd("ModeChanged", { pattern = "n:*", group = e, command = "setl nolist" })
+
+-- Comandos automáticos relacionados ao LSP têm seu próprio grupo e usam a
+-- minha "biblioteca" de configuração de lsp
+
+local l = vim.api.nvim_create_augroup("eduardo-lsp", {})
+local lsp = require("eduardo.core.lsp")
+
+-- Configuração geral de atalhos
+autocmd("LspAttach", { group = l, callback = lsp.conf })
+
+-- Configuração para C/C++
+autocmd("FileType", {
+  group = l, pattern = { "c", "cpp" }, callback = function()
+    vim.o.keywordprg = ":Man" -- tecla K abre o manual
+    lsp.attach("clangd", { ".clangd", "compile_commands.json" })
+  end
 })
-a.nvim_create_autocmd("ModeChanged", {
-  pattern = "n:*", group = eduardo, command = "set nolist"
+
+-- Configuração para python
+autocmd("FileType", {
+  group = l, pattern = "python", callback = function()
+    lsp.attach("pyright-langserver", {}, { "--stdio" })
+  end
+})
+
+-- Configuração para Go
+autocmd("FileType", {
+  group = l, pattern = { "go", "gomod" }, callback = function()
+    lsp.attach("gopls", { "go.mod" })
+  end
+})
+
+-- Configuração para Rust
+autocmd("FileType", {
+  group = l, pattern = "rust", callback = function()
+    lsp.attach("rust-analyzer", { "Cargo.toml" })
+  end
 })
