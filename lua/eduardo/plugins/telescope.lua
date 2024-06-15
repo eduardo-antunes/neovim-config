@@ -4,7 +4,6 @@
 
 return {
   "nvim-telescope/telescope.nvim",
-  opts = {},
   config = function ()
     -- O telescope vem com um pacote de funcionalidades nativas que cobre
     -- basicamente todas as minhas necessidades; defino atalhos para elas aqui

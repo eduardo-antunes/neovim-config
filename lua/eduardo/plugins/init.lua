@@ -1,7 +1,17 @@
--- plugins.lua: declara os plugins que eu utilizo, usando o package.lua (meu
--- gerenciador de plugins simples) para instalá-los e configurá-los
+-- plugins/init.lua: declara os plugins que eu utilizo, usando o package.lua
+-- (meu gerenciador de plugins simples) para instalá-los e configurá-los
 
 require("eduardo.core.package").setup {
+
+  { -- Cores bonitas, pelo bem dos meus olhos
+    "sainnhe/gruvbox-material",
+    config = function ()
+      vim.cmd.colors "gruvbox-material"
+    end
+  },
+
+  -- Minha humilde statusline. Sem ícones e sem cores
+  { "eduardo-antunes/plainline", opts = {} },
 
   -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
   -- mais elegante do que gravar em pedra o estilo de cada linguagem
@@ -10,26 +20,6 @@ require("eduardo.core.package").setup {
   -- Substitui alguns elementos tradicionais da interface com o uso do
   -- telescope.nvim e de janelas 'floating'
   { "stevearc/dressing.nvim", opts = {} },
-
-  -- Minha humilde statusline. Sem ícones e sem cores
-  { "eduardo-antunes/plainline", opts = {} },
-
-  { -- Cores bonitas, pelo bem dos meus olhos. Eu mudo essa parte às vezes,
-    -- mas o onedark.nvim para mim chega bem perto da perfeição
-    "navarasu/onedark.nvim",
-    opts = {
-      ending_tildes = true, -- gosto do visual clássico
-      highlights = { ["@constructor"] = { fmt = "NONE" } },
-      code_style = { strings = "italic" },
-      -- Atalho para alternar entre fundo mais claro e mais escuro
-      toggle_style_key = "<leader><tab>",
-      toggle_style_list = { "darker", "dark" },
-    },
-    config = function()
-      vim.o.termguicolors = true
-      vim.cmd.colors "onedark"
-    end
-  },
 
   { -- Essa é na verdade uma coleção de pequenos plugins, todos de uso bem
     -- específico, mas muito úteis
@@ -52,14 +42,9 @@ require("eduardo.core.package").setup {
       -- isso, e me deixa bem satisfeito que não dê mais trabalho
       require("mini.align").setup()
 
-      -- Outra "imitação" de um clássico do tpope, dessa vez similar ao
-      -- vim-commentary. Introduz atalhos para comentar e descomentar código.
-      -- Nem preciso explicar porque isso é útil
-      require("mini.comment").setup()
-
       -- Expande o sistema de preenchimento ("completion") nativo do vim,
       -- tornando-o automático e integrando com LSP. Muito leve e simples
-      -- quando comparado com alternativas como o nvim-cmp, e já me atende bem
+      -- quando comparado a alternativas como o nvim-cmp, e já me atende bem
       require("mini.completion").setup()
     end
   },

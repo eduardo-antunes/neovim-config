@@ -6,7 +6,11 @@ local e = vim.api.nvim_create_augroup("eduardo", {})
 local autocmd = vim.api.nvim_create_autocmd
 
 -- Destaca o texto copiado após operações de cópia
-autocmd("TextYankPost", { group = e, callback = vim.highlight.on_yank })
+autocmd("TextYankPost", {
+  group = e, callback = function()
+    vim.highlight.on_yank()
+  end
+})
 
 -- Configurações de buffers de terminal
 autocmd("TermOpen", { group = e, command = "setl nonu nornu scrolloff=0" })
@@ -16,23 +20,17 @@ autocmd("TermOpen", { group = e, command = "setl nonu nornu scrolloff=0" })
 autocmd("TermEnter", { group = e, command = "NoMatchParen" })
 autocmd("TermLeave", { group = e, command = "DoMatchParen" })
 
--- Deixa a opção 'list' ligada apenas no modo normal
-autocmd("ModeChanged", { pattern = "*:n", group = e, command = "setl list" })
-autocmd("ModeChanged", { pattern = "n:*", group = e, command = "setl nolist" })
-
 -- Comandos automáticos relacionados ao LSP têm seu próprio grupo e usam a
 -- minha "biblioteca" de configuração de lsp
 
-local l = vim.api.nvim_create_augroup("eduardo-lsp", {})
 local lsp = require("eduardo.core.lsp")
-
--- Configuração geral de atalhos
+local l = vim.api.nvim_create_augroup("eduardo-lsp", {})
 autocmd("LspAttach", { group = l, callback = lsp.conf })
 
 -- Configuração para C/C++
 autocmd("FileType", {
   group = l, pattern = { "c", "cpp" }, callback = function()
-    vim.o.keywordprg = ":Man" -- tecla K abre o manual
+    vim.o.keywordprg = ":Man" -- prefiro o bom e velho manual
     lsp.attach("clangd", { ".clangd", "compile_commands.json" })
   end
 })

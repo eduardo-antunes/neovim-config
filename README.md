@@ -1,5 +1,5 @@
 Essa é a minha configuração pessoal do [neovim](https://neovim.io/), um editor de texto livre de terminal. Ela requer o neovim
-versão 0.8, no mínimo. Para instalá-la, basta ter a versão correta do editor e executar os seguintes comandos:
+versão 0.10, no mínimo. Para instalá-la, basta ter a versão correta do editor e executar os seguintes comandos:
 
 ```sh
 $ mkdir -p ~/.config/nvim

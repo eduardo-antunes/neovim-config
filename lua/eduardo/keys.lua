@@ -55,12 +55,6 @@ vim.keymap.set("n", "<leader>d",  "\"_d")
 vim.keymap.set("v", "<leader>d",  "\"_d")
 vim.keymap.set("v", "<leader>p", "\"_dP")
 
--- Navegação rápida de diagnósticos
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
-
 -- Apagando espaço em branco sobressalente
 local function trim()
     local pos = vim.api.nvim_win_get_cursor(0)
@@ -71,6 +65,6 @@ vim.keymap.set("n", "<leader><bs>", trim)
 
 -- Atalhos para abrir e manipular um terminal único
 local term = require("eduardo.core.terminal")
-vim.keymap.set("n", "<leader><cr>", term.open)
-vim.keymap.set("n", "<leader>t", term.edit)
+vim.keymap.set("n", "<leader>t", term.open)
+vim.keymap.set("n", "<leader>e", term.edit)
 vim.keymap.set("n", "<leader>r", term.rec)

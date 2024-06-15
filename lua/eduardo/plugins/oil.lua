@@ -1,6 +1,6 @@
 -- oil.lua: instala e configura o oil, um editor de diretórios que permite
 -- visualizá-los como buffers de texto, manipulando arquivos com comandos
--- normais de edição de texto. Muit chique
+-- normais de edição de texto. Muito chique
 
 return {
   "stevearc/oil.nvim",

@@ -2,7 +2,7 @@
 -- instalação e configurações de parsers de treesitter. Eles fornecem análise
 -- sintática incremental e em tempo real
 
-local p = { "c", "cpp", "rust", "lua", "python", "go", "vimdoc" }
+local p = { "c", "cpp", "rust", "lua", "python", "go", "vimdoc", "markdown" }
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",

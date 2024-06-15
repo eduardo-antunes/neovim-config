@@ -2,8 +2,14 @@
 -- api nativa, sem nvim-lspconfig. Os métodos daqui são usados em autocmd.lua
 -- para configurar linguagens específicas
 
-local lsp = vim.lsp
 local a = vim.api
+local lsp = vim.lsp
+
+-- Ativa/desativa inlay hints do LSP no buffer atual
+local function toggle_hints()
+  lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled())
+end
+
 local this = {}
 
 -- Define atalhos de teclado para operações do lsp e configura o cliente;
@@ -18,8 +24,9 @@ function this.conf(args)
     ["gD"] = lsp.buf.declaration,
     ["<leader>ct"] = t.lsp_type_definitions,
     ["<leader>cs"] = t.lsp_document_symbols,
+    ["<leader>ch"] = toggle_hints,
+    ["<leader>ck"] = lsp.buf.hover,
     ["<leader>cf"] = lsp.buf.format,
-    ["<leader>ch"] = lsp.buf.hover,
     ["<leader>ca"] = lsp.buf.code_action,
     ["<leader>cr"] = lsp.buf.rename,
   }
@@ -48,14 +55,18 @@ function this.attach(server, root_pattern, flags, settings)
 
   -- Se o parâmetro flags for dado, ele deve ser combinado com o nome do
   -- servidor para formar o comando
-  local cmd = flags or { server } and vim.tbl_flatten { server, flags }
+  local cmd = flags or { server }
+  if flags then
+    table.insert(cmd, 1, server)
+  end
   -- A raiz do projeto é encontrado procurando pelos padrões
+  root_pattern = root_pattern or {}
   table.insert(root_pattern, ".git")
   local root = vim.fs.dirname(vim.fs.find(root_pattern, { upward = true })[1])
   -- A função lsp.start reutiliza um cliente adequado caso já exista, então
   -- pode-se usá-la incondionalmente para conectar buffers a servidores
   local client = vim.lsp.start {
-    name = server, cmd = cmd, root_dir = root,
+    name = server, names = server, cmd = cmd, root_dir = root,
     settings = settings -- configurações específicas do servidor
   }
   return 0
