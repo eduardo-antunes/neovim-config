@@ -13,7 +13,7 @@ end
 -- Clona um repositório de forma assíncrona, executando o código desejado caso
 -- a operação finalize corretamente. Clone raso para não gastar memória demais
 local function clone(name, url, on_success)
-  local args = { "clone", "--depth=1", url }
+  local args = { "clone", "--depth=1", url, name }
   local callback = vim.schedule_wrap(function(code)
     if code == 0 then on_success()
     else err(string.format("[!] Erro ao tentar clonar %s", name))
@@ -70,7 +70,9 @@ end
 
 -- Converte uma declaração simples de plugin em uma declaração completa
 local function complete(plugin)
-  _, _, plugin.name = plugin[1]:find("^[^ /]+/([^ /]+)$")
+  if not plugin.name then
+    _, _, plugin.name = plugin[1]:find("^[^ /]+/([^ /]+)$")
+  end
   plugin.path = string.format("%s/%s", pack_path, plugin.name)
   return plugin
 end

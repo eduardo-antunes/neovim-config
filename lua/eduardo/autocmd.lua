@@ -30,7 +30,6 @@ autocmd("LspAttach", { group = l, callback = lsp.conf })
 -- Configuração para C/C++
 autocmd("FileType", {
   group = l, pattern = { "c", "cpp" }, callback = function()
-    vim.o.keywordprg = ":Man" -- prefiro o bom e velho manual
     lsp.attach("clangd", { ".clangd", "compile_commands.json" })
   end
 })
@@ -53,5 +52,11 @@ autocmd("FileType", {
 autocmd("FileType", {
   group = l, pattern = "rust", callback = function()
     lsp.attach("rust-analyzer", { "Cargo.toml" })
+    if vim.cmd.colors() == "default" then
+      vim.cmd.hi "link @variable.builtin.rust @variable"
+      vim.cmd.hi "link @variable.member.rust Identifier"
+      vim.cmd.hi "link @constant.builtin.rust Identifier"
+      vim.cmd.hi "link @constant.rust Identifier"
+    end
   end
 })

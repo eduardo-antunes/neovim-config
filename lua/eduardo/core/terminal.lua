@@ -13,7 +13,7 @@ local function create()
     vim.g.term = buf vim.g.termchan = a.nvim_buf_get_option(buf, "channel")
     -- Quando o terminal é fechado, deve-se criar outro buffer para ele caso
     -- ele seja aberto novamente
-    a.nvim_create_autocmd("TermClose", {
+    a.nvim_create_autocmd({ "TermClose", "BufDelete" }, {
         group = term, buffer = buf,
         callback = function() vim.g.term = nil end
     })

@@ -44,14 +44,7 @@ end
 -- (o diretório .git é usado como fallback), e argumentos e configurações
 -- extras para o servidor (opcionalmente)
 function this.attach(server, root_pattern, flags, settings)
-  -- O LSP pode ser globalmente desligado na minha configuração definindo
-  -- a variável g:lsp_disable, com qualquer valor
-  if vim.g.lsp_disable then return end
-  if vim.fn.executable(server) ~= 1 then
-    local err = string.format("[!] Servidor %s não encontrado", server)
-    a.nvim_err_writeln(err)
-    return 1 -- erro
-  end
+  if vim.g.lsp_disable or vim.fn.executable(server) ~= 1 then return end
 
   -- Se o parâmetro flags for dado, ele deve ser combinado com o nome do
   -- servidor para formar o comando

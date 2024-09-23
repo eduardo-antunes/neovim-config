@@ -7,3 +7,5 @@ require("eduardo.keys")     -- define atalhos de teclado
 require("eduardo.options")  -- configura opções do editor
 require("eduardo.autocmd")  -- comandos automáticos
 require("eduardo.plugins")  -- instala e carrega plugins
+
+vim.cmd.hi "Comment gui=italic"

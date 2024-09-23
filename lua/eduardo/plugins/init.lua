@@ -3,15 +3,14 @@
 
 require("eduardo.core.package").setup {
 
-  { -- Cores bonitas, pelo bem dos meus olhos
-    "sainnhe/gruvbox-material",
+  { -- Minha humilde statusline. Sem ícones e sem cores
+    "eduardo-antunes/plainline",
     config = function ()
-      vim.cmd.colors "gruvbox-material"
-    end
+      vim.cmd.hi "clear StatusLine"
+      vim.cmd.hi "link StatusLine StatusLineNC"
+    end,
+    opts = {},
   },
-
-  -- Minha humilde statusline. Sem ícones e sem cores
-  { "eduardo-antunes/plainline", opts = {} },
 
   -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
   -- mais elegante do que gravar em pedra o estilo de cada linguagem
