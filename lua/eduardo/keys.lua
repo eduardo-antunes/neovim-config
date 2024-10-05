@@ -35,7 +35,6 @@ vim.keymap.set("t", "<c-k>", "<c-\\><c-n><c-w>k")
 vim.keymap.set("t", "<c-j>", "<c-\\><c-n><c-w>j")
 vim.keymap.set("t", "<c-h>", "<c-\\><c-n><c-w>h")
 vim.keymap.set("t", "<c-l>", "<c-\\><c-n><c-w>l")
-vim.keymap.set("t", "<c-q>", "<c-\\><c-n><c-w>q")
 
 -- Restaura alguns atalhos de teclado do terminal
 vim.keymap.set("t", "<a-l>", "<c-l>")

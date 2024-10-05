@@ -3,14 +3,22 @@
 
 require("eduardo.core.package").setup {
 
-  { -- Minha humilde statusline. Sem ícones e sem cores
-    "eduardo-antunes/plainline",
+  { -- Cores bonitas, pelo bem dos meus olhos
+    "catppuccin/nvim",
+    name = "catppuccin",
+    opts = {
+      no_bold = true,
+      term_colors = true,
+      styles = { conditionals = {} },
+      show_end_of_buffer = true,
+    },
     config = function ()
-      vim.cmd.hi "clear StatusLine"
-      vim.cmd.hi "link StatusLine StatusLineNC"
-    end,
-    opts = {},
+      vim.cmd.colors "catppuccin"
+    end
   },
+
+  -- Minha humilde statusline. Sem ícones e sem cores
+  { "eduardo-antunes/plainline", opts = {} },
 
   -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
   -- mais elegante do que gravar em pedra o estilo de cada linguagem
@@ -57,4 +65,7 @@ require("eduardo.core.package").setup {
   { "nvim-lua/plenary.nvim" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
   { require = "eduardo.plugins.telescope" },
+
+  -- A linguagem java e suas consequências
+  { require = "eduardo.plugins.java" },
 }

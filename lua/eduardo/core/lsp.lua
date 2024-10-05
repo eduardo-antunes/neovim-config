@@ -35,8 +35,10 @@ function this.conf(args)
     vim.keymap.set("n", lhs, rhs, { buffer = args.buf })
   end
   -- Não curto muito esse recurso dos tokens semânticos
-  local c = lsp.get_client_by_id(args.data.client_id)
-  c.server_capabilities.semanticTokensProvider = nil
+  if args.data then
+    local c = lsp.get_client_by_id(args.data.client_id)
+    c.server_capabilities.semanticTokensProvider = nil
+  end
 end
 
 -- Conecta o buffer atual ao cliente de LSP. Recebe o nome do seguidor, um

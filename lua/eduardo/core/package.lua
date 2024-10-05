@@ -105,10 +105,10 @@ end
 
 -- Atualiza todos os plugins
 function this.update_all()
-  for i, plugin in ipairs(this.plugins) do
+  for _, plugin in ipairs(this.plugins) do
     update(plugin.name, plugin.path, function()
       build(plugin)
-      vim.print(string.format("%d. %s atualizado!", i, plugin.name))
+      vim.print(string.format("%s atualizado!", plugin.name))
     end)
   end
 end
@@ -116,8 +116,8 @@ end
 -- Comunica algumas informações sobre os plugins instalados
 function this.status()
   vim.print(string.format("%d plugins instalados:", #this.plugins))
-  for i, plugin in ipairs(this.plugins) do
-    vim.print(string.format("  %d. %s", i, plugin.name))
+  for _, plugin in ipairs(this.plugins) do
+    vim.print(string.format("* %s", plugin.name))
   end
 end
 
