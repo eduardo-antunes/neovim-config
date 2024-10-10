@@ -2,11 +2,11 @@
 -- das partes mais importantes da config. Às vezes eu me esqueço que as opções
 -- aqui não são o padrão
 
--- Suporte a mouse; o botão direito estende seleções visuais
 vim.o.mouse      = "a"
 vim.o.mousemodel = "extend"
 
--- Visual mais limpo e mínimo da interface
+-- Visual ----------------------------------------------------------------------
+
 vim.o.cmdheight   = 0
 vim.o.laststatus  = 3
 vim.o.tabstop     = 2
@@ -22,6 +22,7 @@ vim.o.wrap        = false
 vim.o.showcmd     = false
 vim.o.showmode    = false
 vim.o.hidden      = true
+vim.o.tgc         = true
 vim.o.rnu         = true
 vim.o.number      = true
 vim.o.list        = true
@@ -33,7 +34,8 @@ vim.o.signcolumn  = "number"
 vim.o.lcs         = "tab:· ,trail:_"
 vim.opt.shortmess:append "ISWc"
 
--- Configurações de pesquisa e preenchimento automático
+-- Pesquisa e preenchimento ----------------------------------------------------
+
 vim.o.ignorecase  = true
 vim.o.smartcase   = true
 vim.o.incsearch   = true
@@ -44,15 +46,15 @@ vim.o.inccommand  = "split"
 vim.o.completeopt = "menu,menuone,noselect"
 vim.o.wildmode    = "longest,list,full"
 
--- Indentação padrão; tabs exibidas como 4 espaços
+-- Indentação ------------------------------------------------------------------
+
 vim.o.tabstop    = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab  = true
 
--- Arquivos de histórico persistente em vez de backups e swaps
+-- Histórico -------------------------------------------------------------------
+
 vim.o.undodir  = vim.fn.stdpath("cache") .. "/undodir"
 vim.o.swapfile = false
 vim.o.backup   = false
 vim.o.undofile = true
-
-vim.o.termguicolors = true

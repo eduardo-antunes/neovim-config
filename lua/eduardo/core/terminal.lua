@@ -1,6 +1,4 @@
--- terminal.lua: configura um buffer de terminal persistente e único. Ele
--- possui ainda um comando gravado, armazenado em g:termrec, que pode ser
--- rapidamente editado e executado
+-- terminal.lua: configura um buffer de terminal persistente e único
 
 local a = vim.api
 local term = a.nvim_create_augroup("term", {})
@@ -47,30 +45,15 @@ function this.open()
 end
 
 -- Envia um comando para o terminal único
-function this.send(command)
+function this.send(cmd)
     -- Processa o comando, substituindo '%'s pelo nome do buffer e substituindo
     -- códigos de terminal
     local name = string.format("'%s'", vim.fn.expand "%:.")
-    command = command:gsub("%%", name)
-    command = a.nvim_replace_termcodes(command .. "<cr>", true, true, true)
+    cmd = cmd:gsub("%%", name)
+    cmd = a.nvim_replace_termcodes(cmd .. "<cr>", true, true, true)
     -- Abre o terminal e envia o comando
     this.open()
-    a.nvim_chan_send(vim.g.termchan, command)
-end
-
--- Permite a edição do comando gravado e então o envia
-function this.edit()
-    local command = vim.g.termrec or ""
-    command = vim.fn.input("$ ", command, "shellcmd")
-    if command == "" then return end -- operação cancelada
-    vim.g.termrec = command
-    this.send(command)
-end
-
--- Executa o comando gravando sem editá-lo (a não ser que esteja vazio)
-function this.rec()
-    if not vim.g.termrec then this.edit()
-    else this.send(vim.g.termrec) end
+    a.nvim_chan_send(vim.g.termchan, cmd)
 end
 
 return this

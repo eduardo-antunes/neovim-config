@@ -1,6 +1,6 @@
 -- eduardo/init.lua: esse arquivo é o ponto de partida da configuração, mas eu
 -- não uso ele para configurar nada. Em vez disso, a configuração está divida
--- em diversos arquivos para fins de organização, e essa aqui só executa os
+-- em diversos arquivos para fins de organização, e esse aqui só executa os
 -- outros.
 
 require("eduardo.keys")     -- define atalhos de teclado
