@@ -2,13 +2,15 @@
 -- instalação e configurações de parsers de treesitter. Eles fornecem análise
 -- sintática incremental e em tempo real
 
-local p = { "c", "cpp", "rust", "lua", "python", "go", "vimdoc", "markdown", "java" }
+local langs = { "c", "cpp", "rust", "lua", "python", "go", "vimdoc",
+  "markdown", "java", "javascript", "typescript" }
+
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
   config = function ()
     require("nvim-treesitter.configs").setup {
-      ensure_installed = p,
+      ensure_installed = langs,
       auto_install = false,
       highlight = {
         enable = true,

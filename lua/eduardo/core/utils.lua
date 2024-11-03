@@ -1,6 +1,5 @@
--- utils.lua: pequenas funções utilitárias, usadas principalmente como atalhos
--- de teclado definidos em keys.lua. Boa parte foram inspiradas em entradas no
--- vim wiki ou no stack overflow
+-- utils.lua: pequenas funções utilitárias, usadas principalmente como lado
+-- esquerdo para atalhos de teclado e para tornar partes da config mais concisas
 
 local this = {}
 
@@ -11,12 +10,11 @@ function this.trim()
   vim.api.nvim_win_set_cursor(0, pos)
 end
 
--- Insere um certo caracter no fim da linha atual para que esta passe a ter um
--- certo número fixo de colunas. Bom para criar divisórias em códigos
+-- Insere quantas cópias do caractere x (padrão: '-') forem necessários para que
+-- a linha ocupe n (padrão: 80) colunas
 function this.padline(x, n)
-  n = (n or 80) - vim.fn.virtcol "$"
+  n = (n or 80) - vim.fn.virtcol "$" + 1
   local cmd = string.format("normal $%da%s", n, x or "-")
-  vim.cmd.normal "$a "
   vim.cmd(cmd)
 end
 

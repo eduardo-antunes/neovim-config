@@ -3,7 +3,8 @@
 -- em diversos arquivos para fins de organização, e esse aqui só executa os
 -- outros.
 
-require("eduardo.keys")     -- define atalhos de teclado
-require("eduardo.options")  -- configura opções do editor
-require("eduardo.autocmd")  -- comandos automáticos
-require("eduardo.plugins")  -- instala e carrega plugins
+require("eduardo.keys")       -- define atalhos de teclado
+require("eduardo.options")    -- configura opções do editor
+require("eduardo.autocmd")    -- comandos automáticos
+require("eduardo.plugins")    -- instala e carrega plugins
+require("eduardo.highlights") -- highlights para o tema padrão

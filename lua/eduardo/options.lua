@@ -2,37 +2,39 @@
 -- das partes mais importantes da config. Às vezes eu me esqueço que as opções
 -- aqui não são o padrão
 
-vim.o.mouse      = "a"
-vim.o.mousemodel = "extend"
-
--- Visual ----------------------------------------------------------------------
-
-vim.o.cmdheight   = 0
-vim.o.laststatus  = 3
-vim.o.tabstop     = 2
-vim.o.shiftwidth  = 2
+vim.o.tabstop     = 4
+vim.o.shiftwidth  = 4
 vim.o.scrolloff   = 10
 vim.o.report      = 100
 vim.o.updatetime  = 250
 vim.o.timeoutlen  = 500
-vim.o.title       = false
-vim.o.ruler       = false
-vim.o.errorbells  = false
-vim.o.wrap        = false
-vim.o.showcmd     = false
-vim.o.showmode    = false
 vim.o.hidden      = true
-vim.o.tgc         = true
-vim.o.rnu         = true
-vim.o.number      = true
-vim.o.list        = true
 vim.o.splitright  = true
 vim.o.splitbelow  = true
-vim.o.cursorline  = true
 vim.o.equalalways = true
-vim.o.signcolumn  = "number"
-vim.o.lcs         = "tab:· ,trail:_"
+vim.o.expandtab   = true
+vim.o.title       = true
+vim.o.wrap        = false
+vim.o.mouse       = "a"
+vim.o.mousemodel  = "extend"
 vim.opt.shortmess:append "ISWc"
+
+-- Visual ----------------------------------------------------------------------
+
+vim.o.cmdheight  = 0
+vim.o.laststatus = 3
+vim.o.ruler      = false
+vim.o.showcmd    = false
+vim.o.showmode   = false
+vim.o.tgc        = true
+vim.o.rnu        = true
+vim.o.number     = true
+vim.o.list       = true
+vim.o.cursorline = true
+vim.o.signcolumn = "number"
+vim.o.lcs        = "tab:· ,trail:_"
+
+vim.g.transparent_background = true -- testando
 
 -- Pesquisa e preenchimento ----------------------------------------------------
 
@@ -46,13 +48,7 @@ vim.o.inccommand  = "split"
 vim.o.completeopt = "menu,menuone,noselect"
 vim.o.wildmode    = "longest,list,full"
 
--- Indentação ------------------------------------------------------------------
-
-vim.o.tabstop    = 4
-vim.o.shiftwidth = 4
-vim.o.expandtab  = true
-
--- Histórico -------------------------------------------------------------------
+-- Histórico e backups ---------------------------------------------------------
 
 vim.o.undodir  = vim.fn.stdpath("cache") .. "/undodir"
 vim.o.swapfile = false

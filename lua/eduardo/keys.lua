@@ -8,29 +8,35 @@ local term_esc = "<c-\\><c-n>"
 local u = require("eduardo.core.utils")
 local term = require("eduardo.core.terminal")
 
--- Atalhos gerais --------------------------------------------------------------
-
 vim.keymap.set("n", "H", "^")
 vim.keymap.set("n", "L", "$")
 vim.keymap.set("n", "Q", "<nop>")
+vim.keymap.set("n", "<tab>", "gt")
+vim.keymap.set("n", "<s-tab>", "gT")
 vim.keymap.set("n", "<bs>", "<c-^>zz")
 vim.keymap.set("n", "<c-u>", "<c-u>zz")
 vim.keymap.set("n", "<c-d>", "<c-d>zz")
+vim.keymap.set("i", "<c-a>", "<esc>I")
+vim.keymap.set("i", "<c-e>", "<esc>A")
 
 vim.keymap.set("n", "<c-q>", vim.cmd.copen)
 vim.keymap.set("n", "<c-n>", vim.cmd.cnext)
 vim.keymap.set("n", "<c-p>", vim.cmd.cprev)
 vim.keymap.set("n", "<leader>w", vim.cmd.write)
 vim.keymap.set("n", "<leader>s", ":%s/")
+vim.keymap.set("n", "<leader>e", ":e %:h/")
+vim.keymap.set("n", "<leader>n", ":tabnew|tcd ~/Projetos/")
 
 -- Cópia e cola ----------------------------------------------------------------
 
 vim.keymap.set("n", "<leader>p",  '"+p')
 vim.keymap.set("v", "<leader>p",  '"_dP')
+
 vim.keymap.set("n", "<leader>y",  '"+y')
 vim.keymap.set("v", "<leader>y",  '"+y')
 vim.keymap.set("n", "<leader>yy", '"+yy')
 vim.keymap.set("n", "<leader>Y",  '"+y$')
+
 vim.keymap.set("n", "<leader>d",  '"_d')
 vim.keymap.set("v", "<leader>d",  '"_d')
 vim.keymap.set("n", "<leader>dd", '"_dd')
@@ -52,7 +58,6 @@ vim.keymap.set("t", "<c-h>", term_esc .. "<c-w>h")
 vim.keymap.set("t", "<c-l>", term_esc .. "<c-w>l")
 
 -- Terminal --------------------------------------------------------------------
-
 
 vim.keymap.set("t", "<esc>", term_esc)
 vim.keymap.set("t", "<a-l>", "<c-l>")

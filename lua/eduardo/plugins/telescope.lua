@@ -4,12 +4,18 @@
 
 return {
   "nvim-telescope/telescope.nvim",
+  opts = {
+    defaults = {
+      path_display = { shorten = true }
+    }
+  },
   config = function ()
     -- O telescope vem com um pacote de funcionalidades nativas que cobre
     -- basicamente todas as minhas necessidades; defino atalhos para elas aqui
     local t = require("telescope.builtin")
     vim.keymap.set("n", "<c-b>", t.buffers)
     vim.keymap.set("n", "<c-f>", t.find_files)
+    vim.keymap.set("n", "<c-/>", t.grep_string)
     vim.keymap.set("n", "<leader>h", t.help_tags)
     vim.keymap.set("n", "<leader>k", t.man_pages)
     vim.keymap.set("n", "<leader>:", t.commands)

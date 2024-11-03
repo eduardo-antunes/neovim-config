@@ -3,20 +3,6 @@
 
 require("eduardo.core.package").setup {
 
-  { -- Cores bonitas, pelo bem dos meus olhos
-    "catppuccin/nvim",
-    name = "catppuccin",
-    opts = {
-      no_bold = true,
-      term_colors = true,
-      styles = { conditionals = {} },
-      show_end_of_buffer = true,
-    },
-    config = function ()
-      vim.cmd.colors "catppuccin"
-    end
-  },
-
   -- Minha humilde statusline. Sem ícones e sem cores
   { "eduardo-antunes/plainline", opts = {} },
 
@@ -55,6 +41,14 @@ require("eduardo.core.package").setup {
       require("mini.completion").setup()
     end
   },
+
+  { -- Melhor coisa depois do pão de queijo, gerencia ferramentas externas
+    "williamboman/mason.nvim",
+    opts = { ui = { icons = {
+          package_installed   = "·" ,
+          package_pending     = "·" ,
+          package_uninstalled = "·" ,
+  } } } }, -- que maravilha Rogério
 
   -- Plugins de configuração mais extensa são declarados em arquivos
   -- separados, para manter uma organização mais modular
