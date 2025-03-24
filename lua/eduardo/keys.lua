@@ -64,6 +64,7 @@ vim.keymap.set("t", "<a-l>", "<c-l>")
 vim.keymap.set("t", "<a-k>", "<c-k>")
 vim.keymap.set("n", "<leader>t", term.open)
 vim.keymap.set("n", "<leader>r", function() term.send "!!" end)
+vim.keymap.set("n", "<leader>T", "<cmd>tabnew|terminal<cr>")
 
 -- Utilitários -----------------------------------------------------------------
 

@@ -37,7 +37,7 @@ function this.open()
     vim.cmd.split()
     vim.g.termwin = a.nvim_get_current_win()
     -- Se o buffer do terminal já existe, basta carregá-lo na janela; do
-    -- contrário, deve-se criá-lo com a função term_create
+    -- contrário, deve-se criá-lo com a função create
     if vim.g.term then
         a.nvim_win_set_buf(0, vim.g.term)
     else create() end

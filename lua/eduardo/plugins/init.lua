@@ -3,6 +3,26 @@
 
 require("eduardo.core.package").setup {
 
+  { -- Cores bonitas, pelo bem dos meus olhos
+    "catppuccin/nvim", name = "catppuccin",
+    opts = {
+      no_bold = true,
+      no_italic = true,
+      show_end_of_buffer = true,
+      styles = { conditionals = {} },
+      custom_highlights = function(colors)
+        local none = { fg = colors.text }
+        return {
+          Constant = none,
+          ["@constant.macro"] = none,
+          ["@constant.builtin"] = none,
+          ["@function.builtin"] = none,
+        }
+      end
+    },
+    config = function() vim.cmd.colors "catppuccin" end
+  },
+
   -- Minha humilde statusline. Sem ícones e sem cores
   { "eduardo-antunes/plainline", opts = {} },
 
@@ -39,16 +59,13 @@ require("eduardo.core.package").setup {
       -- tornando-o automático e integrando com LSP. Muito leve e simples
       -- quando comparado a alternativas como o nvim-cmp, e já me atende bem
       require("mini.completion").setup()
+
+      local m = require("mini.misc")
+      m.setup_auto_root() -- muda o diretório para a raiz do git
+      m.setup_termbg_sync() -- sem bordas com o tema do terminal
+      m.setup_restore_cursor() -- restaura posição do cursor
     end
   },
-
-  { -- Melhor coisa depois do pão de queijo, gerencia ferramentas externas
-    "williamboman/mason.nvim",
-    opts = { ui = { icons = {
-          package_installed   = "·" ,
-          package_pending     = "·" ,
-          package_uninstalled = "·" ,
-  } } } }, -- que maravilha Rogério
 
   -- Plugins de configuração mais extensa são declarados em arquivos
   -- separados, para manter uma organização mais modular
@@ -61,5 +78,5 @@ require("eduardo.core.package").setup {
   { require = "eduardo.plugins.telescope" },
 
   -- A linguagem java e suas consequências
-  { require = "eduardo.plugins.java" },
+  -- { require = "eduardo.plugins.java" },
 }

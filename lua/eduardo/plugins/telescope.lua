@@ -4,11 +4,7 @@
 
 return {
   "nvim-telescope/telescope.nvim",
-  opts = {
-    defaults = {
-      path_display = { shorten = true }
-    }
-  },
+  -- opts = { defaults = { path_display = { shorten = true } } },
   config = function ()
     -- O telescope vem com um pacote de funcionalidades nativas que cobre
     -- basicamente todas as minhas necessidades; defino atalhos para elas aqui
@@ -19,11 +15,19 @@ return {
     vim.keymap.set("n", "<leader>h", t.help_tags)
     vim.keymap.set("n", "<leader>k", t.man_pages)
     vim.keymap.set("n", "<leader>:", t.commands)
-    vim.keymap.set("n", "<leader>.", t.oldfiles)
 
     -- Seleciona entre todos arquivos, inclusive ocultos e ignorados
     vim.keymap.set("n", "<leader>f", function ()
       t.find_files { hidden = true, no_ignore = true }
+    end)
+
+    -- Seleciona apenas os arquivos do diretório atual
+    local u = require("telescope.utils")
+    vim.keymap.set("n", "<leader>.", function ()
+      t.find_files {
+        cwd = u.buffer_dir(),
+        path_display = { shorten = false }
+      }
     end)
 
     -- Seleciona entre todas as ocorrências de um texto no diretório atual,

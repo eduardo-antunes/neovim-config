@@ -12,10 +12,11 @@ return {
       ["<CR>"] = false,
       ["<C-s>"] = false,
       ["<C-h>"] = false,
+      ["<C-l>"] = false,
       ["<C-e>"] = "actions.select",
-      ["<C-s>"] = "actions.select_split",
-      ["<A-s>"] = "actions.select_vsplit",
+      ["<C-s>"] = "actions.select_vsplit",
       ["<C-q>"] = "actions.close",
+      ["gr"]    = { "actions.refresh", mode = "n" }
     },
     view_options = {
       -- Mesmo ao exibir arquivos ocultos, não faz sentido exibir o
@@ -25,7 +26,6 @@ return {
   },
   config = function ()
     vim.keymap.set("n", "-", vim.cmd.Oil)
-    vim.keymap.set("n", "<c-s>", "<cmd>sp|Oil<cr>")
-    vim.keymap.set("n", "<a-s>", "<cmd>vs|Oil<cr>")
+    vim.keymap.set("n", "<c-s>", "<cmd>vs|Oil<cr>")
   end
 }

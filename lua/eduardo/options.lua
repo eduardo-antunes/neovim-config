@@ -34,8 +34,6 @@ vim.o.cursorline = true
 vim.o.signcolumn = "number"
 vim.o.lcs        = "tab:· ,trail:_"
 
-vim.g.transparent_background = true -- testando
-
 -- Pesquisa e preenchimento ----------------------------------------------------
 
 vim.o.ignorecase  = true
