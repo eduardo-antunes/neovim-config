@@ -4,7 +4,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-local term_esc = "<c-\\><c-n>"
 local u = require("eduardo.core.utils")
 local term = require("eduardo.core.terminal")
 
@@ -52,14 +51,14 @@ vim.keymap.set("i", "<c-k>", "<esc><c-w>k")
 vim.keymap.set("i", "<c-j>", "<esc><c-w>j")
 vim.keymap.set("i", "<c-h>", "<esc><c-w>h")
 vim.keymap.set("i", "<c-l>", "<esc><c-w>l")
-vim.keymap.set("t", "<c-k>", term_esc .. "<c-w>k")
-vim.keymap.set("t", "<c-j>", term_esc .. "<c-w>j")
-vim.keymap.set("t", "<c-h>", term_esc .. "<c-w>h")
-vim.keymap.set("t", "<c-l>", term_esc .. "<c-w>l")
+vim.keymap.set("t", "<c-k>", term.esc .. "<c-w>k")
+vim.keymap.set("t", "<c-j>", term.esc .. "<c-w>j")
+vim.keymap.set("t", "<c-h>", term.esc .. "<c-w>h")
+vim.keymap.set("t", "<c-l>", term.esc .. "<c-w>l")
 
 -- Terminal --------------------------------------------------------------------
 
-vim.keymap.set("t", "<esc>", term_esc)
+vim.keymap.set("t", "<esc>", term.esc)
 vim.keymap.set("t", "<a-l>", "<c-l>")
 vim.keymap.set("t", "<a-k>", "<c-k>")
 vim.keymap.set("n", "<leader>t", term.open)

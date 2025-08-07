@@ -31,7 +31,7 @@ autocmd("FileType", {
 
 autocmd("FileType", {
   group = l, pattern = "python", callback = function()
-    lsp.attach("pyright-langserver", {}, { "--stdio" })
+    lsp.attach("pylsp", { "setup.py", "requirements.txt" })
   end
 })
 

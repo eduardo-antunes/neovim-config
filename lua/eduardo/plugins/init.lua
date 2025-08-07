@@ -7,16 +7,17 @@ require("eduardo.core.package").setup {
     "catppuccin/nvim", name = "catppuccin",
     opts = {
       no_bold = true,
-      no_italic = true,
+      -- no_italic = true,
       show_end_of_buffer = true,
       styles = { conditionals = {} },
       custom_highlights = function(colors)
         local none = { fg = colors.text }
         return {
           Constant = none,
-          ["@constant.macro"] = none,
+          ["@constant.macro"]   = none,
           ["@constant.builtin"] = none,
           ["@function.builtin"] = none,
+          ["@variable.builtin"] = none,
         }
       end
     },
@@ -60,10 +61,7 @@ require("eduardo.core.package").setup {
       -- quando comparado a alternativas como o nvim-cmp, e já me atende bem
       require("mini.completion").setup()
 
-      local m = require("mini.misc")
-      m.setup_auto_root() -- muda o diretório para a raiz do git
-      m.setup_termbg_sync() -- sem bordas com o tema do terminal
-      m.setup_restore_cursor() -- restaura posição do cursor
+      require("mini.misc").setup_termbg_sync()
     end
   },
 

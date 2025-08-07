@@ -31,10 +31,8 @@ function this.conf(args)
     ["<leader>cr"] = lsp.buf.rename,
   }
   for lhs, rhs in pairs(atalhos) do
-    -- Atalhos são locais ao buffer conectado
     vim.keymap.set("n", lhs, rhs, { buffer = args.buf })
   end
-  -- Não curto muito esse recurso dos tokens semânticos
   if args.data then
     local c = lsp.get_client_by_id(args.data.client_id)
     c.server_capabilities.semanticTokensProvider = nil
@@ -47,22 +45,14 @@ end
 -- extras para o servidor (opcionalmente)
 function this.attach(server, root_pattern, flags, settings)
   if vim.g.lsp_disable or vim.fn.executable(server) ~= 1 then return end
-
-  -- Se o parâmetro flags for dado, ele deve ser combinado com o nome do
-  -- servidor para formar o comando
   local cmd = flags or { server }
-  if flags then
-    table.insert(cmd, 1, server)
-  end
-  -- A raiz do projeto é encontrado procurando pelos padrões
+  if flags then table.insert(cmd, 1, server) end
   root_pattern = root_pattern or {}
   table.insert(root_pattern, ".git")
   local root = vim.fs.dirname(vim.fs.find(root_pattern, { upward = true })[1])
-  -- A função lsp.start reutiliza um cliente adequado caso já exista, então
-  -- pode-se usá-la incondionalmente para conectar buffers a servidores
   local client = vim.lsp.start {
     name = server, names = server, cmd = cmd, root_dir = root,
-    settings = settings -- configurações específicas do servidor
+    settings = settings
   }
   return 0
 end
