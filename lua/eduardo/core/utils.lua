@@ -1,5 +1,5 @@
 -- utils.lua: pequenas funções utilitárias, usadas principalmente como lado
--- esquerdo para atalhos de teclado e para tornar partes da config mais concisas
+-- direito para atalhos de teclado
 
 local this = {}
 

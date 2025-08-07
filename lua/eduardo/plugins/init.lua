@@ -1,80 +1,39 @@
--- plugins/init.lua: declara os plugins que eu utilizo, usando o package.lua
--- (meu gerenciador de plugins simples) para instalá-los e configurá-los
+-- plugins/init.lua: instala e configura os plugins que eu uso
 
-require("eduardo.core.package").setup {
+local function gh(name)
+  return string.format("https://github.com/%s", name)
+end
 
-  { -- Cores bonitas, pelo bem dos meus olhos
-    "catppuccin/nvim", name = "catppuccin",
-    opts = {
-      no_bold = true,
-      -- no_italic = true,
-      show_end_of_buffer = true,
-      styles = { conditionals = {} },
-      custom_highlights = function(colors)
-        local none = { fg = colors.text }
-        return {
-          Constant = none,
-          ["@constant.macro"]   = none,
-          ["@constant.builtin"] = none,
-          ["@function.builtin"] = none,
-          ["@variable.builtin"] = none,
-        }
-      end
-    },
-    config = function() vim.cmd.colors "catppuccin" end
-  },
-
-  -- Minha humilde statusline. Sem ícones e sem cores
-  { "eduardo-antunes/plainline", opts = {} },
-
-  -- Infere o estilo de indentação a partir dos arquivos, uma solução bem
-  -- mais elegante do que gravar em pedra o estilo de cada linguagem
-  { "NMAC427/guess-indent.nvim", opts = {} },
-
-  -- Substitui alguns elementos tradicionais da interface com o uso do
-  -- telescope.nvim e de janelas 'floating'
-  { "stevearc/dressing.nvim", opts = {} },
-
-  { -- Essa é na verdade uma coleção de pequenos plugins, todos de uso bem
-    -- específico, mas muito úteis
-    "echasnovski/mini.nvim",
-    config = function ()
-      -- Equilibra delimitadores automaticamente, o que para mim é realmente
-      -- uma necessidade básica. Similar ao electric-pair do emacs
-      require("mini.pairs").setup()
-
-      -- Oferece operações extras sobre delimitadores. É portanto similar ao
-      -- vim-surround do tpope, embora não seja "retrocompatível" com ele (os
-      -- atalhos são diferentes, mas são também lógicos)
-      require("mini.surround").setup()
-
-      -- Atalhos para movimentar seleções arbitrárias de texto por um arquivo;
-      -- substitui alguns dos meus atalhos mais úteis e confusos
-      require("mini.move").setup()
-
-      -- Atalhos e funções para alinhar texto verticalmente. Eu adoro fazer
-      -- isso, e me deixa bem satisfeito que não dê mais trabalho
-      require("mini.align").setup()
-
-      -- Expande o sistema de preenchimento ("completion") nativo do vim,
-      -- tornando-o automático e integrando com LSP. Muito leve e simples
-      -- quando comparado a alternativas como o nvim-cmp, e já me atende bem
-      require("mini.completion").setup()
-
-      require("mini.misc").setup_termbg_sync()
-    end
-  },
-
-  -- Plugins de configuração mais extensa são declarados em arquivos
-  -- separados, para manter uma organização mais modular
-  { require = "eduardo.plugins.oil" },
-  { require = "eduardo.plugins.treesitter" },
-
-  -- Telescope e suas dependências
-  { "nvim-lua/plenary.nvim" },
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  { require = "eduardo.plugins.telescope" },
-
-  -- A linguagem java e suas consequências
-  -- { require = "eduardo.plugins.java" },
+vim.pack.add {
+  { src = gh "catppuccin/nvim", name = "catppuccin" },
+  { src = gh "eduardo-antunes/plainline"            },
+  { src = gh "NMAC427/guess-indent.nvim"            },
+  { src = gh "nvim-treesitter/nvim-treesitter"      },
+  { src = gh "echasnovski/mini.nvim"                },
+  { src = gh "stevearc/oil.nvim"                    },
 }
+
+require("catppuccin").setup {
+  no_bold = true,
+  show_end_of_buffer = true,
+  styles = { conditionals = {} },
+  custom_highlights = function(colors)
+    local none = { fg = colors.text }
+    return {
+      Constant = none,
+      ["@constant.macro"]   = none,
+      ["@constant.builtin"] = none,
+      ["@function.builtin"] = none,
+      ["@variable.builtin"] = none,
+    }
+  end
+}
+vim.cmd.colors "catppuccin"
+
+require("plainline").setup()
+require("guess-indent").setup()
+
+require("eduardo.plugins.treesitter")
+require("eduardo.plugins.mini")
+require("eduardo.plugins.oil")
+

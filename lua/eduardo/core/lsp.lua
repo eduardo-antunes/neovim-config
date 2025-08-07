@@ -5,7 +5,6 @@
 local a = vim.api
 local lsp = vim.lsp
 
--- Ativa/desativa inlay hints do LSP no buffer atual
 local function toggle_hints()
   lsp.inlay_hint.enable(not lsp.inlay_hint.is_enabled())
 end
@@ -15,22 +14,21 @@ local this = {}
 -- Define atalhos de teclado para operações do lsp e configura o cliente;
 -- feito para ser executado no evento LspAttach
 function this.conf(args)
-  -- Atalhos de teclado específicos, usando o telescope
-  local t = require("telescope.builtin")
-  local atalhos = {
-    ["gd"] = t.lsp_definitions,
-    ["gr"] = t.lsp_references,
-    ["gI"] = t.lsp_implementations,
+  -- TODO substituir os atalhos que usavam o telescope
+  local bindings = {
+    -- ["gd"] = t.lsp_definitions,
+    -- ["gr"] = t.lsp_references,
+    -- ["gI"] = t.lsp_implementations,
     ["gD"] = lsp.buf.declaration,
-    ["<leader>ct"] = t.lsp_type_definitions,
-    ["<leader>cs"] = t.lsp_document_symbols,
+    -- ["<leader>ct"] = t.lsp_type_definitions,
+    -- ["<leader>cs"] = t.lsp_document_symbols,
     ["<leader>ch"] = toggle_hints,
     ["<leader>ck"] = lsp.buf.hover,
     ["<leader>cf"] = lsp.buf.format,
     ["<leader>ca"] = lsp.buf.code_action,
     ["<leader>cr"] = lsp.buf.rename,
   }
-  for lhs, rhs in pairs(atalhos) do
+  for lhs, rhs in pairs(bindings) do
     vim.keymap.set("n", lhs, rhs, { buffer = args.buf })
   end
   if args.data then

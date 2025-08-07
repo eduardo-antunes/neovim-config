@@ -2,7 +2,7 @@
 
 local a = vim.api
 local term = { esc = "<c-\\><c-n>" }
-local term_group = a.nvim_create_augroup("term", {})
+local term_group = a.nvim_create_augroup("eduardo-terminal", {})
 
 function term.create()
     vim.cmd.term()

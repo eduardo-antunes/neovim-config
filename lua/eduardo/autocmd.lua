@@ -1,6 +1,5 @@
--- autocmd.lua: comandos automáticos são um aspecto importante do neovim. Eles
--- permitem associar listas de comandos de vim (ou funções de lua) a ocorrência
--- de certos eventos no editor, para que executem sem interação com o usuário
+-- autocmd.lua: comandos automáticos, executados em resposta a eventos
+-- Eu os uso para, entre outras coisas, ativar servidores LSP
 
 local e = vim.api.nvim_create_augroup("eduardo", {})
 local autocmd = vim.api.nvim_create_autocmd
@@ -11,13 +10,9 @@ autocmd("TextYankPost", {
   end
 })
 
--- Configurações visuais do terminal -------------------------------------------
-
 autocmd("TermOpen",  { group = e, command = "setl nonu nornu scrolloff=0" })
 autocmd("TermEnter", { group = e, command = "NoMatchParen" })
 autocmd("TermLeave", { group = e, command = "DoMatchParen" })
-
--- Configurações de linguagens -------------------------------------------------
 
 local lsp = require("eduardo.core.lsp")
 local l = vim.api.nvim_create_augroup("eduardo-lsp", {})

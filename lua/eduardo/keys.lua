@@ -1,5 +1,4 @@
--- keys.lua: configurações de atalhos de teclado não relacionados a plugins.
--- Inclui alguns recursos de qualidade de vida que tornam tudo mais agradável
+-- keys.lua: configuração de atalhos não relacionados a plugins
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
@@ -7,42 +6,55 @@ vim.g.maplocalleader = ","
 local u = require("eduardo.core.utils")
 local term = require("eduardo.core.terminal")
 
-vim.keymap.set("n", "H", "^")
-vim.keymap.set("n", "L", "$")
-vim.keymap.set("n", "Q", "<nop>")
-vim.keymap.set("n", "<tab>", "gt")
-vim.keymap.set("n", "<s-tab>", "gT")
-vim.keymap.set("n", "<bs>", "<c-^>zz")
-vim.keymap.set("n", "<c-u>", "<c-u>zz")
-vim.keymap.set("n", "<c-d>", "<c-d>zz")
-vim.keymap.set("i", "<c-a>", "<esc>I")
-vim.keymap.set("i", "<c-e>", "<esc>A")
+local function bind(lhs, rhs)
+  vim.keymap.set("n", lhs, rhs)
+end
 
-vim.keymap.set("n", "<c-q>", vim.cmd.copen)
-vim.keymap.set("n", "<c-n>", vim.cmd.cnext)
-vim.keymap.set("n", "<c-p>", vim.cmd.cprev)
-vim.keymap.set("n", "<leader>w", vim.cmd.write)
-vim.keymap.set("n", "<leader>s", ":%s/")
-vim.keymap.set("n", "<leader>e", ":e %:h/")
-vim.keymap.set("n", "<leader>n", ":tabnew|tcd ~/Projetos/")
+local function leader(lhs, rhs, mode)
+  mode = mode or "n"
+  vim.keymap.set(mode, "<leader>" .. lhs, rhs)
+end
 
--- Cópia e cola ----------------------------------------------------------------
+bind("H"       , "^"           )
+bind("L"       , "$"           )
+bind("Q"       , "<nop>"       )
+bind("<tab>"   , "gt"          )
+bind("<s-tab>" , "gT"          )
+bind("<bs>"    , "<c-^>zz"     )
+bind("<c-u>"   , "<c-u>zz"     )
+bind("<c-d>"   , "<c-d>zz"     )
+bind("<c-q>"   , vim.cmd.copen )
+bind("<c-n>"   , vim.cmd.cnext )
+bind("<c-p>"   , vim.cmd.cprev )
 
-vim.keymap.set("n", "<leader>p",  '"+p')
-vim.keymap.set("v", "<leader>p",  '"_dP')
+leader("<bs>" , u.trim                        )
+leader("*"    , u.padline                     )
+leader("w"    , vim.cmd.write                 )
+leader("t"    , term.open                     )
+leader("r"    , function() term.send "!!" end )
+leader("T"    , "<cmd>tabnew|terminal<cr>"    )
+leader("s"    , ":%s/"                        )
+leader("e"    , ":e %:h/"                     )
+leader("n"    , ":tabnew|tcd ~/Projetos/"     )
 
-vim.keymap.set("n", "<leader>y",  '"+y')
-vim.keymap.set("v", "<leader>y",  '"+y')
-vim.keymap.set("n", "<leader>yy", '"+yy')
-vim.keymap.set("n", "<leader>Y",  '"+y$')
+-- Atalhos para copiar e colar do clipboard do sistema, e para apagar sem copiar
+leader("p" , '"+p' )
+leader("y" , '"+y' )
+leader("yy", '"+yy')
+leader("Y" , '"+y$')
+leader("d" , '"_d' )
+leader("dd", '"_dd')
+leader("D" , '"_D' )
+leader("y" , '"+y'  , "v" )
+leader("p" , '"_dP' , "v" )
+leader("d" , '"_d'  , "v" )
 
-vim.keymap.set("n", "<leader>d",  '"_d')
-vim.keymap.set("v", "<leader>d",  '"_d')
-vim.keymap.set("n", "<leader>dd", '"_dd')
-vim.keymap.set("n", "<leader>D",  '"_D')
+-- Conveniências para o uso de atalhos no terminal
+vim.keymap.set("t", "<esc>", term.esc)
+vim.keymap.set("t", "<a-l>", "<c-l>")
+vim.keymap.set("t", "<a-k>", "<c-k>")
 
--- Navegação entre janelas -----------------------------------------------------
-
+-- Navegação entre janelas com CTRL + {h,j,k,l} nos modos normal, inserção e terminal
 vim.keymap.set("n", "<c-k>", "<c-w>k")
 vim.keymap.set("n", "<c-j>", "<c-w>j")
 vim.keymap.set("n", "<c-h>", "<c-w>h")
@@ -55,17 +67,3 @@ vim.keymap.set("t", "<c-k>", term.esc .. "<c-w>k")
 vim.keymap.set("t", "<c-j>", term.esc .. "<c-w>j")
 vim.keymap.set("t", "<c-h>", term.esc .. "<c-w>h")
 vim.keymap.set("t", "<c-l>", term.esc .. "<c-w>l")
-
--- Terminal --------------------------------------------------------------------
-
-vim.keymap.set("t", "<esc>", term.esc)
-vim.keymap.set("t", "<a-l>", "<c-l>")
-vim.keymap.set("t", "<a-k>", "<c-k>")
-vim.keymap.set("n", "<leader>t", term.open)
-vim.keymap.set("n", "<leader>r", function() term.send "!!" end)
-vim.keymap.set("n", "<leader>T", "<cmd>tabnew|terminal<cr>")
-
--- Utilitários -----------------------------------------------------------------
-
-vim.keymap.set("n", "<leader><bs>", u.trim)
-vim.keymap.set("n", "<leader>*", u.padline)
