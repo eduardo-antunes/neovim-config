@@ -3,9 +3,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-local u = require("eduardo.lib.utils")
-local term = require("eduardo.lib.terminal")
-
 local function bind(lhs, rhs)
   vim.keymap.set("n", lhs, rhs)
 end
@@ -13,6 +10,19 @@ end
 local function leader(lhs, rhs, mode)
   mode = mode or "n"
   vim.keymap.set(mode, "<leader>" .. lhs, rhs)
+end
+
+-- Apaga espaços em branco sobressalentes em um arquivo
+local function trim_ws()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  vim.cmd [[ keeppatterns %s/\s\+$//e ]]
+  vim.api.nvim_win_set_cursor(0, pos)
+end
+
+-- Preenche linha com '-' até que ela tenha 80 colunas
+local function padline()
+  n = 80 - vim.fn.virtcol "$" + 1
+  vim.cmd(string.format("normal $%da-", n))
 end
 
 bind("H"       , "^"           )
@@ -27,11 +37,9 @@ bind("<c-q>"   , vim.cmd.copen )
 bind("<c-n>"   , vim.cmd.cnext )
 bind("<c-p>"   , vim.cmd.cprev )
 
-leader("<bs>" , u.trim                        )
-leader("*"    , u.padline                     )
+leader("<bs>" , trim_ws                       )
+leader("*"    , padline                       )
 leader("w"    , vim.cmd.write                 )
-leader("t"    , term.open                     )
-leader("r"    , function() term.send "!!" end )
 leader("T"    , "<cmd>tabnew|terminal<cr>"    )
 leader("s"    , ":%s/"                        )
 leader("e"    , ":e %:h/"                     )
@@ -52,12 +60,7 @@ leader("y" , '"+y'  , "v" )
 leader("p" , '"_dP' , "v" )
 leader("d" , '"_d'  , "v" )
 
--- Conveniências para o uso de atalhos no terminal
-vim.keymap.set("t", "<esc>", term.esc)
-vim.keymap.set("t", "<a-l>", "<c-l>")
-vim.keymap.set("t", "<a-k>", "<c-k>")
-
--- Navegação entre janelas com CTRL + {h,j,k,l} nos modos normal, inserção e terminal
+-- Navegação entre janelas com CTRL + {h,j,k,l} nos modos normal e inserção
 vim.keymap.set("n", "<c-k>", "<c-w>k")
 vim.keymap.set("n", "<c-j>", "<c-w>j")
 vim.keymap.set("n", "<c-h>", "<c-w>h")
@@ -66,7 +69,3 @@ vim.keymap.set("i", "<c-k>", "<esc><c-w>k")
 vim.keymap.set("i", "<c-j>", "<esc><c-w>j")
 vim.keymap.set("i", "<c-h>", "<esc><c-w>h")
 vim.keymap.set("i", "<c-l>", "<esc><c-w>l")
-vim.keymap.set("t", "<c-k>", term.esc .. "<c-w>k")
-vim.keymap.set("t", "<c-j>", term.esc .. "<c-w>j")
-vim.keymap.set("t", "<c-h>", term.esc .. "<c-w>h")
-vim.keymap.set("t", "<c-l>", term.esc .. "<c-w>l")
