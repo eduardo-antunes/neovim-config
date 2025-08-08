@@ -3,8 +3,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-local u = require("eduardo.core.utils")
-local term = require("eduardo.core.terminal")
+local u = require("eduardo.lib.utils")
+local term = require("eduardo.lib.terminal")
 
 local function bind(lhs, rhs)
   vim.keymap.set("n", lhs, rhs)
@@ -36,6 +36,9 @@ leader("T"    , "<cmd>tabnew|terminal<cr>"    )
 leader("s"    , ":%s/"                        )
 leader("e"    , ":e %:h/"                     )
 leader("n"    , ":tabnew|tcd ~/Projetos/"     )
+leader("q"    , vim.cmd.lopen)
+leader("j"    , vim.cmd.lnext)
+leader("k"    , vim.cmd.lprev)
 
 -- Atalhos para copiar e colar do clipboard do sistema, e para apagar sem copiar
 leader("p" , '"+p' )
