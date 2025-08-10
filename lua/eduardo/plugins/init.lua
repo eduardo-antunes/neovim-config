@@ -50,8 +50,6 @@ require("oil").setup {
     ["gr"]    = { "actions.refresh", mode = "n" }
   },
   view_options = {
-    -- Mesmo ao exibir arquivos ocultos, não faz sentido exibir o
-    -- pseudo-diretório '..', pois ele não agrega nada, realmente
     is_always_hidden = function(nome, id) return nome == ".." end
   },
 }

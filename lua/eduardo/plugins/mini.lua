@@ -36,24 +36,24 @@ require("mini.extra").setup()
 -- Seletor genérico, leve e flexível. Alternativa mínima ao telescope
 local pick = require("mini.pick")
 
--- Configura a janela do mini.pick para que fique centralizada e tenha
--- bordas arredondadas
 local win_config = function()
   local height = math.floor(0.618 * vim.o.lines)
   local width = math.floor(0.618 * vim.o.columns)
+  local row = math.floor(0.5 * (vim.o.lines - height))
+  local col = math.floor(0.5 * (vim.o.columns - width))
   return {
-    anchor = 'NW', height = height, width = width,
-    row = math.floor(0.5 * (vim.o.lines - height)),
-    col = math.floor(0.5 * (vim.o.columns - width)),
+    row = row, col = col,
+    width = width, height = height,
+    anchor = "NW",
+    style  = "minimal",
     border = "rounded",
   }
 end
 
 pick.setup {
-  window = { config = win_config },
-  source = { show = pick.default_show }, -- sem ícones
+  source = { show = pick.default_show },
+  window = { config = win_config, prompt_prefix = " ", },
 }
--- Torna o mini.pick a interface padrão de seleção
 vim.ui.select = pick.ui_select
 
 vim.keymap.set("n", "<c-f>", pick.builtin.files)

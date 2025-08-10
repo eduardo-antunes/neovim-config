@@ -30,7 +30,7 @@ local function term_open()
   vim.t.termwin = vim.api.nvim_get_current_win()
   if vim.t.term then
     vim.api.nvim_win_set_buf(0, vim.t.term)
-  else term.create() end
+  else term_create() end
   vim.cmd.startinsert()
 end
 
@@ -38,7 +38,7 @@ local function term_send(cmd)
   local name = string.format("'%s'", vim.fn.expand "%:.")
   cmd = cmd:gsub("%%", name)
   cmd = vim.api.nvim_replace_termcodes(cmd .. "<cr>", true, true, true)
-  term.open()
+  term_open()
   vim.api.nvim_chan_send(vim.t.termchan, cmd)
 end
 
