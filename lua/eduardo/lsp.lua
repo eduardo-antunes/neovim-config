@@ -7,8 +7,12 @@ end
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("eduardo-lsp", {}),
   callback = function(args)
-    vim.lsp.document_color.enable(false, args.buf)
     vim.lsp.semantic_tokens.enable(false)
+    vim.lsp.document_color.enable(false, args.buf)
+
+    local pick = require("mini.extra").pickers.lsp
+    vim.keymap.set("n", "gO", function() pick { scope = "document_symbol"} end)
+    vim.keymap.set("n", "grd", vim.lsp.buf.definition)
     vim.keymap.set("n", "grh", toggle_hints)
   end
 })

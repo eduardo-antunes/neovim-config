@@ -52,7 +52,7 @@ end
 
 pick.setup {
   source = { show = pick.default_show },
-  window = { config = win_config, prompt_prefix = " ", },
+  window = { config = win_config }
 }
 vim.ui.select = pick.ui_select
 
