@@ -5,32 +5,17 @@ local function gh(name)
 end
 
 vim.pack.add {
-  { src = gh "catppuccin/nvim", name = "catppuccin" },
-  { src = gh "eduardo-antunes/plainline"            },
-  { src = gh "NMAC427/guess-indent.nvim"            },
-  { src = gh "nvim-treesitter/nvim-treesitter"      },
-  { src = gh "echasnovski/mini.nvim"                },
-  { src = gh "stevearc/oil.nvim"                    },
+  { src = gh "sainnhe/sonokai"                 },
+  { src = gh "eduardo-antunes/plainline"       },
+  { src = gh "NMAC427/guess-indent.nvim"       },
+  { src = gh "nvim-treesitter/nvim-treesitter" },
+  { src = gh "nvim-mini/mini.nvim"             },
+  { src = gh "stevearc/oil.nvim"               },
 }
 
-require("catppuccin").setup {
-  no_bold = true,
-  show_end_of_buffer = true,
-  styles = { conditionals = {} },
-  custom_highlights = function(colors)
-    local none = { fg = colors.text }
-    return {
-      Constant = none,
-      ["@constant.macro"]     = none,
-      ["@constant.builtin"]   = none,
-      ["@function.builtin"]   = none,
-      ["@variable.builtin"]   = none,
-      ["@variable.parameter"] = none,
-      ["@function.call"]      = none,
-    }
-  end
-}
-vim.cmd.colors "catppuccin"
+vim.g.sonokai_style = "shusia"
+vim.g.sonokai_better_performance = true
+vim.cmd.colors "sonokai"
 
 require("plainline").setup()
 require("guess-indent").setup()
