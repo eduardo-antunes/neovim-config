@@ -18,6 +18,19 @@ autocmd("ColorScheme", {
   end
 })
 
+autocmd("ColorScheme", {
+  group = e, pattern = "nightfly", callback = function()
+    -- Configurações para o nightfly, especificamente
+    local none = { fg = "none" }
+    vim.api.nvim_set_hl(0, "Constant"           , none)
+    vim.api.nvim_set_hl(0, "@boolean"           , none)
+    vim.api.nvim_set_hl(0, "@constant.builtin"  , none)
+    vim.api.nvim_set_hl(0, "@variable.builtin"  , none)
+    vim.api.nvim_set_hl(0, "@variable.parameter", none)
+    vim.api.nvim_set_hl(0, "@function.call"     , none)
+  end
+})
+
 autocmd("FileType", {
   group = e, pattern = "markdown", callback = function(args)
     vim.keymap.set("n", "<localleader>c",
