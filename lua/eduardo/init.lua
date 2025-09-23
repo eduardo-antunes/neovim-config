@@ -2,6 +2,7 @@
 
 require("eduardo.keys")
 require("eduardo.options")
+require("eduardo.autocmd")
 require("eduardo.terminal")
 require("eduardo.plugins")
 require("eduardo.lsp")

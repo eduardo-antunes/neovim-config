@@ -59,11 +59,3 @@ vim.ui.select = pick.ui_select
 vim.keymap.set("n", "<c-f>", pick.builtin.files)
 vim.keymap.set("n", "<c-b>", pick.builtin.buffers)
 vim.keymap.set("n", "<leader>h", pick.builtin.help)
-
--- Seleciona entre todas as ocorrências de um texto no diretório atual,
--- usando o programa ripgrep para efetuar a pesquisa
-vim.keymap.set("n", "<leader>/", function ()
-  local w = vim.fn.input("Pesquisar no diretório: ")
-  if w == "" then return end -- operação cancelada
-  pick.builtin.grep { pattern = w }
-end)

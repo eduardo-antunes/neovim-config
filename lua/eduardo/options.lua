@@ -1,5 +1,4 @@
 -- options.lua: configura opções nativas do editor
--- Também define alguns comandos automáticos simples
 
 vim.o.hidden = true
 vim.o.wrap   = false
@@ -47,23 +46,3 @@ vim.o.undodir  = vim.fn.stdpath("cache") .. "/undodir"
 vim.o.swapfile = false
 vim.o.backup   = false
 vim.o.undofile = true
-
---------------------------------------------------------------------------------
-
-local e = vim.api.nvim_create_augroup("eduardo", {})
-local autocmd = vim.api.nvim_create_autocmd
-
-autocmd("TextYankPost", {
-  group = e, callback = function()
-    vim.highlight.on_yank()
-  end
-})
-
-autocmd("ColorScheme", {
-  group = e, callback = function()
-    -- Eu realmente não gosto da colorização sintática que o LSP aplica
-    for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-      vim.api.nvim_set_hl(0, group, {})
-    end
-  end
-})

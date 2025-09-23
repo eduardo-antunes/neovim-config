@@ -5,7 +5,7 @@ local function gh(name)
 end
 
 vim.pack.add {
-  { src = gh "sainnhe/sonokai"                 },
+  { src = gh "wtfox/jellybeans.nvim"           },
   { src = gh "eduardo-antunes/plainline"       },
   { src = gh "NMAC427/guess-indent.nvim"       },
   { src = gh "nvim-treesitter/nvim-treesitter" },
@@ -13,9 +13,16 @@ vim.pack.add {
   { src = gh "stevearc/oil.nvim"               },
 }
 
-vim.g.sonokai_style = "shusia"
-vim.g.sonokai_better_performance = true
-vim.cmd.colors "sonokai"
+require("jellybeans").setup {
+  bold = false,
+  on_highlights = function(highlights, colors)
+    local none = { fg = colors.foreground }
+    local none_bg = { bg = colors.background }
+    highlights["@variable.builtin"] = none
+    highlights["MiniPickNormal"] = none_bg
+  end
+}
+vim.cmd.colors "jellybeans"
 
 require("plainline").setup()
 require("guess-indent").setup()
