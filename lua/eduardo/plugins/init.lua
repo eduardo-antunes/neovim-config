@@ -5,6 +5,7 @@ local function gh(name)
 end
 
 vim.pack.add {
+  { src = gh "junegunn/seoul256.vim"           },
   { src = gh "bluz71/vim-nightfly-colors"      },
   { src = gh "eduardo-antunes/plainline"       },
   { src = gh "NMAC427/guess-indent.nvim"       },
@@ -13,8 +14,10 @@ vim.pack.add {
   { src = gh "stevearc/oil.nvim"               },
 }
 
-vim.g.nightflyNormalFloat = true
-vim.cmd.colors "nightfly"
+vim.g.nightflyWinSeparator = 2
+vim.g.nightflyNormalFloat  = true
+vim.g.seoul256_background  = 235
+vim.cmd.colors "seoul256"
 
 require("plainline").setup()
 require("guess-indent").setup()

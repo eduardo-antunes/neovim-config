@@ -20,21 +20,24 @@ autocmd("ColorScheme", {
 
 autocmd("ColorScheme", {
   group = e, pattern = "nightfly", callback = function()
-    -- Configurações para o nightfly, especificamente
     local none = { fg = "none" }
-    vim.api.nvim_set_hl(0, "Constant"           , none)
-    vim.api.nvim_set_hl(0, "@boolean"           , none)
-    vim.api.nvim_set_hl(0, "@constant.builtin"  , none)
+    vim.api.nvim_set_hl(0, "NightflyWatermelon" , none)
     vim.api.nvim_set_hl(0, "@variable.builtin"  , none)
     vim.api.nvim_set_hl(0, "@variable.parameter", none)
-    vim.api.nvim_set_hl(0, "@function.call"     , none)
+    vim.api.nvim_set_hl(0, "@boolean", { link = "NightflyGreen" })
+  end
+})
+
+autocmd("ColorScheme", {
+  group = e, pattern = "seoul256", callback = function()
+    vim.api.nvim_set_hl(0, "StatusLine", { link = "StatusLineNC" })
+    vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { link = "Visual" })
+    vim.api.nvim_set_hl(0, "CursorLineNr", { link = "LineNr" })
   end
 })
 
 autocmd("FileType", {
   group = e, pattern = "markdown", callback = function(args)
-    vim.keymap.set("n", "<localleader>c",
-      "i```<cr>```<esc>kA",
-      { buffer = args.buf })
+    vim.keymap.set("n", "<localleader>c", "i```<cr>```<esc>kA", { buffer = args.buf })
   end
 })
