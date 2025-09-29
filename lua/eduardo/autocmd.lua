@@ -18,26 +18,11 @@ autocmd("ColorScheme", {
   end
 })
 
-autocmd("ColorScheme", {
-  group = e, pattern = "nightfly", callback = function()
-    local none = { fg = "none" }
-    vim.api.nvim_set_hl(0, "NightflyWatermelon" , none)
-    vim.api.nvim_set_hl(0, "@variable.builtin"  , none)
-    vim.api.nvim_set_hl(0, "@variable.parameter", none)
-    vim.api.nvim_set_hl(0, "@boolean", { link = "NightflyGreen" })
-  end
-})
-
-autocmd("ColorScheme", {
-  group = e, pattern = "seoul256", callback = function()
-    vim.api.nvim_set_hl(0, "StatusLine", { link = "StatusLineNC" })
-    vim.api.nvim_set_hl(0, "MiniPickMatchCurrent", { link = "Visual" })
-    vim.api.nvim_set_hl(0, "CursorLineNr", { link = "LineNr" })
-  end
-})
-
 autocmd("FileType", {
   group = e, pattern = "markdown", callback = function(args)
-    vim.keymap.set("n", "<localleader>c", "i```<cr>```<esc>kA", { buffer = args.buf })
+    -- TODO substituir isso por um snippet de verdade
+    vim.keymap.set("n", "<localleader>c", "i```<cr>```<esc>kA", {
+      buffer = args.buf
+    })
   end
 })

@@ -5,19 +5,19 @@ local function gh(name)
 end
 
 vim.pack.add {
-  { src = gh "junegunn/seoul256.vim"           },
-  { src = gh "bluz71/vim-nightfly-colors"      },
-  { src = gh "eduardo-antunes/plainline"       },
-  { src = gh "NMAC427/guess-indent.nvim"       },
-  { src = gh "nvim-treesitter/nvim-treesitter" },
-  { src = gh "nvim-mini/mini.nvim"             },
-  { src = gh "stevearc/oil.nvim"               },
+  { src = gh "catppuccin/nvim", name = "catppuccin" },
+  { src = gh "eduardo-antunes/plainline"            },
+  { src = gh "NMAC427/guess-indent.nvim"            },
+  { src = gh "nvim-treesitter/nvim-treesitter"      },
+  { src = gh "nvim-mini/mini.nvim"                  },
+  { src = gh "stevearc/oil.nvim"                    },
 }
 
-vim.g.nightflyWinSeparator = 2
-vim.g.nightflyNormalFloat  = true
-vim.g.seoul256_background  = 235
-vim.cmd.colors "seoul256"
+require("catppuccin").setup {
+  show_end_of_buffer = true,
+  term_colors = true,
+}
+vim.cmd.colors "catppuccin"
 
 require("plainline").setup()
 require("guess-indent").setup()
