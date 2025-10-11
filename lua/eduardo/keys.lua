@@ -1,4 +1,5 @@
--- keys.lua: configuração de atalhos não relacionados a plugins
+-- keys.lua: configurações de atalhos de teclado não relacionados a plugins.
+-- Inclui alguns recursos de qualidade de vida que tornam tudo mais agradável
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
@@ -25,14 +26,16 @@ local function padline()
   vim.cmd(string.format("normal $%da-", n))
 end
 
-bind("H"       , "^"           )
-bind("L"       , "$"           )
-bind("Q"       , "<nop>"       )
-bind("<tab>"   , "gt"          )
-bind("<s-tab>" , "gT"          )
-bind("<bs>"    , "<c-^>zz"     )
-bind("<c-u>"   , "<c-u>zz"     )
-bind("<c-d>"   , "<c-d>zz"     )
+-- Básicos ---------------------------------------------------------------------
+
+bind("H"       , "^"      )
+bind("L"       , "$"      )
+bind("Q"       , "<nop>"  )
+bind("<tab>"   , "gt"     )
+bind("<s-tab>" , "gT"     )
+bind("<bs>"    , "<c-^>zz")
+bind("<c-u>"   , "<c-u>zz")
+bind("<c-d>"   , "<c-d>zz")
 
 leader("<bs>" , trim_ws                   )
 leader("*"    , padline                   )
@@ -42,7 +45,8 @@ leader("s"    , ":%s/"                    )
 leader("e"    , ":e %:h/"                 )
 leader("n"    , ":tabnew|tcd ~/src/"      )
 
--- Atalhos para copiar e colar do clipboard do sistema, e para apagar sem copiar
+-- Cópia e cola ----------------------------------------------------------------
+
 leader("p" , '"+p' )
 leader("y" , '"+y' )
 leader("yy", '"+yy')
@@ -54,7 +58,8 @@ leader("y" , '"+y'  , "v" )
 leader("p" , '"_dP' , "v" )
 leader("d" , '"_d'  , "v" )
 
--- Navegação entre janelas com CTRL + {h,j,k,l} nos modos normal e inserção
+-- Navegação entre janelas -----------------------------------------------------
+
 vim.keymap.set("n", "<c-k>", "<c-w>k")
 vim.keymap.set("n", "<c-j>", "<c-w>j")
 vim.keymap.set("n", "<c-h>", "<c-w>h")

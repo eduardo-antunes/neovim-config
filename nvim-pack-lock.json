@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "catppuccin": {
+      "rev": "af58927"
+    },
+    "guess-indent.nvim": [],
+    "mini.nvim": {
+      "rev": "d048db2"
+    },
+    "nvim-treesitter": [],
+    "oil.nvim": [],
+    "plainline": {
+      "rev": "c5da747"
+    }
+  }
+}
