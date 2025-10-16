@@ -17,26 +17,38 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end
 })
 
+vim.lsp.config("*", { root_markers = { ".git" } })
+
 vim.lsp.config("clangd", {
-  cmd = { "clangd" }, filetypes = { "c", "cpp" },
-  root_markers = { ".clangd", "compile_commands.json", ".git" },
+  cmd = { "clangd" },
+  filetypes = { "c", "cpp" },
+  root_markers = { ".clangd", "compile_commands.json" },
+})
+
+vim.lsp.config("jdtls", {
+  cmd = { "jdtls" },
+  filetypes = "java",
+  root_markers = { "gradlew" },
 })
 
 vim.lsp.config("pylsp", {
-  cmd = { "pylsp" }, filetypes = { "python" },
-  root_markers = { "setup.py", "requirements.txt", ".git" },
+  cmd = { "pylsp" },
+  filetypes = { "python" },
+  root_markers = { "setup.py", "requirements.txt" },
 })
 
 vim.lsp.config("gopls", {
-  cmd = { "gopls" }, filetypes = { "go", "gomod" },
-  root_markers = { "go.mod", ".git" },
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod" },
+  root_markers = { "go.mod" },
 })
 
 vim.lsp.config("rust-analyzer", {
-  cmd = { "rust-analyzer" }, filetypes = { "rust" },
-  root_markers = { "Cargo.toml", ".git" },
+  cmd = { "rust-analyzer" },
+  filetypes = { "rust" },
+  root_markers = { "Cargo.toml" },
 })
 
 if not vim.g.lsp_disable then
-  vim.lsp.enable { "clangd", "pylsp", "gopls", "rust-analyzer" }
+  vim.lsp.enable { "clangd", "jdtls", "pylsp", "gopls", "rust-analyzer" }
 end

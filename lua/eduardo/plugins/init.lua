@@ -1,16 +1,16 @@
 -- plugins/init.lua: instala e configura os plugins que eu uso com vim.pack
 
-local function gh(name)
-  return string.format("https://github.com/%s", name)
-end
+local github = function(x) return "https://github.com/" .. x end
 
 vim.pack.add {
-  { src = gh "catppuccin/nvim", name = "catppuccin" },
-  { src = gh "eduardo-antunes/plainline"            },
-  { src = gh "NMAC427/guess-indent.nvim"            },
-  { src = gh "nvim-treesitter/nvim-treesitter"      },
-  { src = gh "nvim-mini/mini.nvim"                  },
-  { src = gh "stevearc/oil.nvim"                    },
+  { src = github "catppuccin/nvim", name = "catppuccin" },
+  { src = github "eduardo-antunes/plainline"            },
+  { src = github "NMAC427/guess-indent.nvim"            },
+  { src = github "mason-org/mason.nvim"                 },
+  { src = github "nvim-treesitter/nvim-treesitter"      },
+  { src = github "mfussenegger/nvim-jdtls"              },
+  { src = github "nvim-mini/mini.nvim"                  },
+  { src = github "stevearc/oil.nvim"                    },
 }
 
 require("catppuccin").setup {
@@ -21,6 +21,15 @@ vim.cmd.colors "catppuccin"
 
 require("plainline").setup()
 require("guess-indent").setup()
+require("mason").setup {
+  ui = {
+    icons = {
+      package_installed   = "*",
+      package_pending     = "*",
+      package_uninstalled = "*",
+    }
+  }
+}
 
 require("eduardo.plugins.treesitter")
 require("eduardo.plugins.mini")

@@ -4,8 +4,13 @@
       "rev": "af58927"
     },
     "guess-indent.nvim": [],
+    "mason.nvim": [],
     "mini.nvim": {
-      "rev": "d048db2"
+      "rev": "5e1dd6e"
+    },
+    "nvim-jdtls": {
+      "rev": "380ac14",
+      "src": "https://github.com/mfussenegger/nvim-jdtls"
     },
     "nvim-treesitter": [],
     "oil.nvim": [],
