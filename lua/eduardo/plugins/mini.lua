@@ -63,8 +63,8 @@ vim.keymap.set("n", "<c-b>", pick.builtin.buffers)
 vim.keymap.set("n", "<leader>h", pick.builtin.help)
 
 -- Pesquisa apenas arquivos com a mesma extensão que o arquivo atual.
--- Remove o maior prefixo comum de todos os caminhos. Muito útil em java
-vim.keymap.set("n", "<leader>f", function()
+-- Remove o maior prefixo comum de todos os caminhos
+vim.keymap.set("n", "<leader>g", function()
   local ext = vim.fn.expand("%:e")
   pick.builtin.cli {
     command = { "rg", "-g", "*." .. ext, "--files" },
@@ -79,6 +79,29 @@ vim.keymap.set("n", "<leader>f", function()
   }
 end)
 
+-- Pesquisa apenas arquivos com a mesma extensão que o arquivo atual.
+-- Mostra apenas o diretório pai e o nome para cada um. Isso não necessariamente
+-- vai ser único, mas o é na maioria dos casos, e ajuda bastante
+vim.keymap.set("n", "<leader>f", function()
+  local ext = vim.fn.expand("%:e")
+  pick.builtin.cli {
+    command = { "rg", "-g", "*." .. ext, "--files" },
+    postprocess = function(lines)
+      local items = {}
+      for _, line in ipairs(lines) do
+        if line == "" then break end
+        local dir = vim.fn.fnamemodify(line, ":h:t")
+        local name = vim.fn.fnamemodify(line, ":t")
+        if dir ~= '.' then
+          table.insert(items, string.format("%s/%s", dir, name))
+        else table.insert(items, name)
+        end
+      end
+      return items
+    end,
+  }
+end)
+
 -- Pesquisa apenas arquivos no diretório atual
 vim.keymap.set("n", "<leader>.", function()
   local dir = vim.fn.expand("%:h")
@@ -87,6 +110,7 @@ vim.keymap.set("n", "<leader>.", function()
     postprocess = function(lines)
       local items = {}
       for _, line in ipairs(lines) do
+        if line == "" then break end
         table.insert(items, vim.fn.fnamemodify(line, ":t"))
       end
       return items
