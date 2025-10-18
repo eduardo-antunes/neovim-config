@@ -56,6 +56,40 @@ pick.setup {
 }
 vim.ui.select = pick.ui_select
 
+local u = require("eduardo.utils")
+
 vim.keymap.set("n", "<c-f>", pick.builtin.files)
 vim.keymap.set("n", "<c-b>", pick.builtin.buffers)
 vim.keymap.set("n", "<leader>h", pick.builtin.help)
+
+-- Pesquisa apenas arquivos com a mesma extensão que o arquivo atual.
+-- Remove o maior prefixo comum de todos os caminhos. Muito útil em java
+vim.keymap.set("n", "<leader>f", function()
+  local ext = vim.fn.expand("%:e")
+  pick.builtin.cli {
+    command = { "rg", "-g", "*." .. ext, "--files" },
+    postprocess = function(lines)
+      local items = {}
+      local prefix_len = u.commonprefix_len(lines)
+      for _, line in ipairs(lines) do
+        table.insert(items, line:sub(prefix_len + 1))
+      end
+      return items
+    end,
+  }
+end)
+
+-- Pesquisa apenas arquivos no diretório atual
+vim.keymap.set("n", "<leader>.", function()
+  local dir = vim.fn.expand("%:h")
+  pick.builtin.cli {
+    command = { "rg", "--files", dir },
+    postprocess = function(lines)
+      local items = {}
+      for _, line in ipairs(lines) do
+        table.insert(items, vim.fn.fnamemodify(line, ":t"))
+      end
+      return items
+    end
+  }
+end)
