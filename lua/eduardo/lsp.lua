@@ -52,6 +52,18 @@ vim.lsp.config("rust-analyzer", {
   root_markers = { "Cargo.toml" },
 })
 
+vim.lsp.config("typescript-language-server", {
+  cmd = { "typescript-language-server", "--stdio" },
+  filetypes = { "javascript", "typescript" },
+})
+
 if not vim.g.lsp_disable then
-  vim.lsp.enable { "clangd", "jdtls", "pylsp", "gopls", "rust-analyzer" }
+  vim.lsp.enable {
+    "clangd",
+    "jdtls",
+    "pylsp",
+    "gopls",
+    "rust-analyzer",
+    "typescript-language-server",
+  }
 end
