@@ -7,7 +7,7 @@ local M = {}
 -- Calcula o tamanho do maior prefixo comum em uma lista de strings, ignorando
 -- quaisquer strings vazias na entrada. O algoritmo é baseado no código da
 -- função os.path.commonprefix do python
-function M.commonprefix_len(words)
+function M.common_prefix_len(words)
   if not words or #words == 0 then
     return 0
   end

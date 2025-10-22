@@ -33,4 +33,5 @@ require("mason").setup {
 
 require("eduardo.plugins.treesitter")
 require("eduardo.plugins.mini")
+require("eduardo.plugins.pick")
 require("eduardo.plugins.oil")
