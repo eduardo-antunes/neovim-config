@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "accent.vim": {
+      "rev": "54e0b25",
+      "src": "https://github.com/Alligator/accent.vim"
+    },
     "catppuccin": {
       "rev": "af58927"
     },
@@ -7,6 +11,10 @@
     "mason.nvim": [],
     "mini.nvim": {
       "rev": "cf32454"
+    },
+    "modus-themes.nvim": {
+      "rev": "c57c2c5",
+      "src": "https://github.com/miikanissi/modus-themes.nvim"
     },
     "nvim-jdtls": {
       "rev": "380ac14",
@@ -18,6 +26,10 @@
     },
     "plainline": {
       "rev": "c5da747"
+    },
+    "vim-enfocado": {
+      "rev": "2a8fffd",
+      "src": "https://github.com/wuelnerdotexe/vim-enfocado"
     }
   }
 }
