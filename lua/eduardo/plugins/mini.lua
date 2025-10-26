@@ -28,8 +28,13 @@ require("mini.completion").setup()
 
 -- Caso o tema do terminal e o do neovim não sejam iguais, normalmente
 -- aparecem bordas com o tema do terminal em torno do editor, o que não é
--- muito agradável. Essa função evita isso
-require("mini.misc").setup_termbg_sync()
+-- muito agradável. Essa função evita isso. NOTA: não estou usando isso
+-- no momento porque as bordas tem seu charme. Razão besta né
+-- require("mini.misc").setup_termbg_sync()
+
+-- Integração com o git, estilo vim-fugitive
+require("mini.git").setup()
+vim.keymap.set("n", "<leader>g", ":Git ")
 
 -- Funcionalidade extra para outros plugins do mini.nvim
 require("mini.extra").setup()

@@ -33,7 +33,7 @@ local u = require("eduardo.utils")
 
 -- Pesquisa apenas arquivos com a mesma extensão que o arquivo atual.
 -- Remove o maior prefixo comum de todos os caminhos
-vim.keymap.set("n", "<leader>g", function()
+vim.keymap.set("n", "<leader><leader>", function()
   local original_paths = {}
   local choose = function(path)
     pick.default_choose(original_paths[path])
