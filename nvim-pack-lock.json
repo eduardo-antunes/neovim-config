@@ -1,5 +1,6 @@
 {
   "plugins": {
+    "accent.nvim": [],
     "accent.vim": {
       "rev": "54e0b25",
       "src": "https://github.com/Alligator/accent.vim"
@@ -30,6 +31,10 @@
     "vim-enfocado": {
       "rev": "2a8fffd",
       "src": "https://github.com/wuelnerdotexe/vim-enfocado"
+    },
+    "vim-fugitive": {
+      "rev": "61b51c0",
+      "src": "https://github.com/tpope/vim-fugitive"
     }
   }
 }

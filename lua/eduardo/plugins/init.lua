@@ -11,11 +11,8 @@ vim.pack.add {
   { src = github "mfussenegger/nvim-jdtls"         },
   { src = github "nvim-mini/mini.nvim"             },
   { src = github "stevearc/oil.nvim"               },
+  { src = github "tpope/vim-fugitive"              },
 }
-
-vim.g.accent_colour = "green"
-vim.g.accent_invert_status = true
-vim.cmd.colors "accent"
 
 require("plainline").setup()
 require("guess-indent").setup()
@@ -30,6 +27,11 @@ require("mason").setup {
 }
 
 require("eduardo.plugins.treesitter")
+require("eduardo.plugins.fugitive")
 require("eduardo.plugins.mini")
 require("eduardo.plugins.pick")
 require("eduardo.plugins.oil")
+
+vim.g.accent_colour = "green"
+vim.g.accent_invert_status = true
+vim.cmd.colors "accent"

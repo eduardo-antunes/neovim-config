@@ -23,6 +23,8 @@ pick.setup {
 }
 vim.ui.select = pick.ui_select
 
+-- Os atalhos C-f e C-b já tem funções pré-definidas no vim, mas eu não as
+-- utilizo, então pra mim faz mais sentido sobreescrevê-las
 vim.keymap.set("n", "<c-f>", pick.builtin.files)
 vim.keymap.set("n", "<c-b>", pick.builtin.buffers)
 vim.keymap.set("n", "<leader>h", pick.builtin.help)
@@ -31,44 +33,16 @@ vim.keymap.set("n", "<leader>h", pick.builtin.help)
 
 local u = require("eduardo.utils")
 
--- Pesquisa apenas arquivos com a mesma extensão que o arquivo atual.
--- Remove o maior prefixo comum de todos os caminhos
-vim.keymap.set("n", "<leader><leader>", function()
-  local original_paths = {}
-  local choose = function(path)
-    pick.default_choose(original_paths[path])
-  end
-  local opts = { source = { choose = choose }}
-
-  local ext = vim.fn.expand("%:e")
-  pick.builtin.cli({
-    command = { "rg", "-g", "*." .. ext, "--files" },
-    postprocess = function(paths)
-      local items = {}
-      local prefix_len = u.common_prefix_len(paths)
-      for _, path in ipairs(paths) do
-        local new_path = path:sub(prefix_len + 1)
-        original_paths[new_path] = path
-        table.insert(items, new_path)
-      end
-      return items
-    end,
-  }, opts)
-end)
-
--- Pesquisa apenas arquivos com a mesma extensão que o arquivo atual.
--- Mostra apenas o diretório pai e o nome para cada um. Isso não necessariamente
--- vai ser único, mas o é na maioria dos casos, e ajuda bastante
+-- Pesquisa em arquivos com caminhos truncados
 vim.keymap.set("n", "<leader>f", function()
   local original_paths = {}
   local choose = function(path)
     pick.default_choose(original_paths[path])
   end
-  local opts = { source = { choose = choose }}
+  local opts = { source = { choose = choose } }
 
-  local ext = vim.fn.expand("%:e")
   pick.builtin.cli({
-    command = { "rg", "-g", "*." .. ext, "--files" },
+    command = { "rg", "--files" },
     postprocess = function(paths)
       local items = {}
       for _, path in ipairs(paths) do
@@ -87,22 +61,23 @@ vim.keymap.set("n", "<leader>f", function()
   }, opts)
 end)
 
--- Pesquisa apenas arquivos no diretório atual
+-- Pesquisa apenas arquivos sob o diretório atual
 vim.keymap.set("n", "<leader>.", function()
   local original_paths = {}
   local choose = function(path)
     pick.default_choose(original_paths[path])
   end
-  local opts = { source = { choose = choose }}
+  local opts = { source = { choose = choose } }
 
   local dir = vim.fn.expand("%:h")
   pick.builtin.cli({
     command = { "rg", "--files", dir },
     postprocess = function(paths)
       local items = {}
+      local prefix_len = u.common_prefix_len(paths)
       for _, path in ipairs(paths) do
         if path == "" then break end
-        local new_path = vim.fn.fnamemodify(path, ":t")
+        local new_path = path:sub(prefix_len + 1)
         original_paths[new_path] = path
         table.insert(items, new_path)
       end
