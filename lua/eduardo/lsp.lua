@@ -25,15 +25,6 @@ vim.lsp.config("clangd", {
   root_markers = { ".clangd", "compile_commands.json" },
 })
 
--- O lombok é uma ótima biblioteca para facilitar a programação em java,  mas
--- é preciso "avisar" ao jdtls que ela vai ser usada
-local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")
-vim.lsp.config("jdtls", {
-  cmd = { "jdtls", "--jvm-arg=-javaagent:" .. lombok_jar },
-  filetypes = { "java" },
-  root_markers = { "gradlew" },
-})
-
 vim.lsp.config("pylsp", {
   cmd = { "pylsp" },
   filetypes = { "python" },
@@ -55,6 +46,17 @@ vim.lsp.config("rust-analyzer", {
 vim.lsp.config("typescript-language-server", {
   cmd = { "typescript-language-server", "--stdio" },
   filetypes = { "javascript", "typescript" },
+})
+
+-- Para a supresa geral de todos, java é o mais chato de configurar
+local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")
+local debug_jar = vim.fn.expand(
+  "$MASON/share/java-debug-adapter/com.microsoft.java.debug.plugin.jar")
+vim.lsp.config("jdtls", {
+  cmd = { "jdtls", "--jvm-arg=-javaagent:" .. lombok_jar },
+  init_options = { bundles = { debug_jar }},
+  root_markers = { "gradlew" },
+  filetypes = { "java" },
 })
 
 if not vim.g.lsp_disable then

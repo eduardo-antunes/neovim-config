@@ -18,7 +18,7 @@ vim.o.equalalways = true
 
 vim.o.mouse = "a"
 vim.o.mousemodel = "extend"
-vim.opt.shortmess:append "ISWc"
+vim.opt.shortmess:append "SWc"
 
 -- Visual ----------------------------------------------------------------------
 
@@ -53,3 +53,7 @@ vim.o.undodir  = vim.fn.stdpath("cache") .. "/undodir"
 vim.o.swapfile = false
 vim.o.backup   = false
 vim.o.undofile = true
+
+-- Outras opções ---------------------------------------------------------------
+
+vim.diagnostic.config { float = { border = "rounded" }}
