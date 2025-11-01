@@ -54,6 +54,6 @@ vim.o.swapfile = false
 vim.o.backup   = false
 vim.o.undofile = true
 
--- Outras opções ---------------------------------------------------------------
+-- Outros tipos de configuração ------------------------------------------------
 
 vim.diagnostic.config { float = { border = "rounded" }}
