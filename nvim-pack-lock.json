@@ -1,15 +1,8 @@
 {
   "plugins": {
     "accent.nvim": {
-      "rev": "dc366fb",
+      "rev": "6b46907",
       "src": "https://github.com/eduardo-antunes/accent.nvim"
-    },
-    "accent.vim": {
-      "rev": "54e0b25",
-      "src": "https://github.com/Alligator/accent.vim"
-    },
-    "catppuccin": {
-      "rev": "af58927"
     },
     "guess-indent.nvim": {
       "rev": "84a4987",
@@ -20,19 +13,15 @@
       "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.nvim": {
-      "rev": "cf32454",
+      "rev": "429e5f9",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
-    "modus-themes.nvim": {
-      "rev": "c57c2c5",
-      "src": "https://github.com/miikanissi/modus-themes.nvim"
-    },
     "nvim-dap": {
-      "rev": "6782b09",
+      "rev": "e97dc47",
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-jdtls": {
-      "rev": "380ac14",
+      "rev": "38d265e",
       "src": "https://github.com/mfussenegger/nvim-jdtls"
     },
     "nvim-treesitter": {
@@ -46,10 +35,6 @@
     "plainline": {
       "rev": "c5da747",
       "src": "https://github.com/eduardo-antunes/plainline"
-    },
-    "vim-enfocado": {
-      "rev": "2a8fffd",
-      "src": "https://github.com/wuelnerdotexe/vim-enfocado"
     },
     "vim-fugitive": {
       "rev": "61b51c0",

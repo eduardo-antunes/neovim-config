@@ -2,7 +2,7 @@
 -- protocolo similar ao LSP, mas com foco específico em depuradores
 
 local function dap_bind(lhs, rhs)
-  vim.keymap.set("n", "<leader>D" .. lhs, rhs)
+  vim.keymap.set("n", "<leader>b" .. lhs, rhs)
 end
 
 dap_bind("c", function() require("dap").continue() end)
