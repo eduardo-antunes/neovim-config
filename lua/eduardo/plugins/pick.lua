@@ -2,44 +2,53 @@
 -- flexível; parte do mini.nvim que eu mais configuro
 
 local pick = require("mini.pick")
+local u = require("eduardo.lib.utils")
 
 local win_config = function()
-  local height = math.floor(0.618 * vim.o.lines)
-  local width = math.floor(0.618 * vim.o.columns)
-  local row = math.floor(0.5 * (vim.o.lines - height))
-  local col = math.floor(0.5 * (vim.o.columns - width))
-  return {
-    row = row, col = col,
-    width = width, height = height,
-    anchor = "NW",
-    style  = "minimal",
-    border = "rounded",
-  }
+  local config = u.win_center_compute()
+  config.style = "minimal"
+  config.border = "rounded"
+  return config
 end
 
-pick.setup {
-  source = { show = pick.default_show },
-  window = { config = win_config }
-}
 vim.ui.select = pick.ui_select
+pick.setup {
+  window = { config = win_config },
+  source = { show = pick.default_show },
+}
 
--- Os atalhos C-f e C-b já tem funções pré-definidas no vim, mas eu não as
--- utilizo, então pra mim faz mais sentido sobreescrevê-las
-vim.keymap.set("n", "<c-f>", pick.builtin.files)
-vim.keymap.set("n", "<c-b>", pick.builtin.buffers)
-vim.keymap.set("n", "<leader>h", pick.builtin.help)
+vim.keymap.set("n", "<c-f>", pick.builtin.files, { desc = "pick files" })
+vim.keymap.set("n", "<c-b>", pick.builtin.buffers, { desc = "pick buffers" })
+vim.keymap.set("n", "<leader>h", pick.builtin.help, { desc = "pick help" })
 
--- Seletores customizados ------------------------------------------------------
+--------------------------------------------------------------------------------
 
-local u = require("eduardo.utils")
+-- Muda a cor de destaque do accent.nvim
+vim.keymap.set("n", "<leader>c", function()
+  local source = {
+    name = "Accent Colors",
+    choose = function(name)
+      vim.g.accent_color = name
+      vim.cmd.colors "accent"
+    end,
+    items = require("accent").accent_colors,
+  }
+  pick.start { source = source }
+end, { desc = "pick accent_colors" })
 
--- Pesquisa em arquivos com caminhos truncados
+-- Pesquisa em arquivos com caminhos truncados; útil principalmente em projetos
+-- com estruturas de diretórios profundamente aninhadas, como os típicos em java
 vim.keymap.set("n", "<leader>f", function()
   local original_paths = {}
-  local choose = function(path)
-    pick.default_choose(original_paths[path])
-  end
-  local opts = { source = { choose = choose } }
+  local source = {
+    name = "Abbrev Files (rg)",
+    choose = function(path)
+      pick.default_choose(original_paths[path])
+    end,
+    preview = function(buf, path, opts)
+      pick.default_preview(buf, original_paths[path], opts)
+    end,
+  }
 
   pick.builtin.cli({
     command = { "rg", "--files" },
@@ -47,7 +56,6 @@ vim.keymap.set("n", "<leader>f", function()
       local items = {}
       for _, path in ipairs(paths) do
         if path == "" then break end
-
         local dir = vim.fn.fnamemodify(path, ":h:t")
         local name = vim.fn.fnamemodify(path, ":t")
         local new_path = (dir ~= ".")
@@ -58,16 +66,21 @@ vim.keymap.set("n", "<leader>f", function()
       end
       return items
     end,
-  }, opts)
-end)
+  }, { source = source })
+end, { desc = "pick abbrev_files" })
 
--- Pesquisa apenas arquivos sob o diretório atual
+-- Pesquisa apenas arquivos sob o diretório atual (caminhos truncados)
 vim.keymap.set("n", "<leader>.", function()
   local original_paths = {}
-  local choose = function(path)
-    pick.default_choose(original_paths[path])
-  end
-  local opts = { source = { choose = choose } }
+  local source = {
+    name = "Current Filetree (rg)",
+    choose = function(path)
+      pick.default_choose(original_paths[path])
+    end,
+    preview = function(buf, path, opts)
+      pick.default_preview(buf, original_paths[path], opts)
+    end,
+  }
 
   local dir = vim.fn.expand("%:h")
   pick.builtin.cli({
@@ -83,5 +96,10 @@ vim.keymap.set("n", "<leader>.", function()
       end
       return items
     end
-  }, opts)
-end)
+  }, { source = source })
+end, { desc = "pick current_filetree" })
+
+--------------------------------------------------------------------------------
+
+local extra = require("mini.extra").pickers
+vim.keymap.set("n", "<leader>k", extra.keymaps, { desc = "pick keymaps" })

@@ -33,6 +33,7 @@ vim.o.number      = true
 vim.o.list        = true
 vim.o.cursorline  = true
 vim.o.signcolumn  = "number"
+vim.o.winborder   = "rounded"
 vim.o.lcs         = "tab:· ,trail:_"
 
 -- Pesquisa e preenchimento ----------------------------------------------------
@@ -53,7 +54,3 @@ vim.o.undodir  = vim.fn.stdpath("cache") .. "/undodir"
 vim.o.swapfile = false
 vim.o.backup   = false
 vim.o.undofile = true
-
--- Outros tipos de configuração ------------------------------------------------
-
-vim.diagnostic.config { float = { border = "rounded" }}

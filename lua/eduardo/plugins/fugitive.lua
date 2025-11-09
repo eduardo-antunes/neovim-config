@@ -1,7 +1,7 @@
 -- plugins/fugitive: configurações da integração com o git
 
 vim.keymap.set("n", "<leader>g", ":Git ")
-vim.keymap.set("n", "<leader>G", vim.cmd.Git)
+vim.keymap.set("n", "<leader>G", vim.cmd.Git, { desc = "git open" })
 
 -- O fugitive com o cmdheight=0 às vezes acaba causando alguns dos famigerados
 -- prompts de "aperte ENTER para prosseguir". Alguns ajustes para resolver isso

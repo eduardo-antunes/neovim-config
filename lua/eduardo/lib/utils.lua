@@ -31,4 +31,30 @@ function M.common_prefix_len(words)
   return c
 end
 
+-- Apaga espaços em branco sobressalentes em um arquivo
+function M.trim_ws()
+  local pos = vim.api.nvim_win_get_cursor(0)
+  vim.cmd [[ keeppatterns %s/\s\+$//e ]]
+  vim.api.nvim_win_set_cursor(0, pos)
+end
+
+-- Preenche linha com '-' até que ela tenha 80 colunas
+function M.padline()
+  n = 80 - vim.fn.virtcol "$" + 1
+  vim.cmd(string.format("normal $%da-", n))
+end
+
+-- Calcula os valores necessários para centralizar janelas flutuantes
+function M.win_center_compute()
+  local W, H = vim.o.columns, vim.o.lines
+  local height = math.floor(0.618 * H)
+  local width  = math.floor(0.618 * W)
+  return {
+    anchor = "NW",
+    height = height, width = width,
+    row = math.floor(0.5 * (H - height)),
+    col = math.floor(0.5 * (W - width)),
+  }
+end
+
 return M

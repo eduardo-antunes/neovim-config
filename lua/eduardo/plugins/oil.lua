@@ -18,5 +18,5 @@ require("oil").setup {
     is_always_hidden = function(nome, id) return nome == ".." end
   },
 }
-vim.keymap.set("n", "-", vim.cmd.Oil)
-vim.keymap.set("n", "<leader>-", "<cmd>vs|Oil<cr>")
+vim.keymap.set("n", "-", vim.cmd.Oil, { desc = "oil open" })
+vim.keymap.set("n", "<leader>-", "<cmd>vs|Oil<cr>", { desc = "oil vsplit" })
