@@ -24,7 +24,7 @@ vim.keymap.set("n", "<leader>h", pick.builtin.help, { desc = "pick help" })
 --------------------------------------------------------------------------------
 
 -- Muda a cor de destaque do accent.nvim
-vim.keymap.set("n", "<leader>c", function()
+vim.keymap.set("n", "<leader>C", function()
   local source = {
     name = "Accent Colors",
     choose = function(name)

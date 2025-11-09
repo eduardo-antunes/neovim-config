@@ -21,22 +21,24 @@ vim.keymap.set("n", "<c-d>"  , "<c-d>zz")
 vim.keymap.set("n", "<leader><bs>", u.trim_ws, { desc = "Remove espaços em branco sobressalentes" })
 vim.keymap.set("n", "<leader>*"   , u.padline, { desc = "Completa linha até 80 colunas" })
 
-vim.keymap.set("n", "<leader>w", vim.cmd.write             , { desc = "Salva arquivo"                       })
-vim.keymap.set("n", "<leader>s", ":%s/<c-r><c-w>/"         , { desc = "Substitui palavra globalmente"       })
-vim.keymap.set("n", "<leader>e", ":e %:h/"                 , { desc = "Edita arquivo no diretório do atual" })
-vim.keymap.set("n", "<leader>/", ":grep "                  , { desc = "Grep"                                })
-vim.keymap.set("n", "<leader>n", ":tabnew|tcd ~/src/"      , { desc = "Nova aba"                            })
-vim.keymap.set("n", "<leader>T", "<cmd>tabnew|terminal<cr>", { desc = "Nova aba (terminal)"                 })
+vim.keymap.set("n", "<leader>s", ":%s/<c-r><c-w>//g<left><left>", { desc = "Substitui palavra globalmente" })
+vim.keymap.set("n", "<leader>c", ":s/<c-r><c-w>//g<left><left>" , { desc = "Substitui palavra na linha"    })
+
+vim.keymap.set("n", "<leader>w", vim.cmd.write             , { desc = "Salva arquivo"                    })
+vim.keymap.set("n", "<leader>e", ":e %:h/"                 , { desc = "Edita arquivo no diretório atual" })
+vim.keymap.set("n", "<leader>/", ":grep "                  , { desc = "Grep"                             })
+vim.keymap.set("n", "<leader>n", ":tabnew|tcd ~/src/"      , { desc = "Nova aba"                         })
+vim.keymap.set("n", "<leader>T", "<cmd>tabnew|terminal<cr>", { desc = "Nova aba (terminal)"              })
 
 -- Cópia e cola ----------------------------------------------------------------
 
-vim.keymap.set("n", "<leader>p" , '"+p' , { desc = "Cola do clipboard do sistema"            })
-vim.keymap.set("v", "<leader>p" , '"_dP', { desc = "Susbtitui seleção por reg. 0"            })
-vim.keymap.set("n", "<leader>y" , '"+y' , { desc = "Copia para reg. +"                       })
-vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "Copia linha para reg. +"                 })
-vim.keymap.set("n", "<leader>Y" , '"+y$', { desc = "Copia resto da linha para o clipboard +" })
-vim.keymap.set("v", "<leader>y" , '"+y' , { desc = "Copia seleção para reg. +"               })
-vim.keymap.set("v", "<leader>x" , '"_d' , { desc = "Apaga seleção para /dev/null"            })
+vim.keymap.set("n", "<leader>p" , '"+p' , { desc = "Cola do clipboard do sistema"       })
+vim.keymap.set("v", "<leader>p" , '"_dP', { desc = "Susbtitui seleção por reg. 0"       })
+vim.keymap.set("n", "<leader>y" , '"+y' , { desc = "Copia para reg. +"                  })
+vim.keymap.set("n", "<leader>yy", '"+yy', { desc = "Copia linha para reg. +"            })
+vim.keymap.set("n", "<leader>Y" , '"+y$', { desc = "Copia resto da linha para o reg. +" })
+vim.keymap.set("v", "<leader>y" , '"+y' , { desc = "Copia seleção para reg. +"          })
+vim.keymap.set("v", "<leader>x" , '"_d' , { desc = "Apaga seleção para /dev/null"       })
 
 -- Terminal --------------------------------------------------------------------
 
