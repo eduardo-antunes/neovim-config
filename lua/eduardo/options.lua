@@ -32,6 +32,7 @@ vim.o.rnu         = true
 vim.o.number      = true
 vim.o.list        = true
 vim.o.cursorline  = true
+vim.o.guicursor   = ""
 vim.o.signcolumn  = "number"
 vim.o.winborder   = "rounded"
 vim.o.lcs         = "tab:· ,trail:_"

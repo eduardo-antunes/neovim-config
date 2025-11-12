@@ -17,7 +17,7 @@
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "nvim-dap": {
-      "rev": "e97dc47",
+      "rev": "4c0e3a9",
       "src": "https://github.com/mfussenegger/nvim-dap"
     },
     "nvim-jdtls": {

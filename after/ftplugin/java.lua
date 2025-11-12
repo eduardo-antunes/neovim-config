@@ -1,5 +1,5 @@
--- ftplugin/java.lua: configurations for java programming, mainly focused on
--- spring boot and gradle projects
+-- ftplugin/java.lua: configurações específicas para java, com focos em projetos
+-- que utilizam gradle e spring boot
 
 local term = require("eduardo.lib.terminal")
 
