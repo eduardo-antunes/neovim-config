@@ -35,7 +35,7 @@ vim.o.cursorline  = true
 vim.o.guicursor   = ""
 vim.o.signcolumn  = "number"
 vim.o.winborder   = "rounded"
-vim.o.lcs         = "tab:· ,trail:_"
+vim.o.lcs         = "tab:_ ,trail:_"
 
 -- Pesquisa e preenchimento ----------------------------------------------------
 

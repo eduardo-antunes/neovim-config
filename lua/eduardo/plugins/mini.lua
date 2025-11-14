@@ -26,5 +26,8 @@ require("mini.splitjoin").setup()
 -- quando comparado a alternativas como o nvim-cmp, e já me atende bem
 require("mini.completion").setup()
 
+-- Sincroniza o plano de fundo do terminal com o do neovim
+require("mini.misc").setup_termbg_sync()
+
 -- Funcionalidade extra para outros plugins do mini.nvim
 require("mini.extra").setup()
